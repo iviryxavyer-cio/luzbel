@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+  api:
+    container_name: 'api'
+    build: './api'
+    volumes:
+      - './api:/app'
+  nginx:
+    container_name: 'web-server'
+    restart: 'always'
+    image: 'nginx:latest'
+    ports:
+      - '80:80'
+    volumes:
+      - './server:/etc/nginx/conf.d:ro'
+  postgres:
+    container_name: 'db'
+    restart: 'always'
+    image: 'postgres:latest'
+    ports:
+      - '5432:5432'
+    volumes:
+      - 'db-data:/var/lib/postgresql/data'
+volumes:
+  db-data:
+    driver: 'local'
