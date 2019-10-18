@@ -2,9 +2,9 @@ version: '3.3'
 services:
   api:
     container_name: 'api'
-    build: './api'
+    build: './server'
     volumes:
-      - './api:/app'
+      - './server:/app'
   nginx:
     container_name: 'web-server'
     restart: 'always'
