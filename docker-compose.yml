@@ -12,7 +12,7 @@ services:
     ports:
       - '80:80'
     volumes:
-      - './server:/etc/nginx/conf.d:ro'
+      - './webserver:/etc/nginx/conf.d:ro'
   postgres:
     container_name: 'db'
     restart: 'always'
