@@ -1,5 +1,8 @@
 from flask import Flask
+from flask_graphql import GraphQLView
 from data import insert_data
+
+from schema import schema
 #from api import db
 
 
@@ -11,6 +14,11 @@ def create_app(config_name):
     #insert_data()
 
     # Routes (aqui se importaran las rutas de la api)
+    app.add_url_rule('/graphql', view_func=GraphQLView.as_view(
+        'graphql',
+        schema=schema,
+        graphiql=True
+    ))
 
     return app
 

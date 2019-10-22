@@ -1,4 +1,3 @@
-import psycopg2
 from datetime import datetime
 
 from peewee import *
@@ -20,7 +19,7 @@ class Usuario(Model):
     status = CharField(max_length=1, default='I')
     fecha_creacion = DateTimeField(default=datetime.utcnow)
     fecha_modificacion = DateTimeField(default=datetime.utcnow)
-    #usuario_modificacion = ForeignKeyField('self', backref='usuario_modificacion')
+    usuario_modificacion = ForeignKeyField('self', backref='usuario_modificacion', default= 1)
 
     @property
     def serialize(self):
