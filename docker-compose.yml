@@ -5,6 +5,7 @@ services:
     build: './server'
     volumes:
       - './server:/app'
+    restart: 'always'
   nginx:
     container_name: 'web-server'
     restart: 'always'
@@ -13,14 +14,14 @@ services:
       - '80:80'
     volumes:
       - './webserver:/etc/nginx/conf.d:ro'
-  postgres:
-    container_name: 'db'
-    restart: 'always'
-    image: 'postgres:latest'
-    ports:
-      - '5432:5432'
-    volumes:
-      - 'db-data:/var/lib/postgresql/data'
-volumes:
-  db-data:
-    driver: 'local'
+  #postgres:
+    #container_name: 'db'
+    #restart: 'always'
+    #image: 'postgres:latest'
+    #ports:
+      #- '5432:5432'
+    #volumes:
+      #- 'db-data:/var/lib/postgresql/data'
+#volumes:
+  #db-data:
+    #driver: 'local'

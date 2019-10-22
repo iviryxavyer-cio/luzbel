@@ -1,16 +1,14 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from .config import config
+from data import insert_data
+#from api import db
 
-db = SQLAlchemy()
 
 
 def create_app(config_name):
     app = Flask(__name__)
-    app.config.from_object(config[config_name])
-    config[config_name].init_app(app)
+    app.config.from_object(__name__)
 
-    db.init_app(app)
+    #insert_data()
 
     # Routes (aqui se importaran las rutas de la api)
 
@@ -19,5 +17,11 @@ def create_app(config_name):
 
 app = create_app('default')
 
+
+@app.route('/api/')
+def index():
+    return 'CAIN'
+
+
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=3000)
+    app.run(debug=True, host="0.0.0.0", port=3000)

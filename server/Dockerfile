@@ -1,7 +1,7 @@
-FROM python:3.7.4-alpine3.10
+FROM caindevelopers/cen_ciosa:v0.0.1
 LABEL MAINTAINER="CIOSA"
 WORKDIR /app
 COPY . .
-RUN pip install -r requirements.txt
+RUN python3.7 -m pip install -r requirements.txt
 EXPOSE 3000
-CMD [ "python","server.py" ]
+CMD [ "python3.7","server.py" ]
