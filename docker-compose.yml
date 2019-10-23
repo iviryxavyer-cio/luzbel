@@ -6,6 +6,8 @@ services:
     volumes:
       - './server:/app'
     restart: 'always'
+    depends_on:
+      - 'nginx'
   nginx:
     container_name: 'web-server'
     restart: 'always'
@@ -14,14 +16,16 @@ services:
       - '80:80'
     volumes:
       - './webserver:/etc/nginx/conf.d:ro'
-  #postgres:
-    #container_name: 'db'
-    #restart: 'always'
-    #image: 'postgres:latest'
-    #ports:
-      #- '5432:5432'
-    #volumes:
-      #- 'db-data:/var/lib/postgresql/data'
-#volumes:
-  #db-data:
-    #driver: 'local'
+    depends_on:
+      - 'postgres'
+  postgres:
+    container_name: 'db'
+    restart: 'always'
+    image: 'postgres:latest'
+    ports:
+      - '5432:5432'
+    volumes:
+      - 'db-data:/var/lib/postgresql/data'
+volumes:
+  db-data:
+    driver: 'local'

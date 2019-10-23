@@ -2,7 +2,7 @@ from datetime import datetime
 
 from peewee import *
 
-psql_db = PostgresqlDatabase('necronomicon', user="postgres", password="", host="10.1.8.64")
+psql_db = PostgresqlDatabase('necronomicon', user="postgres", password="", host="postgres")
 
 
 class Usuario(Model):
