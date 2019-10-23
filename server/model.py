@@ -1,8 +1,9 @@
 from datetime import datetime
-
+import bcrypt
 from peewee import *
 
-psql_db = PostgresqlDatabase('necronomicon', user="postgres", password="", host="postgres")
+
+psql_db = PostgresqlDatabase('necronomicon', user="postgres", password="", host="postgres", port=5432)
 
 
 class Usuario(Model):
@@ -12,6 +13,7 @@ class Usuario(Model):
 
     id_usuario = PrimaryKeyField(null=False)
     usuario = CharField(max_length=30, null=False, unique=True)
+    contrasena = CharField()
     nombre_usuario = CharField(max_length=60, null=False)
     apellido_usuario = CharField(max_length=60, null=False)
     correo_usuario = CharField(max_length=120, null=False)
@@ -38,3 +40,9 @@ class Usuario(Model):
         return "{}, {}, {}, {}, {}, {}, {}".format(self.id_usuario, self.nombre_usuario, self.apellido_usuario,
                                                    self.usuario, self.correo_usuario, self.telefono_usuario,
                                                    self.status)
+
+
+    def guardar(self):
+        salt = bcrypt.gensalt()
+        self.contrasena = bcrypt.hashpw(self.contrasena.encode(), salt)
+        self.save()
