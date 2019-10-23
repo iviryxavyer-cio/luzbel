@@ -11,7 +11,7 @@ def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object(__name__)
 
-    #insert_data()
+    insert_data()
 
     # Routes (aqui se importaran las rutas de la api)
     app.add_url_rule('/graphql', view_func=GraphQLView.as_view(
