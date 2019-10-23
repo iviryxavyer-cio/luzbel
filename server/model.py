@@ -2,7 +2,6 @@ from datetime import datetime
 import bcrypt
 from peewee import *
 
-
 psql_db = PostgresqlDatabase('necronomicon', user="postgres", password="", host="postgres", port=5432)
 
 
@@ -21,7 +20,7 @@ class Usuario(Model):
     status = CharField(max_length=1, default='I')
     fecha_creacion = DateTimeField(default=datetime.utcnow)
     fecha_modificacion = DateTimeField(default=datetime.utcnow)
-    usuario_modificacion = ForeignKeyField('self', backref='usuario_modificacion', default= 1)
+    usuario_modificacion = ForeignKeyField('self', backref='usuario_modificacion', default=1)
 
     @property
     def serialize(self):
@@ -41,8 +40,12 @@ class Usuario(Model):
                                                    self.usuario, self.correo_usuario, self.telefono_usuario,
                                                    self.status)
 
-
     def guardar(self):
         salt = bcrypt.gensalt()
-        self.contrasena = bcrypt.hashpw(self.contrasena.encode(), salt)
+        self.contrasena = bcrypt.hashpw(self.contrasena.encode('utf8'), salt)
+        self.save()
+
+    def modificar(self):
+        salt = bcrypt.gensalt()
+        self.contrasena = bcrypt.hashpw(self.contrasena.encode('utf8'), salt)
         self.save()
