@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_graphql import GraphQLView
 from data import insert_data
+from modelos.servidores import SchemaServidores
 
 from schema import schema
 #from api import db
@@ -19,6 +20,14 @@ def create_app(config_name):
         graphiql=True
     ))
 
+    # servidores
+    app.add_url_rule('/servidores',
+        view_func=GraphQLView.as_view(
+            'servidores',
+            schema=SchemaServidores,
+            graphiql=True
+        )
+     )
     return app
 
 
