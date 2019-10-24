@@ -1,4 +1,5 @@
-from modelos.BaseModel import psql_db, Servidores
+from modelos.model import psql_db
+from modelos.servidores import Servidores
 from peewee import DatabaseError
 
 if __name__ == "__main__":
