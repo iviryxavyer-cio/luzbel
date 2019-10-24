@@ -4,7 +4,6 @@ from data import insert_data
 from modelos.servidores import SchemaServidores
 
 from schema import schema
-#from api import db
 
 
 def create_app(config_name):
@@ -20,7 +19,7 @@ def create_app(config_name):
         graphiql=True
     ))
 
-    # servidores
+    # ruta para servidores GQL
     app.add_url_rule('/servidor',
         view_func=GraphQLView.as_view(
             'servidor',

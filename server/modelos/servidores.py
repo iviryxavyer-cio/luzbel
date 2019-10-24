@@ -16,11 +16,19 @@ class Servidores(Model):
     status = CharField()
 
 
+# usado para definir los datos que se recuperan de un objeto(modelo peewee) tpo Servidores por GQL
 class ServidoresSchema(graphene.ObjectType):
     id_servidor = graphene.Int()
     direccion = graphene.String()
     alias_servidor = graphene.String()
     status = graphene.String()
+
+
+# usado para recibir un objeto tipo servidor como parametro en graphql
+class ServidoresInput(graphene.InputObjectType):
+    direccion = graphene.String(required=True)
+    alias_servidor = graphene.String(required=True)
+    status = graphene.String(required=True)
 
 
 class ServidoresQuery(graphene.ObjectType):
@@ -68,12 +76,6 @@ class ServidoresDeleteMutation(graphene.Mutation):
         return ServidoresDeleteMutation(servidor=servidor)
 
 
-class ServidoresInput(graphene.InputObjectType):
-    direccion = graphene.String(required=True)
-    alias_servidor = graphene.String(required=True)
-    status = graphene.String(required=True)
-
-
 class ServidoresUpdateMutation(graphene.Mutation):
     class Arguments:
         id_servidor = graphene.Int(required=True)
@@ -101,4 +103,4 @@ SchemaServidores = graphene.Schema(query=ServidoresQuery, mutation=ServidoresMut
 
 if __name__ == "__main__":
     for s in Servidores.select():
-        print(f"servidor {s.direccion} {s.status}")
+        print(f"servidor {s.id_servidor} | {s.direccion} | {s.status}")
