@@ -1,9 +1,7 @@
 from datetime import datetime
-import bcrypt
 from peewee import *
-from utils import decode_token
-
-psql_db = PostgresqlDatabase('necronomicon', user="postgres", password="", host="postgres", port=5432)
+from utils.conexion import psql_db
+import bcrypt
 
 
 class Usuario(Model):
@@ -50,6 +48,7 @@ class Usuario(Model):
         salt = bcrypt.gensalt()
         self.contrasena = bcrypt.hashpw(self.contrasena.encode('utf8'), salt)
         self.save()
+
 
 """
 class Conector(Model):

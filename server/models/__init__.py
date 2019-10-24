@@ -1,1 +1,0 @@
-from .usuario import Usuario, psql_db

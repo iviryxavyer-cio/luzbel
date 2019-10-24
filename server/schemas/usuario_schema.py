@@ -1,10 +1,9 @@
 import graphene
-from models import Usuario
-from utils import login
+from models.usuario import Usuario
+from utils.authentication import login
 
 
 # UserValueObject = namedtuple('Usuarios_Schema', )
-
 
 class UsuariosSchema(graphene.ObjectType):
     id_usuario = graphene.Int()
@@ -84,8 +83,8 @@ class Query(graphene.ObjectType):
     usuario = graphene.Field(UsuariosSchema, id=graphene.Int())
     usuarioByUser = graphene.Field(UsuariosSchema, usuario=graphene.String())
     usuarios = graphene.List(UsuariosSchema)
-
     def resolve_hello(self, info, name):
+        print(name)
         return 'hello {}'.format(name)
 
     def resolve_usuario(self, info, **kwargs):
@@ -109,6 +108,20 @@ class Query(graphene.ObjectType):
             query = Usuario.select().get()
 
         return query
+
+    #def resolve_usuario(self, info, **kwargs):
+    #    id = kwargs.get('id')
+    #    print(id)
+    #    query = Usuario.select().get()
+    #    return query
+
+    def resolve_usuario(self, info, id):
+        print(id)
+        query = Usuario.select().where(Usuario.id_usuario == id).get()
+        if query:
+            return query
+        else:
+            return {}
 
 
 class Mutation(graphene.ObjectType):

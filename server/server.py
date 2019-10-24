@@ -1,9 +1,8 @@
 from flask import Flask
 from flask_graphql import GraphQLView
-from data import insert_data
+from models.servidores import SchemaServidores
 
-from schemas import schema
-#from api import db
+from schemas.usuario_schema import schema
 
 
 
@@ -11,7 +10,7 @@ def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object(__name__)
 
-    insert_data()
+    # insert_data()
 
     # Routes (aqui se importaran las rutas de la api)
     app.add_url_rule('/graphql', view_func=GraphQLView.as_view(
@@ -20,6 +19,14 @@ def create_app(config_name):
         graphiql=True
     ))
 
+    # ruta para servidores GQL
+    app.add_url_rule('/servidor',
+        view_func=GraphQLView.as_view(
+            'servidor',
+            schema=SchemaServidores,
+            graphiql=True
+        )
+     )
     return app
 
 

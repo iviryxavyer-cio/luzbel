@@ -2,7 +2,7 @@ import jwt
 import bcrypt
 import logging
 from datetime import datetime, timedelta
-from models import Usuario
+from models.usuario import Usuario
 
 
 def encode_auth_token(id_usuario):
