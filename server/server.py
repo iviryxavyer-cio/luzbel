@@ -21,9 +21,9 @@ def create_app(config_name):
     ))
 
     # servidores
-    app.add_url_rule('/servidores',
+    app.add_url_rule('/servidor',
         view_func=GraphQLView.as_view(
-            'servidores',
+            'servidor',
             schema=SchemaServidores,
             graphiql=True
         )
