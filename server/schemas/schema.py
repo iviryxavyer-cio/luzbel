@@ -1,6 +1,6 @@
 import graphene
-from model import Usuario
-from authentication import login
+from models import Usuario
+from utils import login
 
 
 # UserValueObject = namedtuple('Usuarios_Schema', )
