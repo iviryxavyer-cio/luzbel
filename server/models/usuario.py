@@ -1,14 +1,13 @@
 from datetime import datetime
 from peewee import *
+from utils.conexion import psql_db
 import bcrypt
 
-psql_db = PostgresqlDatabase('necronomicon', user="postgres", password="postgres", host="10.1.8.64")
-#psql_db = PostgresqlDatabase('necronomicon', user="postgres", password="postgres", host="localhost")
 
 class Usuario(Model):
     class Meta:
         database = psql_db
-        db_table = 'Usuarios'
+        table_name = 'usuarios'
 
     id_usuario = PrimaryKeyField(null=False)
     usuario = CharField(max_length=30, null=False, unique=True)
@@ -49,3 +48,53 @@ class Usuario(Model):
         salt = bcrypt.gensalt()
         self.contrasena = bcrypt.hashpw(self.contrasena.encode('utf8'), salt)
         self.save()
+
+
+"""
+class Conector(Model):
+    class Meta:
+        database = psql_db
+        table_name = 'conectores'
+        
+    id_conector = PrimaryKeyField(null=False)
+    nombre_conector = CharField(max_length=60, null=False)
+    url_conector = CharField(max_length=1000, null=False)
+    status = CharField(max_length=1, default='A')
+    fecha_creacion = DateTimeField(default=datetime.utcnow)
+    fecha_modificacion = DateTimeField(default=datetime.utcnow)
+    usuario_modificacion = ForeignKeyField('usuarios', backref='usuario_modificacion', default=1)
+
+    @property
+    def serialize(self):
+        data = {
+            'id_conector': self.id_conector,
+            'nombre_conector': self.nombre_conector,
+            'url_conector': self.url_conector,
+            'status': self.status
+        }
+        return data
+
+    def __repr__(self):
+        return '{}, {}, {}, {}'.format(self.id_conector, self.nombre_conector, self.url_conector, self.status)
+
+    def modificar(self, token):
+        try:
+            user = decode_token(token)
+            self.usuario_modificacion = user
+            self.fecha_modificacion = datetime.utcnow()
+            self.save()
+            return True
+        except Exception as e:
+            return e
+
+    def elimiar(self, token):
+        try:
+            user = decode_token(token)
+            self.usuario_modificacion = user
+            self.fecha_modificacion = datetime.utcnow()
+            self.status = 'E'
+            self.save()
+            return True
+        except Exception as e:
+            return e
+"""

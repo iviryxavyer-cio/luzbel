@@ -1,9 +1,9 @@
 from flask import Flask
 from flask_graphql import GraphQLView
-from data import insert_data
-from modelos.servidores import SchemaServidores
+from models.servidores import SchemaServidores
 
-from schema import schema
+from schemas.usuario_schema import schema
+
 
 
 def create_app(config_name):

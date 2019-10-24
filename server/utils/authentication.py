@@ -2,7 +2,7 @@ import jwt
 import bcrypt
 import logging
 from datetime import datetime, timedelta
-from model import Usuario
+from models.usuario import Usuario
 
 
 def encode_auth_token(id_usuario):
@@ -33,6 +33,7 @@ def login(user, password):
     except Exception as e:
         return e
 
+
 def decode_token(token):
     """
     Decodes the auth token
@@ -46,4 +47,3 @@ def decode_token(token):
         return 'El tiempo del token expiró.'
     except jwt.InvalidTokenError:
         return 'El token es invalido.'
-

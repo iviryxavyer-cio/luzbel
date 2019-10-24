@@ -1,5 +1,5 @@
 from peewee import *
-from model import psql_db
+from utils.conexion import psql_db
 import graphene
 
 # para validar el input
