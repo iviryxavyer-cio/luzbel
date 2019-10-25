@@ -1,8 +1,9 @@
 from flask import Flask
 from flask_graphql import GraphQLView
-from models.servidores import SchemaServidores
-
+from schemas.servidores_schema import SchemaServidores
 from schemas.usuario_schema import schema
+
+from schemas.conexiones_schema import SchemaConexiones
 
 
 
@@ -26,7 +27,17 @@ def create_app(config_name):
             schema=SchemaServidores,
             graphiql=True
         )
-     )
+    )
+
+    # ruta para conexiones GQL
+    app.add_url_rule('/conexion',
+         view_func=GraphQLView.as_view(
+             'conexion',
+             schema=SchemaConexiones,
+             graphiql=True
+         )
+    )
+
     return app
 
 
