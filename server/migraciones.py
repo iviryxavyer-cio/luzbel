@@ -1,6 +1,7 @@
 from utils.conexion import psql_db
 from models.servidores import Servidores
 from models.usuario import Usuario
+from models.conector import Conector
 from peewee import DatabaseError
 
 
@@ -49,4 +50,6 @@ if __name__ == "__main__":
     alterar_campo_status(psql_db, Usuario.__name__.lower())
     crear_tabla(psql_db, Servidores)
     alterar_campo_status(psql_db, Servidores.__name__)
+    crear_tabla(psql_db, Conector)
+    alterar_campo_status(psql_db, Conector)
 
