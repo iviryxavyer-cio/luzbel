@@ -1,12 +1,13 @@
-from modelos.model import psql_db
-from modelos.servidores import Servidores
+from utils.conexion import psql_db
+from models.servidores import Servidores
+from models.conexiones import Conexiones
 from peewee import DatabaseError
 
 if __name__ == "__main__":
     psql_db.connect()
     print("creando tabla servidor")
     try:
-        psql_db.create_tables([Servidores])
+        psql_db.create_tables([Servidores, Conexiones])
         print("tabla servidor creada")
     except DatabaseError as exc:
         print(exc)

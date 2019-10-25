@@ -61,10 +61,12 @@ class ConexionesDeleteMutation(graphene.Mutation):
 
     @staticmethod
     def mutate(self, info, id_conexion):
-        modelo = Conexiones.select().where(Conexiones.id_conexion == id_conexion).get()
-        #servidor.status = "E"
-        #servidor.save()
-        return ServidoresDeleteMutation(conexion=modelo)
+        try:
+            modelo = Conexiones.select().where(Conexiones.id_conexion == id_conexion).get()
+            modelo.delete_instance()
+        except:
+            pass
+        return {}
 
 
 class ConexionesUpdateMutation(graphene.Mutation):
@@ -77,10 +79,12 @@ class ConexionesUpdateMutation(graphene.Mutation):
     @staticmethod
     def mutate(self, info, id_conexion, conexion_data):
         modelo = Conexiones.select().where(Conexiones.id_conexion == id_conexion).get()
-        #servidor.direccion = servidor_data.direccion
-        #servidor.alias_servidor = servidor_data.alias_servidor
-        #servidor.status = servidor_data.status
-        #servidor.save()
+        modelo.id_servidor = conexion_data.id_servidor
+        modelo.id_conector = conexion_data.id_conector
+        modelo.puerto = conexion_data.puerto
+        modelo.usuario = conexion_data.usuario
+        modelo.contrasena = conexion_data.contrasena
+        modelo.save()
         return ConexionesUpdateMutation(conexion=modelo)
 
 
