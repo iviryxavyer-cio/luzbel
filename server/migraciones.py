@@ -15,7 +15,7 @@ def crear_tabla(db, tabla):
     except DatabaseError as exc:
         print(exc)
     except:
-        print('error al crear la tabla {}'.format(tabla))
+        print('error al crear la tabla {}'.format(tabla.__name__))
     finally:
         db.close()
 
@@ -52,7 +52,6 @@ if __name__ == "__main__":
     crear_tabla(psql_db, Servidores)
     alterar_campo_status(psql_db, Servidores.__name__)
     crear_tabla(psql_db, Conector)
-    alterar_campo_status(psql_db, Conector)
+    alterar_campo_status(psql_db, Conector.__name__)
     crear_tabla(psql_db, Conexiones)
-    alterar_campo_status(psql_db, Conexiones)
 
