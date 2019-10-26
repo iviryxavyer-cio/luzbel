@@ -1,27 +1,18 @@
 from utils.conexion import psql_db
 from models.servidores import Servidores
-<<<<<<< HEAD
 from models.usuario import Usuario
 from models.conector import Conector
-=======
 from models.conexiones import Conexiones
->>>>>>> 480ca269bb3b7a4f0247af8c82ddc9a231ce4407
 from peewee import DatabaseError
 
 
 def crear_tabla(db, tabla):
     print('Creando tabla {}'.format(tabla))
     try:
-<<<<<<< HEAD
         db.connect()
         db.create_tables([tabla])
         print('Tabla {} creada'.format(tabla.__name__))
-    except  DatabaseError as exc:
-=======
-        psql_db.create_tables([Servidores, Conexiones])
-        print("tabla servidor creada")
     except DatabaseError as exc:
->>>>>>> 480ca269bb3b7a4f0247af8c82ddc9a231ce4407
         print(exc)
     except:
         print('error al crear la tabla {}'.format(tabla))
@@ -62,4 +53,6 @@ if __name__ == "__main__":
     alterar_campo_status(psql_db, Servidores.__name__)
     crear_tabla(psql_db, Conector)
     alterar_campo_status(psql_db, Conector)
+    crear_tabla(psql_db, Conexiones)
+    alterar_campo_status(psql_db, Conexiones)
 
