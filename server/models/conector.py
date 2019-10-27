@@ -10,6 +10,6 @@ class Conector(Model):
     id_conector = AutoField()
     nombre_conector = CharField(max_length=60, null=False)
     url_conector = CharField(max_length=1000, null=False)
-    status = CharField()
+    status = CharField(default='A')
     fecha_creacion = DateTimeField(default=datetime.utcnow)
     fecha_modificacion = DateTimeField(default=datetime.utcnow)
