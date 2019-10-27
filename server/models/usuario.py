@@ -16,10 +16,10 @@ class Usuario(Model):
     apellido_usuario = CharField(max_length=60, null=False)
     correo_usuario = CharField(max_length=120, null=False)
     telefono_usuario = CharField(max_length=10, null=False)
-    status = CharField(max_length=1, default='I')
+    status = CharField()
     fecha_creacion = DateTimeField(default=datetime.utcnow)
     fecha_modificacion = DateTimeField(default=datetime.utcnow)
-    usuario_modificacion = ForeignKeyField('self', backref='usuario_modificacion', default=1)
+    usuario_modificacion = ForeignKeyField('self', backref='usuario_modificacion', null=True)
 
     @property
     def serialize(self):

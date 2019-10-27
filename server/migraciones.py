@@ -44,6 +44,23 @@ def alterar_campo_status(db, tabla):
     finally:
         db.close()
 
+
+def crear_usuario_admin():
+    try:
+        usuario = Usuario()
+        usuario.usuario = 'admin'
+        usuario.nombre_usuario = 'Admin'
+        usuario.apellido_usuario = 'Admin'
+        usuario.contrasena = 'admin@123'
+        usuario.correo_usuario = 'admin@cain.com'
+        usuario.telefono_usuario = '3312758869'
+        usuario.status = 'A'
+        usuario.guardar()
+    except Exception as e:
+        print(e)
+
+
+
 if __name__ == "__main__":
     crear_tipo_status(psql_db)
 
@@ -54,4 +71,5 @@ if __name__ == "__main__":
     crear_tabla(psql_db, Conector)
     alterar_campo_status(psql_db, Conector.__name__)
     crear_tabla(psql_db, Conexiones)
+    crear_usuario_admin()
 

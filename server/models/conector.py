@@ -1,6 +1,7 @@
 from utils.conexion import psql_db
 from peewee import *
 from datetime import datetime
+from .usuario import Usuario
 
 class Conector(Model):
     class Meta:
@@ -13,3 +14,4 @@ class Conector(Model):
     status = CharField(default='A')
     fecha_creacion = DateTimeField(default=datetime.utcnow)
     fecha_modificacion = DateTimeField(default=datetime.utcnow)
+    usuario_modificacion = ForeignKeyField(Usuario, backref='id_usuario', lazy_load=False, null=True)
