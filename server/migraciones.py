@@ -60,7 +60,6 @@ def crear_usuario_admin():
         print(e)
 
 
-
 if __name__ == "__main__":
     crear_tipo_status(psql_db)
 
@@ -72,4 +71,3 @@ if __name__ == "__main__":
     alterar_campo_status(psql_db, Conector.__name__)
     crear_tabla(psql_db, Conexiones)
     crear_usuario_admin()
-
