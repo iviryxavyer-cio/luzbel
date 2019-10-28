@@ -42,7 +42,7 @@ def decode_token(token):
     """
     try:
         payload = jwt.decode(token, 'angeles')
-        return payload
+        return payload['sub']
     except jwt.ExpiredSignatureError:
         return 'El tiempo del token expiró.'
     except jwt.InvalidTokenError:
