@@ -4,7 +4,7 @@ import '../Generales.css';
 import { Col } from 'reactstrap';
 import { steps } from '../steps';
 //import MultiStep from '../../node_modules/react-multistep2';
-import MultiStep from '../../node_modules/react-multistep2';
+import MultiStep from '../../node_modules/react-multistep';
 //import {Checkbox} from 'react-md';
 
 import { Modal, Button } from 'react-bootstrap';
