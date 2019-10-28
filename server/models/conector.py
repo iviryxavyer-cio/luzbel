@@ -14,4 +14,3 @@ class Conector(Model):
     status = CharField(default='A')
     fecha_creacion = DateTimeField(default=datetime.utcnow)
     fecha_modificacion = DateTimeField(default=datetime.utcnow)
-    usuario_modificacion = ForeignKeyField(Usuario, backref='id_usuario', lazy_load=False, null=True)

@@ -9,7 +9,7 @@ class Usuario(Model):
         database = psql_db
         table_name = 'usuarios'
 
-    id_usuario = PrimaryKeyField(null=False)
+    id_usuario = AutoField()
     usuario = CharField(max_length=30, null=False, unique=True)
     contrasena = CharField()
     nombre_usuario = CharField(max_length=60, null=False)
@@ -19,7 +19,6 @@ class Usuario(Model):
     status = CharField()
     fecha_creacion = DateTimeField(default=datetime.utcnow)
     fecha_modificacion = DateTimeField(default=datetime.utcnow)
-    usuario_modificacion = ForeignKeyField('self', backref='usuario_modificacion', null=True)
 
     @property
     def serialize(self):

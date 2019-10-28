@@ -17,7 +17,6 @@ class Servidores(Model):
     status = CharField()
     fecha_creacion = DateTimeField(default=datetime.utcnow)
     fecha_modificacion = DateTimeField(default=datetime.utcnow)
-    usuario_modificacion = ForeignKeyField(Usuario, backref='usuario_modificacion', lazy_load=False, null=True)
 
 
 if __name__ == "__main__":
