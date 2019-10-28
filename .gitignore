@@ -123,5 +123,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-/.env/lib64/
-.idea
+/.env/lib64
+.vscode/
+.idea/

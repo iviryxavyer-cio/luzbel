@@ -1,0 +1,80 @@
+from utils.conexion import psql_db
+from models.servidores import Servidores
+from models.usuario import Usuario
+from models.conector import Conector
+from models.conexiones import Conexiones
+from peewee import DatabaseError
+import sys
+
+
+def crear_tabla(db, tabla):
+    print('Creando tabla {}'.format(tabla))
+    try:
+        db.connect()
+        db.begin()
+        db.create_tables([tabla])
+        print('Tabla {} creada'.format(tabla.__name__))
+        db.commit()
+    except DatabaseError as exc:
+        print(exc)
+    except:
+        print('error al crear la tabla {}'.format(tabla.__name__))
+    finally:
+        db.close()
+
+
+def crear_tipo_status(db):
+    try:
+        db.connect()
+        db.begin()
+        db.execute_sql("CREATE TYPE status AS ENUM ('A', 'I', 'E')")
+        db.commit()
+    except DatabaseError as exc:
+        print(exc)
+    except Exception as e:
+        print("Error al crear el tipo status")
+    finally:
+        db.close()
+
+
+def alterar_campo_status(db, tabla):
+    try:
+        db.connect()
+        db.begin()
+        print('Se alterará el campo de status de la tabla {}'.format(tabla))
+        db.execute_sql('ALTER TABLE {} ALTER COLUMN status TYPE status using status::status'.format(tabla))
+        db.commit()
+    except DatabaseError as exc:
+        print(exc)
+    except Exception as e:
+        print("Error al alterar el campo status de la tabla {}".format(tabla))
+    finally:
+        db.close()
+
+
+def crear_usuario_admin():
+    try:
+            usuario = Usuario()
+            usuario.usuario = 'admin'
+            usuario.nombre_usuario = 'Admin'
+            usuario.apellido_usuario = 'Admin'
+            usuario.contrasena = 'admin@123'
+            usuario.correo_usuario = 'admin@cain.com'
+            usuario.telefono_usuario = '3312758869'
+            usuario.status = 'A'
+            usuario.save()
+    except Exception as e:
+        print(e)
+
+
+if __name__ == "__main__":
+    crear_tipo_status(psql_db)
+    crear_tabla(psql_db, Usuario)
+    alterar_campo_status(psql_db, Usuario._meta.table_name)
+    crear_tabla(psql_db, Servidores)
+    alterar_campo_status(psql_db, Servidores.__name__)
+    crear_tabla(psql_db, Conector)
+    alterar_campo_status(psql_db, Conector._meta.table_name)
+    crear_tabla(psql_db, Conexiones)
+    psql_db.close()
+    crear_usuario_admin()

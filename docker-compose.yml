@@ -2,9 +2,12 @@ version: '3.3'
 services:
   api:
     container_name: 'api'
-    build: './api'
+    build: './server'
     volumes:
-      - './api:/app'
+      - './server:/app'
+    restart: 'always'
+    depends_on:
+      - 'nginx'
   nginx:
     container_name: 'web-server'
     restart: 'always'
@@ -12,13 +15,15 @@ services:
     ports:
       - '80:80'
     volumes:
-      - './server:/etc/nginx/conf.d:ro'
+      - './webserver:/etc/nginx/conf.d:ro'
+    depends_on:
+      - 'postgres'
   postgres:
     container_name: 'db'
     restart: 'always'
     image: 'postgres:latest'
     ports:
-      - '5432:5432'
+      - '5431:5432'
     volumes:
       - 'db-data:/var/lib/postgresql/data'
 volumes:
