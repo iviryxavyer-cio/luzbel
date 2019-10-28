@@ -5,6 +5,7 @@ from schemas.usuario_schema import schema
 from schemas.conector_schema import SchemaConectores
 
 from schemas.conexiones_schema import SchemaConexiones
+from utils.middleware import login_required
 
 
 def create_app(config_name):
@@ -48,6 +49,7 @@ app = create_app('default')
 
 
 @app.route('/api/')
+@login_required
 def index():
     return 'CAIN'
 
