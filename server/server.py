@@ -23,24 +23,29 @@ def create_app(config_name):
 
     # ruta para servidores GQL
     app.add_url_rule('/servidor',
-                     view_func=GraphQLView.as_view(
-                         'servidor',
-                         schema=SchemaServidores,
-                         graphiql=True
-                     )
-                     )
+         view_func=GraphQLView.as_view(
+             'servidor',
+             schema=SchemaServidores,
+             graphiql=True
+         )
+     )
 
     # ruta para conexiones GQL
     app.add_url_rule('/conexion',
-                     view_func=GraphQLView.as_view(
-                         'conexion',
-                         schema=SchemaConexiones,
-                         graphiql=True
-                     )
-                     )
+         view_func=GraphQLView.as_view(
+             'conexion',
+             schema=SchemaConexiones,
+             graphiql=True
+         )
+     )
 
     app.add_url_rule('/conector',
-                     view_func=GraphQLView.as_view('conector', schema=SchemaConectores, graphiql=True))
+         view_func=GraphQLView.as_view(
+             'conector',
+             schema=SchemaConectores,
+             graphiql=True
+         )
+     )
 
     return app
 
