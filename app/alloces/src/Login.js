@@ -5,6 +5,8 @@ import './Generales.css';
 import { Container, Row, Col } from 'reactstrap';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import ApolloClient from 'apollo-boost';
+import { gql } from 'apollo-boost';
 //Clase que nos traera el Login
 class Login extends Component {
 //constructor del login, cuenta con usuario y contraseña
@@ -22,7 +24,7 @@ class Login extends Component {
       var payload = {
         "username":this.state.username,
         "password":this.state.password
-      }
+      };
       axios.post(apiBaseUrl+'login', payload)
       .then(function (response) {
         console.log(response);
