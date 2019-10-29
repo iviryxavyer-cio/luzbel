@@ -33,16 +33,12 @@ function Conectores() {
             <h1 className="text-center">CONECTORES</h1>
         </Col>
         <Col xs="12">
-        <Col xs="2" className={"pos-left"}>
+        <Col xs="1" className={"pos-left"}>
           <label></label>
         </Col>
         <Col xs="8"> 
-          <Col xs="8">
-            <DataTableConectores/>
-          </Col>
-          <Col xs="4">
-            <Col xs="6" className="controller-crud">
-            <ButtonToolbar>
+          <Col xs="12">
+          <ButtonToolbar>
               <Button className="buttons boutton-crud Agregar" onClick={() => setModalShow(true)}>
                 Agregar
               </Button>
@@ -66,9 +62,10 @@ function Conectores() {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
               />*/}
-            </ButtonToolbar>
-            
-            </Col>
+            </ButtonToolbar>            
+          </Col>
+          <Col xs="12">
+            <DataTableConectores/>
           </Col>
         </Col>
         <Col xs="2">

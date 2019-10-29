@@ -24,16 +24,12 @@ function Conexiones() {
             <h1 className="text-center">CONEXIONES</h1>
         </Col>
         <Col xs="12">
-          <Col xs="2">
+          <Col xs="1">
             <label></label>
           </Col>
           <Col xs="8"> 
-            <Col xs="8">
-              <DataTableConexiones/>
-            </Col>
-            <Col xs="4">
-              <Col xs="6" className="controller-crud">
-              <ButtonToolbar>
+            <Col xs="12">
+            <ButtonToolbar>
                 <Button className="buttons boutton-crud Agregar" onClick={() => setModalShow(true)}>
                   Agregar
                 </Button>
@@ -50,8 +46,9 @@ function Conexiones() {
                   onHide={() => setModalShow(false)}
                 />*/}
               </ButtonToolbar>
-              
-              </Col>
+            </Col>
+            <Col xs="12">
+              <DataTableConexiones/>
             </Col>
           </Col>
           <Col xs="2">
