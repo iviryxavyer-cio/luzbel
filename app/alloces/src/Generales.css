@@ -151,3 +151,33 @@
     background-color: dodgerblue;
     font-size: 14px;
 }
+.Esto{
+	position: absolute; 
+	right: 25px; 
+	border: 1px solid #565656; 
+	top: 43px; 
+	font-size: 24px;
+	padding-left: 1%;
+	border-right: none;
+	border-top: none;
+	border-bottom: none;
+}
+.Ingresar:hover{
+	border-color: dodgerblue;
+	background-color: dodgerblue !important;
+	color: #fff;
+}
+h1{
+	text-decoration: underline;
+	text-decoration-color: dodgerblue;
+}
+h4{
+	text-decoration: underline;
+	text-decoration-color: #565656;
+	text-align: center;
+}
+@media screen and (max-width: 1366){
+	.Esto{
+		top: 38px;
+	}
+}

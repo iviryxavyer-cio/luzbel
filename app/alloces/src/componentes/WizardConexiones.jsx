@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import '../App.css';
 import '../Generales.css';
-import { Col } from 'reactstrap';
 import { steps } from '../steps';
 //import MultiStep from '../../node_modules/react-multistep2';
-import MultiStep from '../../node_modules/react-multistep';
+import MultiStep from '../Utilidades/MultiSteps';
 //import {Checkbox} from 'react-md';
 
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 class FuncModalWizard extends Component{
 
@@ -29,7 +28,7 @@ render(){
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <MultiStep steps={steps} />
+         <MultiStep steps={steps} />
         </Modal.Body>
         <Modal.Footer>
         </Modal.Footer>
