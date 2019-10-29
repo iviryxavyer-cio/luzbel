@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText} from '@trendmicro/react-sidenav';
+import { ApolloProvider } from '@apollo/react-hooks';
+import ApolloClient from 'apollo-boost';
 import './App.css';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
@@ -8,8 +10,13 @@ import Servidores from './pages/Servidores';
 import Conectores from "./pages/Conectores";
 import Conexiones from "./pages/Conexiones";
 
+const client = new ApolloClient({
+    uri: 'localhost/graphql'
+});
+
 function App() {
   return (
+      <ApolloProvider client={client}>
       <Router>
         <Route render={({ location, history }) => (
             <React.Fragment>
@@ -74,6 +81,7 @@ function App() {
         )}
         />
       </Router>
+      </ApolloProvider>
   );
 }
 
