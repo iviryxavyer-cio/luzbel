@@ -11,10 +11,8 @@ def crear_tabla(db, tabla):
     print('Creando tabla {}'.format(tabla))
     try:
         db.connect()
-        db.begin()
         db.create_tables([tabla])
         print('Tabla {} creada'.format(tabla.__name__))
-        db.commit()
     except DatabaseError as exc:
         print(exc)
     except:
@@ -26,9 +24,7 @@ def crear_tabla(db, tabla):
 def crear_tipo_status(db):
     try:
         db.connect()
-        db.begin()
         db.execute_sql("CREATE TYPE status AS ENUM ('A', 'I', 'E')")
-        db.commit()
     except DatabaseError as exc:
         print(exc)
     except Exception as e:
@@ -40,10 +36,8 @@ def crear_tipo_status(db):
 def alterar_campo_status(db, tabla):
     try:
         db.connect()
-        db.begin()
         print('Se alterará el campo de status de la tabla {}'.format(tabla))
         db.execute_sql('ALTER TABLE {} ALTER COLUMN status TYPE status using status::status'.format(tabla))
-        db.commit()
     except DatabaseError as exc:
         print(exc)
     except Exception as e:
@@ -62,7 +56,7 @@ def crear_usuario_admin():
             usuario.correo_usuario = 'admin@cain.com'
             usuario.telefono_usuario = '3312758869'
             usuario.status = 'A'
-            usuario.save()
+            usuario.guardar()
     except Exception as e:
         print(e)
 
@@ -76,5 +70,4 @@ if __name__ == "__main__":
     crear_tabla(psql_db, Conector)
     alterar_campo_status(psql_db, Conector._meta.table_name)
     crear_tabla(psql_db, Conexiones)
-    psql_db.close()
     crear_usuario_admin()
