@@ -1,7 +1,7 @@
-'use strict'
+//'use strict'
 import React from 'react';
 //importamos los componentes de Container, rows y col de reactstrap para un mayor estandar
-import { Container, Row, Col } from 'reactstrap';
+import { Col } from 'reactstrap';
 import Select from 'react-dropdown-select';
 
 

@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import './Generales.css';
-import { Container, Row, Col } from 'reactstrap';
+import { Col } from 'reactstrap';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import {FaEye, FaEyeSlash} from 'react-icons/fa';
 //Clase que nos traera el Login
 class Login extends Component {
 //constructor del login, cuenta con usuario y contraseña
@@ -15,8 +16,9 @@ class Login extends Component {
         password:''
     }
   }
-
+//Evento
     handleClick(event){
+      //Url base de nuestra api
       var apiBaseUrl = "http://localhost:4000/api/";
       var self = this;
       var payload = {
@@ -81,11 +83,12 @@ class Login extends Component {
                     onChange = {(event, newValue) =>
                     this.setState({password:newValue})}
                   />
+                  <span onClick="EYE()"><FaEye className="Esto"/></span>                 
 
                   <br/>
 
                   <button 
-                    className="input-border buttons" 
+                    className="input-border buttons Ingresar" 
                     primary={true} 
                     onClick={(event) => this.handleClick(event)} >
                       Ingresar
@@ -93,11 +96,12 @@ class Login extends Component {
 
                   <br/>
 
-                  <button 
-                    className="input-border buttons" 
+                  <a
+                    className="" 
+                    href=""
                   >
                         Registro
-                  </button>
+                  </a>
               </Col>
           </Col>
       </Col>
