@@ -1,32 +1,53 @@
 import pymssql
 from tabulate import tabulate
 
-errores = False
-conn = None
 
-try:
-    conn = pymssql.connect(server='10.1.1.67', user='tca', password='ITerp01@02', database='TCADBDWH')
-except:
-    pass
+def testMssqlServerConection(host="localhost",user="admin", password="admin" ):
+    """
+    :param host: direccion del servidor
+    :param user: usuario que se usara para la conexion
+    :param password: password que se usara para la conexion
+    :return: json
 
-if conn:
-    cursor = conn.cursor()
+    la funcion debe regresar un diccionario con:
+    - booleano que indique si se conecto o no
+    - error como string que describe el error
+    - listado de bds en caso de exito
+    """
+    conn = None
+    response = {
+        "status":0,
+        "errores":"",
+        "data":[]
+    }
 
-    cursor.execute(
-        'SELECT name, database_id, create_date FROM sys.databases;'
-    )
+    try:
+        conn = pymssql.connect(server=host, user=user, password=password)
+    except pymssql.Error as pymssqlerror:
+        response["errores"] = f"no se pudo conectar con el servidor : {pymssqlerror}"
 
-    row_db = cursor.fetchone()
-    tabla = []
-    headers = ["database", "id sql server", "fecha creacion"]
+    if conn:
+        response["status"] = 1
+        cursor = conn.cursor()
 
-    while row_db:
-        row = [row_db[0],row_db[1],row_db[2]]
-        tabla.append(row)
-        row_db = cursor.fetchone()
+        cursor.execute(
+            'SELECT name FROM sys.databases;'
+        )
 
-    print(tabulate(tabla, headers=headers, tablefmt="fancy_grid"))
+        #tabla = []
+        #headers = ["database"]
+        data = cursor.fetchall()
+        conn.close()
 
-    conn.close()
-else:
-    print("no se pudo")
+        for row_db in data:
+            #row_tabla = [row_db[0]]
+            #tabla.append(row_tabla)
+            response["data"].append({"database":row_db[0]})
+            #row_db = cursor.fetchone()
+
+        #print(tabulate(tabla, headers=headers, tablefmt="fancy_grid"))
+
+    return response
+
+if __name__ == "__main__":
+    print(testMssqlServerConection(host="10.1.1.67", user='tca', password='ITerp01@02'))
