@@ -6,7 +6,7 @@ import React from 'react'
 // with es6
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
-import '../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
+import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 // with es5
 /*var ReactBsTable = require('react-bootstrap-table');
 var BootstrapTable = ReactBsTable.BootstrapTable;
