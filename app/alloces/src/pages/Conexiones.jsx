@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import '../App.css';
 //importamos los componentes de Container, rows y col de reactstrap para un mayor estandar
 import { Col } from 'reactstrap';
 //import {Checkbox} from 'react-md';
