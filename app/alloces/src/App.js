@@ -6,6 +6,7 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 import Servidores from './pages/Servidores';
 import Conectores from "./pages/Conectores";
+import Conexiones from "./pages/Conexiones";
 
 function App() {
   return (
@@ -30,20 +31,44 @@ function App() {
                       Home
                     </NavText>
                   </NavItem>
+                    <NavItem eventKey="usuarios">
+                        <NavIcon>
+                            <i className="fa fa-fw fa-users" style={{ fontSize: '1.75em' }} />
+                        </NavIcon>
+                        <NavText>
+                            Usuarios
+                        </NavText>
+                    </NavItem>
                   <NavItem eventKey="servidores">
                     <NavIcon>
-                      <i className="fa fa-fw fa-device" style={{ fontSize: '1.75em' }} />
+                      <i className="fa fa-fw fa-server" style={{ fontSize: '1.75em' }} />
                     </NavIcon>
                     <NavText>
                       Servidores
                     </NavText>
                   </NavItem>
+                    <NavItem eventKey="conectores">
+                        <NavIcon>
+                            <i className="fa fa-fw fa-plug" style={{ fontSize: '1.75em' }} />
+                        </NavIcon>
+                        <NavText>
+                            Conectores
+                        </NavText>
+                    </NavItem>
+                    <NavItem eventKey="conexiones">
+                        <NavIcon>
+                            <i className="fa fa-fw fa-database" style={{ fontSize: '1.75em' }} />
+                        </NavIcon>
+                        <NavText>
+                            Conexiones
+                        </NavText>
+                    </NavItem>
                 </SideNav.Nav>
               </SideNav>
               <main>
                 <Route path="/servidores" component={props => <Servidores />} />
                 <Route path="/conectores" component={props => <Conectores/>} />
-                <Route path="/"/>
+                <Route path="/conexiones" component={props => <Conexiones/>} />
               </main>
             </React.Fragment>
         )}

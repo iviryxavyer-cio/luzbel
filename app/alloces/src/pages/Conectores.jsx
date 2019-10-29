@@ -9,9 +9,9 @@ import {BootstrapTable, TableHeaderColumn, ref} from 'react-bootstrap-table';
 //importamos los modales y los buttons
 import {  ButtonToolbar, Button } from 'react-bootstrap';
 //importamos el componente del modal agregar que creamos 
-import FuncModalAgregar from "./componentes/ModalAgregar.jsx"
+import FuncModalAgregar from "../componentes/ModalAgregar.jsx"
 
-import DataTableConectores from "./componentes/DataTableConectores.jsx";
+import DataTableConectores from "../componentes/DataTableConectores.jsx";
 
 //Funcion principal de servidores, aqui nos armara la estructura principal de la vista servidores
 function Conectores() {

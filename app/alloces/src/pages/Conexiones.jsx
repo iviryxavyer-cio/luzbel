@@ -8,9 +8,9 @@ import {  ButtonToolbar, Button } from 'react-bootstrap';
 //importamos los modales y los buttons
 import {BootstrapTable, TableHeaderColumn, ref} from 'react-bootstrap-table';
 //importamos el componente del modal agregar que creamos 
-import FuncModalWizard from "./componentes/WizardConexiones.jsx";
+import FuncModalWizard from "../componentes/WizardConexiones.jsx";
 
-import DataTableConexiones from "./componentes/DataTableConexiones.jsx";
+import DataTableConexiones from "../componentes/DataTableConexiones.jsx";
 
 //Clase principal de servidores, aqui nos armara la estructura principal de la vista servidores
 function Conexiones() {
