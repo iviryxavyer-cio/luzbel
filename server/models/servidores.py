@@ -18,6 +18,9 @@ class Servidores(Model):
     fecha_creacion = DateTimeField(default=datetime.utcnow)
     fecha_modificacion = DateTimeField(default=datetime.utcnow)
 
+    def __str__(self):
+        return f"id : {self.id_servidor}  direccion : {self.direccion} status : {self.status}"
+
 
 if __name__ == "__main__":
     for s in Servidores.select():
