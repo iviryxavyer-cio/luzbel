@@ -14,3 +14,6 @@ class Conector(Model):
     status = CharField(default='A')
     fecha_creacion = DateTimeField(default=datetime.utcnow)
     fecha_modificacion = DateTimeField(default=datetime.utcnow)
+
+    def __str__(self):
+        return f"id : {self.id_conector}  direccion : {self.nombre_conector} status : {self.status}"
