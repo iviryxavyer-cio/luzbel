@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import '../Generales.css';
+import '../css/Generales.css';
 import { Col } from 'reactstrap';
 //import {Checkbox} from 'react-md';
 
