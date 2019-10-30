@@ -57,8 +57,21 @@ class ValidacionConexionQuery(graphene.ObjectType):
 
         if servidor and conector:
             # falta la logica de decision sobre que db validar segun el conector
-            validacion = testc.testMssqlServerConection(host=servidor.direccion, user=usuario, password=contrasena, port=puerto)
-            response = validacion
+            tipoConector = conector.nombre_conector.replace(" ","").replace("\n","").replace("-","").replace("_","").lower()
+
+            if tipoConector == "mssql" or tipoConector == "sqlserver":
+                response = testc.testMssqlServerConection(host=servidor.direccion, user=usuario, password=contrasena, port=puerto)
+            elif tipoConector == "postgres" or tipoConector=="postgresql":
+                response["error"] = "aun no implementado el soporte para postgres"
+            elif tipoConector == "mariadb" or tipoConector=="mysql" or tipoConector=="maria" or tipoConector=="percona" or tipoConector=="perconaserver":
+                response["error"] = "aun no implementado el soporte para MySQL y compatibles"
+            elif tipoConector == "mongo" or tipoConector=="mongodb":
+                response["error"] = "aun no implementado el soporte para mongodb"
+            elif tipoConector == "cassandra" or tipoConector=="casandra" or tipoConector=="apachecasandra":
+                response["error"] = "aun no implementado el soporte para apache cassandra"
+            else:
+                response["error"] = "tipo de conector no soportado"
+
 
         # print(response)
         return response
