@@ -1,6 +1,7 @@
 import graphene
-from utils.test_conection import testMssqlServerConection
+import utils.test_conexion as testc
 from models.servidores import Servidores
+from models.conector import Conector
 from tabulate import tabulate
 
 
@@ -10,7 +11,7 @@ class ValidacionConexionSchema(graphene.ObjectType):
     """
     status = graphene.Boolean()
     errores = graphene.String()
-    data = graphene.String()
+    data = graphene.List(graphene.String)
 
 
 class ValidacionConexionInput(graphene.InputObjectType):
@@ -36,15 +37,31 @@ class ValidacionConexionQuery(graphene.ObjectType):
 
     @staticmethod
     def resolve_validacion(self, info, id_servidor, id_conector, usuario, contrasena, puerto):
-        print(tabulate([[id_servidor, id_conector, usuario, contrasena, puerto]], headers=["id servidor", "id conector", "usuario", "contraseña", "puerto"]))
-        servidor = Servidores.select().where(Servidores.id_servidor == id_servidor).get()
-        print(servidor)
-
-        return {
+        response = {
             "status":False,
             "errores":"",
             "data":""
         }
+        # print(tabulate([[id_servidor, id_conector, usuario, contrasena, puerto]], headers=["id servidor", "id conector", "usuario", "contraseña", "puerto"]))
+        try:
+            servidor = Servidores.select().where(Servidores.id_servidor == id_servidor).get()
+        except:
+            response["errores"] = f"no se encontro el servidor con id {id_servidor}"
+            servidor = None
+
+        try:
+            conector = Conector.select().where(Conector.id_conector == id_conector).get()
+        except:
+            response["errores"] = f"no se encontro el conector con id {id_conector}"
+            conector = None
+
+        if servidor and conector:
+            # falta la logica de decision sobre que db validar segun el conector
+            validacion = testc.testMssqlServerConection(host=servidor.direccion, user=usuario, password=contrasena)
+            response = validacion
+
+        # print(response)
+        return response
 
 
-SchemaValidacionConection = graphene.Schema(query=ValidacionConexionQuery)
+SchemaValidacionConexion = graphene.Schema(query=ValidacionConexionQuery)

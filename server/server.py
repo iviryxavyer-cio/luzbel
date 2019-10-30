@@ -3,7 +3,7 @@ from flask_graphql import GraphQLView
 from schemas.servidores_schema import SchemaServidores
 from schemas.usuario_schema import schema
 from schemas.conector_schema import SchemaConectores
-from schemas.validacion_conexiones_schema import SchemaValidacionConection
+from schemas.validacion_conexiones_schema import SchemaValidacionConexion
 from schemas.conexiones_schema import SchemaConexiones
 from utils.middleware import login_required
 
@@ -50,7 +50,7 @@ def create_app(config_name):
     app.add_url_rule('/validacion',
          view_func=GraphQLView.as_view(
              'validacion',
-             schema=SchemaValidacionConection,
+             schema=SchemaValidacionConexion,
              graphiql=True
          )
      )
