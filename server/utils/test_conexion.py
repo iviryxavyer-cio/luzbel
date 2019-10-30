@@ -42,7 +42,7 @@ def testMssqlServerConection(host="localhost",user="admin", password="admin" ):
         for row_db in data:
             #row_tabla = [row_db[0]]
             #tabla.append(row_tabla)
-            response["data"].append({"database":row_db[0]})
+            response["data"].append(row_db[0])
             #row_db = cursor.fetchone()
 
         #print(tabulate(tabla, headers=headers, tablefmt="fancy_grid"))
