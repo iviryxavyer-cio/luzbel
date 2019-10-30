@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import logo from '../logo.svg';
+import '../App.css';
 //importamos los componentes de Container, rows y col de reactstrap para un mayor estandar
 import { Container, Row, Col } from 'reactstrap';
 //import {Checkbox} from 'react-md';
@@ -9,19 +9,19 @@ import {BootstrapTable, TableHeaderColumn, ref} from 'react-bootstrap-table';
 //importamos los modales y los buttons
 import {  ButtonToolbar, Button } from 'react-bootstrap';
 //importamos el componente del modal agregar que creamos 
-import FuncModalAgregar from "./componentes/ModalAgregar.jsx";
+import FuncModalAgregar from "../componentes/ModalAgregar.jsx"
 
-import DataTableServidores from "./componentes/DataTableServidores.jsx";
+import DataTableConectores from "../componentes/DataTableConectores.jsx";
 
 //Funcion principal de servidores, aqui nos armara la estructura principal de la vista servidores
-function Servidores() {
+function Conectores() {
 //Variable que contiene los campos de prueba       
-  const data = [{title: '10.1.1.67', nombre: 'El 67'},
-                {title: '10.1.1.18', nombre: 'El 18'},
-                {title: '10.1.1.40', nombre: 'SAP'}];
+  const data = [{nombre: 'SQL', url: 'SDASQLS'},
+                {nombre: 'MONGODB', url: 'MONDBADB'},
+                {nombre: 'MYSQL', url: 'MSDASQL'}];
 //Variable de tipo arreglo que contiene los campos y encabezados de la DataTable            
-  const columns = [{name: 'IP/DOMINIO', selector: 'title', sortable: true,},
-                   {name: 'NOM SERVIDOR', selector: 'nombre', sortable:true, right: true,}
+  const columns = [{name: 'Nombre', selector: 'nombre', sortable: true,},
+                   {name: 'URL', selector: 'url', sortable:true, right: true,}
                   ];
 
   const [modalShow, setModalShow] = React.useState(false);
@@ -30,15 +30,15 @@ function Servidores() {
     <div className="Container" id="divServidores">
       <Col xs="12"> 
         <Col xs="10">
-            <h1 className="text-center">SERVIDORES</h1>
+            <h1 className="text-center">CONECTORES</h1>
         </Col>
         <Col xs="12">
-        <Col xs="2">
+        <Col xs="2" className={"pos-left"}>
           <label></label>
         </Col>
         <Col xs="8"> 
           <Col xs="8">
-            <DataTableServidores/>
+            <DataTableConectores/>
           </Col>
           <Col xs="4">
             <Col xs="6" className="controller-crud">
@@ -54,14 +54,14 @@ function Servidores() {
               <Button className="buttons boutton-crud Editar" id="Editar" disabled="disabled" onClick={() => setModalShow(true)}>
                 Editar
               </Button>
-              {/*<FuncModalAgregar
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
-                />*/}
+            {/*  <FuncModalAgregar
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+              />*/}
 
              <Button className="buttons boutton-crud Eliminar" id="Eliminar" disabled="disabled" onClick={() => setModalShow(true)}>
                 Eliminar
-             </Button>
+              </Button>
               {/*<FuncModalAgregar
                 show={modalShow}
                 onHide={() => setModalShow(false)}
@@ -74,10 +74,10 @@ function Servidores() {
         <Col xs="2">
           <label></label>
         </Col>
-      </Col>
+        </Col>
       </Col>
     </div>
   );
 }
 
-export default Servidores;
+export default Conectores;

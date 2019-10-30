@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import logo from '../logo.svg';
+import '../App.css';
 import './Generales.css';
 import { Col } from 'reactstrap';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-import {FaEye, FaEyeSlash} from 'react-icons/fa';
+//import {FaEye, FaEyeSlash} from 'react-icons/fa';
 //Clase que nos traera el Login
 class Login extends Component {
 //constructor del login, cuenta con usuario y contraseña
@@ -83,7 +83,6 @@ class Login extends Component {
                     onChange = {(event, newValue) =>
                     this.setState({password:newValue})}
                   />
-                  <span onClick="EYE()"><FaEye className="Esto"/></span>                 
 
                   <br/>
 
