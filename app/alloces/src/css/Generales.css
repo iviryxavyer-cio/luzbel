@@ -35,12 +35,12 @@
 .boutton-crud{
 	border: 1px solid #565656 !important;
 	box-shadow: none;
-	padding: 2% 5% 2% 5%;
-	margin: 2%;
-	width:80%;
+	/*padding: 2% 5% 2% 5%;*/
+	margin: 0.5%;
+	/*width:80%;*/
 	color: #565656 !important;
-	margin-left: 10%;
-	margin-right: 10%;
+	/*margin-left: 10%;*/
+	/*margin-right: 10%;*/
 }
 /*Seccion de los botones del CRUD*/
 .controller-crud {

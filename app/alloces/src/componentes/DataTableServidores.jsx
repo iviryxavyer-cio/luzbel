@@ -1,44 +1,28 @@
 import React, { Component } from 'react'
 //importamos los datatable para su utilizaciones
 //import DataTable from 'react-data-table-component';
-
+import { serversActions } from '../actions/servidores.actions';
+import { connect } from 'react-redux';
 // with es6
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-// with es5
-/*var ReactBsTable = require('react-bootstrap-table');
-var BootstrapTable = ReactBsTable.BootstrapTable;
-var TableHeaderColumn = ReactBsTable.TableHeaderColumn;
 
-// with es5
-require('node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css');*/
-// with es6
 import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 class DataTableServidores extends Component {
 
   constructor (props) {
     super(props)
-    this.state = { 
-      db: '',
-      servidor: '',
-      usuario: '',
-      contrasenia: '',
-      conector: '',
-      puerto: ''
-    }
-    //this.handleBDChanged = this.handleBDChanged.bind(this);
+    this.getAllServers = this.getAllServers.bind(this)
+    this.getAllServers() 
   }
 
-/*  handleBDChanged (event) {
-    this.setState({db: event.target.value})
-  }*/
-
+  getAllServers() {
+    this.props.dispatch(serversActions.getAllServers())
+  }
   render(){
- //Variable que contiene los campos de prueba       
-  const data = [{ip: '10.1.1.67', nombre: 'El 67'},
-                {ip: '10.1.1.18', nombre: 'El 18'},
-                {ip: '10.1.1.40', nombre: 'SAP'}];
-  var Servidor;
+    const { servers } = this.props;
+    console.log(servers); 
+    var Servidor;
   const selectRowProp = {
         mode: 'radio',
         clickToSelect: true, 
@@ -55,20 +39,27 @@ class DataTableServidores extends Component {
 
         }
   }
+
  // const handleIndeterninate = isIndeterminate => (isIndeterminate ? <FontIcon>indeterminate_check_box</FontIcon> : <FontIcon>check_box_outline_blank</FontIcon>)
     return(
       <div>        
-        <BootstrapTable               
-              data = { data } 
+        <BootstrapTable             
+              data = { servers.allServers } 
               selectRow = { selectRowProp }
               options = { options }
               pagination>
-              <TableHeaderColumn dataField='ip' isKey={ true }>IP</TableHeaderColumn>
-              <TableHeaderColumn dataField='nombre'>Nombre</TableHeaderColumn>
+                      <TableHeaderColumn isKey={true} dataField='ip' >ip</TableHeaderColumn>
+                      <TableHeaderColumn dataField='name'>name</TableHeaderColumn>
             </BootstrapTable>
       </div>
     );
   }
 }
 
-export default DataTableServidores;
+function mapPropsState(state){
+  return {
+    servers: state.servers
+  }
+}
+
+export default connect(mapPropsState)(DataTableServidores);

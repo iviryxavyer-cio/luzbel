@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-// with es6
+import { driversActions } from '../actions/drivers.actions';
+import { connect } from 'react-redux';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
@@ -7,18 +8,16 @@ class DataTableConectores extends Component {
 
   constructor (props) {
     super(props)
-    this.state = { 
-      nombre: '',
-      url: ''
+    this.getAllDrivers = this.getAllDrivers.bind(this)
+    this.getAllDrivers()
     }
-    //this.handleBDChanged = this.handleBDChanged.bind(this);
-  }
 
-/*  handleBDChanged (event) {
-    this.setState({db: event.target.value})
-  }*/
-
+    getAllDrivers(){
+      this.props.dispatch(driversActions.getAllDrivers())
+    }
+  
   render(){
+    const { drivers } = this.props;
  //Variable que contiene los campos de prueba       
   const data = [{nombre: 'SQL', url: 'SDASQLS'},
                 {nombre: 'MONGODB', url: 'MONDBADB'},
@@ -32,7 +31,6 @@ class DataTableConectores extends Component {
   };
 
   var Conector;
-
   const options={
 
       onRowClick: function(row){
@@ -48,7 +46,7 @@ class DataTableConectores extends Component {
     return(
       <div>        
           <BootstrapTable               
-                data = { data } 
+                data = { drivers.allDrivers } 
                 selectRow = { selectRowProp }
                 options = { options }
                 pagination>
@@ -60,4 +58,10 @@ class DataTableConectores extends Component {
   }
 }
 
-export default DataTableConectores;
+function mapPropsState(state){
+  return {
+    drivers: state.drivers
+  }
+}
+
+export default connect(mapPropsState)(DataTableConectores);
