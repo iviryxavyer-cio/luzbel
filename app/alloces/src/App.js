@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText} from '@trendmicro/react-sidenav';
 import { ApolloProvider } from '@apollo/react-hooks';
@@ -46,21 +47,21 @@ function App() {
                             Usuarios
                         </NavText>
                     </NavItem>
-                  <NavItem eventKey="servidores">
-                    <NavIcon>
-                      <i className="fa fa-fw fa-server" style={{ fontSize: '1.75em' }} />
-                    </NavIcon>
-                    <NavText>
-                      Servidores
-                    </NavText>
-                  </NavItem>
-                    <NavItem eventKey="conectores">
-                        <NavIcon>
-                            <i className="fa fa-fw fa-plug" style={{ fontSize: '1.75em' }} />
-                        </NavIcon>
-                        <NavText>
-                            Conectores
-                        </NavText>
+                      <NavItem eventKey="usuarios">
+                          <NavIcon>
+                              <i className="fa fa-fw fa-users" style={{ fontSize: '1.75em' }} />
+                          </NavIcon>
+                          <NavText>
+                              Usuarios
+                          </NavText>
+                      </NavItem>
+                    <NavItem eventKey="servidores">
+                      <NavIcon>
+                        <i className="fa fa-fw fa-server" style={{ fontSize: '1.75em' }} />
+                      </NavIcon>
+                      <NavText>
+                        Servidores
+                      </NavText>
                     </NavItem>
                     <NavItem eventKey="conexiones">
                         <NavIcon>
