@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import '../Generales.css';
+import '../css/Generales.css';
 import { steps } from '../steps';
 //import MultiStep from '../../node_modules/react-multistep2';
 import MultiStep from '../Utilidades/MultiSteps';
