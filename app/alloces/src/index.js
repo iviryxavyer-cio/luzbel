@@ -7,8 +7,16 @@ import './css/custom.css';
 import './css/normalize.css';
 import './css/prog-tracker.css';
 import * as serviceWorker from './serviceWorker';
+//import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'font-awesome/css/font-awesome.min.css'
+import 'font-awesome/css/font-awesome.min.css';
+import { Provider } from 'react-redux';
+import { store } from './store/index';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-serviceWorker.unregister();
+ReactDOM.render(    
+    <Provider store={store}>
+        <App />
+    </Provider>, 
+    document.getElementById('root')
+);
+serviceWorker.unregister();//registerServiceWorker();

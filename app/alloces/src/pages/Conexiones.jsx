@@ -18,16 +18,16 @@ function Conexiones() {
   const [modalShow, setModalShow] = React.useState(false);
 
   return (
-    <div className="Container" id="divServidores">
+    <div id="divServidores">
       <Col xs="12"> 
-        <Col xs="10">
+        <Col xs="12">
             <h1 className="text-center">CONEXIONES</h1>
         </Col>
         <Col xs="12">
           <Col xs="1">
             <label></label>
           </Col>
-          <Col xs="8"> 
+          <Col xs="10"> 
             <Col xs="12">
             <ButtonToolbar>
                 <Button className="buttons boutton-crud Agregar" onClick={() => setModalShow(true)}>
