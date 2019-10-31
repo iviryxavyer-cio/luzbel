@@ -11,7 +11,8 @@ function login(username , password) {
         user: username,
         contrasena: password
     }
-    return request('localhost:80/graphql', loginConstants.LOGIN_QUERY, variables)
+    console.log(variables)
+    return request('http://localhost:80/graphql', loginConstants.LOGIN_QUERY, variables)
 }
 
 function logout() {

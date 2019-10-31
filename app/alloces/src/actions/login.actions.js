@@ -11,6 +11,8 @@ function login(username, password) {
         dispatch(request())
 
         try {
+            console.log(username)
+            console.log(password)
             LoginService.login(username, password).then((token) => {
                 console.log(token)
             /*if(token){
