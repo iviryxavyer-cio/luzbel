@@ -11,18 +11,17 @@ function login(username, password) {
         dispatch(request())
 
         try {
-            console.log(username)
-            console.log(password)
             LoginService.login(username, password).then((token) => {
                 console.log(token)
-            /*if(token){
-                dispatch(success(token))
-            }*/
+            if(token){
+                localStorage.setItem('token', token.loginUsuario.token)
+                dispatch(success(token.loginUsuario.token))
+            }
             }).catch((e)=>{
-                console.log(e)
+                dispatch(fail())
             })
         }catch(e){
-            console.log(e)
+            dispatch(fail())
         }
     }
 
@@ -33,4 +32,5 @@ function login(username, password) {
             payload: token
         }
     }
+    function fail(){return { type: loginConstants.LOGIN_USER_REQUEST_FAIL }}
 }
