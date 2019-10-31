@@ -9,6 +9,7 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import Servidores from './pages/Servidores';
 import Conectores from "./pages/Conectores";
 import Conexiones from "./pages/Conexiones";
+import Login from './pages/Login';
 
 const client = new ApolloClient({
     uri: 'localhost/graphql'
@@ -73,6 +74,7 @@ function App() {
                 </SideNav.Nav>
               </SideNav>
               <main>
+                <Route path="/" component={props => <Login />} />
                 <Route path="/servidores" component={props => <Servidores />} />
                 <Route path="/conectores" component={props => <Conectores/>} />
                 <Route path="/conexiones" component={props => <Conexiones/>} />

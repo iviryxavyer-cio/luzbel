@@ -3,9 +3,10 @@ import logo from '../logo.svg';
 import '../App.css';
 import '../css/Generales.css';
 import { Col } from 'reactstrap';
-import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-import LoginService from '../services/login/login.service';
+import {connect} from 'react-redux';
+import LoginService from '../services/login.service';
+import {loginActions} from '../actions/login.actions'
 
 
 //Clase que nos traera el Login
@@ -17,11 +18,12 @@ class Login extends Component {
         username:'',
         password:''
     }
+
+    this.handleClick = this.handleClick.bind(this)
   }
 //Evento
     handleClick(event){
-      console.log('click');
-      LoginService.login(this.state.username, this.state.password)
+      this.props.dispatch(loginActions.login(this.state.username, this.state.password))
     }
 
   render(){
@@ -82,5 +84,11 @@ class Login extends Component {
   }
 }
 
-export default Login;
+function mapsPropsState(state){
+  return {
+    authentication: state.authentication
+  }
+}
+
+export default connect(mapsPropsState)(Login);
 
