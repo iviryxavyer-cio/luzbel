@@ -10,9 +10,11 @@ import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css'
 
-//TODO: borrar esto
-import Login from "./pages/Login";
+import { Provider } from 'react-redux';
 
-//ReactDOM.render(<App />, document.getElementById('root'));
-ReactDOM.render(<Login />, document.getElementById('root'));
+import {store} from './store';
+
+ReactDOM.render(
+    <Provider store={store}><App /></Provider>
+    , document.getElementById('root'));
 serviceWorker.unregister();

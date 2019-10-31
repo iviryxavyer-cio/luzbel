@@ -3,84 +3,87 @@ import logo from '../logo.svg';
 import '../App.css';
 import '../css/Generales.css';
 import { Col } from 'reactstrap';
-import axios from 'axios';
-import { Redirect } from 'react-router-dom';
-import LoginService from '../services/login/login.service';
+import { connect } from 'react-redux';
+import { loginActions } from '../actions/login.actions';
+import { Field, reduxForm, getFormSyncError } from 'redux-forms';
+import { Form, Row, Col as Column, Button} from 'react-bootstrap'
 
 
 //Clase que nos traera el Login
 class Login extends Component {
-//constructor del login, cuenta con usuario y contraseña
-  constructor(props){
+  //constructor del login, cuenta con usuario y contraseña
+  constructor(props) {
     super(props);
     this.state = {
-        username:'',
-        password:''
-    }
+      username: '',
+      password: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
   }
-//Evento
-    handleClick(event){
-      console.log('click');
-      LoginService.login(this.state.username, this.state.password)
-    }
+  //Evento
+  submitForm(event) {
+    event.preventDefault();
+    this.props.dispatch(loginActions.login(this.state.username, this.state.password))
+  }
 
-  render(){
+  handleChange = async(event)=> {
+    const { target } = event;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const { name } = target;
+    await this.setState({
+      [ name ]: value,
+    });
+  }
+
+  render() {
     return (
       <Col xs="12">
-          <Col xs="6"> 
-            <img src={logo} className="App-Logo" alt="CAIN" />
-          </Col>
-
-          <Col xs="6" className={" fondo-azul login-components "}>
-              <Col xs="6">
-                  <label>Usuario: </label>
-                  <br/>
-                  <label>Contraseña: </label>
-              </Col>
-
-              <Col xs="4">
-                  <input 
-                    className="input-border" 
-                    type="text" 
-                    hitText= "Usuario"
-                    floatingLabelText = "Username"
-                    onChange = {(event, newValue) => 
-                    this.setState({username:newValue})}
-                  />
-
-                  <br/>
-
-                  <input 
-                    className="input-border" 
-                    type="password"
-                    floatingLabelText = "Password"
-                    onChange = {(event, newValue) =>
-                    this.setState({password:newValue})}
-                  />
-
-                  <br/>
-
-                  <button 
-                    className="input-border buttons Ingresar" 
-                    primary={true} 
-                    onClick={(event) => this.handleClick(event)} >
-                      Ingresar
-                  </button>
-
-                  <br/>
-
-                  <a
-                    className="" 
-                    href=""
-                  >
-                        Registro
-                  </a>
-              </Col>
-          </Col>
+        <Col xs="6">
+          <img src={logo} className="App-Logo" alt="CAIN" />
+        </Col>
+        <Col xs="4">
+          <Form className="Login-form" onSubmit={ (e) => this.submitForm(e)}>
+            <Form.Group as={Row} controlId="formEmail">
+              <Form.Label column sm={5}>
+                Nombre de usuario
+              </Form.Label>
+              <Column sm={7}>
+                <Form.Control type="text" 
+                  placeholder="username"
+                  value={this.state.username}
+                  onChange={(e) => {this.handleChange(e)}} 
+                  name="username"/>
+              </Column>
+            </Form.Group>
+            <Form.Group as={Row} controlId="formPassword">
+              <Form.Label column sm={5}>
+                Contraseña
+              </Form.Label>
+              <Column sm={7}>
+                <Form.Control type="password" 
+                  placeholder="contraseña" 
+                  value={this.state.password}
+                  onChange={(e) => {this.handleChange(e)}} 
+                  name="password"/>
+              </Column>
+            </Form.Group>
+            <Form.Group as={Row} controlId="formControls">
+              <Column sm={{span: 10, offset:3}}>
+                <Button type="submit">Iniciar Sesion</Button>
+              </Column>
+            </Form.Group>
+          </Form>
+        </Col>        
       </Col>
     );
   }
 }
 
-export default Login;
+function mapsPropsState(state) {
+  return {
+    authentication: state.authentication
+  }
+}
+
+export default connect(mapsPropsState)(Login);
 
