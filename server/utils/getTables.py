@@ -17,7 +17,7 @@ def getMssqlTables(host:str="localhost",user:str="admin", password:str="admin" ,
         if errorCode == 20009:
             errorMsg = "conexion rechazada revisar direccion y puerto. "
         elif errorCode == 18456:
-            errorMsg = "conexion rechazada revisar usuario y contraseña. "
+            errorMsg = "conexion rechazada revisar usuario, contraseña y base de datos. "
         else:
             errorMsg = f"error de conexion no clasificado : {pymssqlerror.args[0][0]} | "
 
