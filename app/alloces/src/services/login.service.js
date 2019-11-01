@@ -11,12 +11,12 @@ function login(username , password) {
         user: username,
         contrasena: password
     }
-    console.log(variables)
     return request('http://localhost:80/graphql', loginConstants.LOGIN_QUERY, variables)
 }
 
 function logout() {
-    console.log('Se mando llamar el logout')
+    //elimina el token de localStorage para cerrar sesion    
+    localStorage.removeItem('token')
 }
 
 
