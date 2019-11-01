@@ -4,17 +4,11 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
-import loginReducer from '../reducers/login.reducer';
+import rootReducers from '../reducers';
 
 //crear logger middleware
 const loggerMiddleware = createLogger()
 
-//combine reducer para nuestro store
-const rootReducers = combineReducers(
-    {
-        authentication: loginReducer
-    }
-)
 
 // se crea el Store con todos los reducers
 // y se agregan los middleware de log y funciones asyn/await

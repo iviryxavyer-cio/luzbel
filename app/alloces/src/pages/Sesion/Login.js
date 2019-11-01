@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
-import '../App.css';
-import '../css/Generales.css';
+import logo from '../../logo.svg';
+import '../../App.css';
+import '../../css/Generales.css';
 import { Col } from 'reactstrap';
 import { connect } from 'react-redux';
-import { loginActions } from '../actions/login.actions';
+import { loginActions } from '../../actions/login.actions';
 import { Field, reduxForm, getFormSyncError } from 'redux-forms';
 import { Form, Row, Col as Column, Button} from 'react-bootstrap'
 
