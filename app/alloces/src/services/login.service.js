@@ -15,7 +15,8 @@ function login(username , password) {
 }
 
 function logout() {
-    console.log('Se mando llamar el logout')
+    //elimina el token de localStorage para cerrar sesion    
+    localStorage.removeItem('token')
 }
 
 

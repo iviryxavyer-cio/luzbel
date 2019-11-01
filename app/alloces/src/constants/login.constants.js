@@ -10,4 +10,5 @@ export const loginConstants = {
                         token
                     }
                 } `,
+    LOGOUT_USER_REQUEST: 'LOGOUT_USER_REQUEST',
 }

@@ -21,6 +21,8 @@ export default function loginReducer(state = loginInitialState, action){
             return {...state}
         case loginConstants.LOGIN_USER_REQUEST_SUCCESS:
             return {...state, token: action.payload, loggedIn: true}
+        case loginConstants.LOGOUT_USER_REQUEST:
+            return { ...state, token:'', loggedIn: false}
         default:
             return {...state}
     }

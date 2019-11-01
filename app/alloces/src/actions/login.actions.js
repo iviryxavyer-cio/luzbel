@@ -3,7 +3,8 @@ import { LoginService } from '../services/login.service';
 import { historial } from '../Utilidades/historial';
 
 export const loginActions = {
-    login
+    login,
+    logOut
 }
 
 /**
@@ -57,4 +58,12 @@ function login(username, password) {
      * regresa un objeto con el tipo de reduce de fail
      */
     function fail() { return { type: loginConstants.LOGIN_USER_REQUEST_FAIL } }
+}
+
+/**
+ * Funcion para cerra sesion e indica al estado de la aplicación
+ */
+function logOut() {
+    LoginService.logout();
+    return { type: loginConstants.LOGOUT_USER_REQUEST };
 }
