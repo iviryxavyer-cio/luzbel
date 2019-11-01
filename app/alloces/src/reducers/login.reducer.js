@@ -1,9 +1,14 @@
 import {loginConstants} from '../constants/login.constants';
 
-const loginInitialState = {
+let token = localStorage.getItem('token')
+
+const loginInitialState = token ? {
+    token: token,
+    loggedIn: true
+} : {
     token: '',
     loggedIn: false
-}
+} 
 
 /**
  * funcion para el reducer del login

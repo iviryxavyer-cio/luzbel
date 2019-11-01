@@ -1,5 +1,6 @@
 import { loginConstants } from '../constants/login.constants';
 import { LoginService } from '../services/login.service';
+import { historial } from '../Utilidades/historial';
 
 export const loginActions = {
     login
@@ -26,6 +27,7 @@ function login(username, password) {
                 if (token) {
                     localStorage.setItem('token', token.loginUsuario.token)
                     dispatch(success(token.loginUsuario.token))
+                    historial.push('/');
                 }
             })
             //Si hay un error, hace un dispatch con la funcion de error
