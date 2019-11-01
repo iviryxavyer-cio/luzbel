@@ -9,7 +9,7 @@ export default class PlantillaPrivada extends Component {
 
         return (
             <>
-                {/*<SideBar />*/}
+                <SideBar />
                 <Component route={route} />
             </>
         )
