@@ -27,22 +27,18 @@ function Servidores() {
   const [modalShow, setModalShow] = React.useState(false);
 
   return (
-    <div className="Container" id="divServidores">
+    <div id="divServidores">
       <Col xs="12"> 
-        <Col xs="10">
+        <Col xs="12">
             <h1 className="text-center">SERVIDORES</h1>
         </Col>
         <Col xs="12">
-        <Col xs="2">
+        <Col xs="1">
           <label></label>
         </Col>
-        <Col xs="8"> 
-          <Col xs="8">
-            <DataTableServidores/>
-          </Col>
-          <Col xs="4">
-            <Col xs="6" className="controller-crud">
-            <ButtonToolbar>
+        <Col xs="10"> 
+          <Col xs="12">
+          <ButtonToolbar>
               <Button className="buttons boutton-crud Agregar" onClick={() => setModalShow(true)}>
                 Agregar
               </Button>
@@ -67,8 +63,9 @@ function Servidores() {
                 onHide={() => setModalShow(false)}
               />*/}
             </ButtonToolbar>
-            
-            </Col>
+          </Col>
+          <Col xs="12">
+            <DataTableServidores/>
           </Col>
         </Col>
         <Col xs="2">

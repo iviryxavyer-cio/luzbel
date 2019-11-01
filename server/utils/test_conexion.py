@@ -1,8 +1,15 @@
 import pymssql
 from tabulate import tabulate
 
+def limpiarStringTipoServidor(tipoServidor:str=""):
+    """
+    regresar el string del tipo de servidor sin _, -, espacios, \n y en formato de minusculas
+    :param tipoServidor:
+    :return:
+    """
+    return tipoServidor.replace(" ","").replace("\n","").replace("-","").replace("_","").lower()
 
-def testMssqlServerConection(host="localhost",user="admin", password="admin" ):
+def testMssqlServerConection(host:str="localhost",user:str="admin", password:str="admin" , port:str="1433"):
     """
     :param host: direccion del servidor
     :param user: usuario que se usara para la conexion
@@ -16,18 +23,29 @@ def testMssqlServerConection(host="localhost",user="admin", password="admin" ):
     """
     conn = None
     response = {
-        "status":0,
-        "errores":"",
+        "status":False,
+        "error":"",
         "data":[]
     }
 
     try:
-        conn = pymssql.connect(server=host, user=user, password=password)
+        conn = pymssql.connect(server=host, user=user, password=password, port=port)
     except pymssql.Error as pymssqlerror:
-        response["errores"] = f"no se pudo conectar con el servidor : {pymssqlerror}"
+        errorMsg = ""
+        errorCode = pymssqlerror.args[0][0]
+        # print(f"error code : {errorCode}")
+
+        if errorCode == 20009:
+            errorMsg = "conexion rechazada revisar direccion y puerto. "
+        elif errorCode == 18456:
+            errorMsg = "conexion rechazada revisar usuario y contraseña. "
+        else:
+            errorMsg = f"error de conexion no clasificado : {pymssqlerror.args[0][0]} | "
+
+        response["error"] = errorMsg + str(pymssqlerror.args[0][1])
 
     if conn:
-        response["status"] = 1
+        response["status"] = True
         cursor = conn.cursor()
 
         cursor.execute(
