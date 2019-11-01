@@ -11,12 +11,11 @@ import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import { Provider } from 'react-redux';
-import { store } from './store/index';
 
-ReactDOM.render(    
-    <Provider store={store}>
-        <App />
-    </Provider>, 
-    document.getElementById('root')
-);
-serviceWorker.unregister();//registerServiceWorker();
+import {store} from './store';
+
+
+ReactDOM.render(
+    <Provider store={store}><App /></Provider>
+    , document.getElementById('root'));
+serviceWorker.unregister();
