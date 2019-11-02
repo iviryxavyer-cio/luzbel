@@ -6,9 +6,3 @@ const modalConstants =  keyMirror({
 })
 
 export default modalConstants
-
-/*export const modalConstants = {
-    ABRIR_MODAL: 'ABRIR_MODAL',
-    FORMULARIO_MODAL: 'FORMULARIO_MODAL',
-    CERRAR_MODAL: 'CERRAR_MODAL'
-}*/

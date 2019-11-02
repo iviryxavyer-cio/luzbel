@@ -14,13 +14,15 @@ import { createLogger } from 'redux-logger';
 import { serverReducer } from '../reducers/servidores.reducer';
 import { connectionReducer } from '../reducers/conexiones.reducer';
 import { driversReducer } from '../reducers/drivers.reducer';
+import { usersReducers } from '../reducers/usuarios.reducer';
 //crea un logger midleware
 const loggerMidleware = createLogger();
 //combina nuestros reducers para nuestro store
 const rootReducers = combineReducers({
         servers: serverReducer,
         connections: connectionReducer,
-        drivers: driversReducer
+        drivers: driversReducer,
+        users: usersReducers
 })
 //Se crea el store con todos los reducers
 //y se agregan los midleware

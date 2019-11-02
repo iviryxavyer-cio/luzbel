@@ -3,25 +3,11 @@ import '../App.css';
 import '../css/Generales.css';
 import { Col } from 'reactstrap';
 import { Modal, Button } from 'react-bootstrap';
-import Servidores from '../pages/Servidores';
-import axios from 'axios';
-import { Redirect } from 'react-router-dom';
-import { serversActions } from '../actions/servidores.actions';
+import { showModal, hideModal } from '../actions/modal.actions';
 import { connect } from 'react-redux';
 
 
 class FuncModalAgregar extends Component{
-
-  constructor(props){
-    super(props);
-    this.getAllServers = this.getAllServers.bind(this)
-    this.getAllServers()
-  }
-
-  getAllServers() {
-    this.props.dispatch(serversActions.getAllServers())
-  }
-
   render(){
     const { Servidores } = this.props
     console.log(Servidores);
@@ -80,11 +66,5 @@ class FuncModalAgregar extends Component{
       );
   }
 }
-function mapsPropsState(state){
-  return {
-    servidores: state.servidores
-  }
-}
 
-
-export default connect(mapsPropsState)(FuncModalAgregar);
+export default FuncModalAgregar;
