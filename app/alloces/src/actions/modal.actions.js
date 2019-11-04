@@ -1,7 +1,7 @@
-import { modalConstants } from '../constants/modal.constants';
+import modalConstants from '../constants/modal.constants';
 
-export const showModal = ({ modalProps, modalType }) => {
-    dispatchEvent({
+export const showModal = ({ modalProps, modalType }) => dispatch => {
+    dispatch({
         type: modalConstants.SHOW_MODAL,
         modalProps,
         modalType
