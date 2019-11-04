@@ -5,7 +5,6 @@ import '../../css/Generales.css';
 import { Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import { loginActions } from '../../actions/login.actions';
-import { Field, reduxForm, getFormSyncError } from 'redux-forms';
 import { Form, Row, Col as Column, Button} from 'react-bootstrap'
 
 
