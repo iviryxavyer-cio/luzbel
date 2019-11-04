@@ -14,7 +14,14 @@ function ModalGeneral(props){
                 {props.title}
             </Button>
 
-            <Modal show={show} onHide={handleClose} animation={false}>
+            <Modal 
+                show={show} 
+                onHide={handleClose} 
+                animation={false}
+                size="lg" 
+                aria-labelledby="contained-modal-title-vcenter" 
+                centered 
+                >
                 <Modal.Header closeButton>
                     <Modal.Title>
                         { props.cabecera }
@@ -24,12 +31,7 @@ function ModalGeneral(props){
                     {props.contenido}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secundary" onClick={handleClose}>
-                        Cancelar
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Aceptar
-                    </Button>
+                    { props.footer }
                 </Modal.Footer>
             </Modal>
         </>
