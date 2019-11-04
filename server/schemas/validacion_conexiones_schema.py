@@ -56,8 +56,7 @@ class ValidacionConexionQuery(graphene.ObjectType):
             conector = None
 
         if servidor and conector:
-            # falta la logica de decision sobre que db validar segun el conector
-            tipoConector = conector.nombre_conector.replace(" ","").replace("\n","").replace("-","").replace("_","").lower()
+            tipoConector = testc.limpiarStringTipoServidor(conector.nombre_conector)
 
             if tipoConector == "mssql" or tipoConector == "sqlserver":
                 response = testc.testMssqlServerConection(host=servidor.direccion, user=usuario, password=contrasena, port=puerto)

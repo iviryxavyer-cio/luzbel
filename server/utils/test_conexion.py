@@ -1,8 +1,15 @@
 import pymssql
 from tabulate import tabulate
 
+def limpiarStringTipoServidor(tipoServidor:str=""):
+    """
+    regresar el string del tipo de servidor sin _, -, espacios, \n y en formato de minusculas
+    :param tipoServidor:
+    :return:
+    """
+    return tipoServidor.replace(" ","").replace("\n","").replace("-","").replace("_","").lower()
 
-def testMssqlServerConection(host="localhost",user="admin", password="admin" , port="1433"):
+def testMssqlServerConection(host:str="localhost",user:str="admin", password:str="admin" , port:str="1433"):
     """
     :param host: direccion del servidor
     :param user: usuario que se usara para la conexion

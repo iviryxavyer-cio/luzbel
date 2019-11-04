@@ -1,16 +1,19 @@
 from flask import Flask
+from flask_cors import CORS
 from flask_graphql import GraphQLView
 from schemas.servidores_schema import SchemaServidores
 from schemas.usuario_schema import schema
 from schemas.conector_schema import SchemaConectores
 from schemas.validacion_conexiones_schema import SchemaValidacionConexion
 from schemas.conexiones_schema import SchemaConexiones
+from schemas.tablasdb_schema import SchemaTablaDB
 from utils.middleware import login_required
 
 
 def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object(__name__)
+    app.config['CORS_HEADERS'] = 'Content-Type'
 
     # insert_data()
 
@@ -23,34 +26,42 @@ def create_app(config_name):
 
     # ruta para servidores GQL
     app.add_url_rule('/servidor',
-         view_func=GraphQLView.as_view(
-             'servidor',
-             schema=SchemaServidores,
-             graphiql=True
-         )
-     )
+        view_func=GraphQLView.as_view(
+            'servidor',
+            schema=SchemaServidores,
+            graphiql=True
+        )
+    )
 
     # ruta para conexiones GQL
     app.add_url_rule('/conexion',
-         view_func=GraphQLView.as_view(
-             'conexion',
-             schema=SchemaConexiones,
-             graphiql=True
-         )
-     )
+        view_func=GraphQLView.as_view(
+            'conexion',
+            schema=SchemaConexiones,
+            graphiql=True
+        )
+    )
 
     app.add_url_rule('/conector',
-         view_func=GraphQLView.as_view(
-             'conector',
-             schema=SchemaConectores,
-             graphiql=True
-         )
-     )
+        view_func=GraphQLView.as_view(
+            'conector',
+            schema=SchemaConectores,
+            graphiql=True
+        )
+    )
 
     app.add_url_rule('/validacion',
+        view_func=GraphQLView.as_view(
+            'validacion',
+            schema=SchemaValidacionConexion,
+            graphiql=True
+        )
+    )
+
+    app.add_url_rule('/tabla',
          view_func=GraphQLView.as_view(
-             'validacion',
-             schema=SchemaValidacionConexion,
+             'tabla',
+             schema=SchemaTablaDB,
              graphiql=True
          )
      )
@@ -59,6 +70,7 @@ def create_app(config_name):
 
 
 app = create_app('default')
+cors = CORS(app)
 
 
 @app.route('/api/')
