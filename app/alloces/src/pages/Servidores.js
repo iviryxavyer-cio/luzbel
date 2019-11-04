@@ -5,9 +5,9 @@ import '../App.css';
 import { Container, Row, Col } from 'reactstrap';
 //import {Checkbox} from 'react-md';
 //importamos los datatable para su utilizaciones
-import {BootstrapTable, TableHeaderColumn, ref} from 'react-bootstrap-table';
+import { BootstrapTable, TableHeaderColumn, ref } from 'react-bootstrap-table';
 //importamos los modales y los buttons
-import {  ButtonToolbar, Button } from 'react-bootstrap';
+import { ButtonToolbar, Button } from 'react-bootstrap';
 //importamos el componente del modal agregar que creamos 
 import FuncModalAgregar from "../componentes/ModalAgregar.jsx";
 
@@ -19,50 +19,50 @@ function Servidores() {
 
   return (
     <div id="divServidores">
-      <Col xs="12"> 
+      <Col xs="12">
         <Col xs="12">
-            <h1 className="text-center">SERVIDORES</h1>
+          <h1 className="text-center">SERVIDORES</h1>
         </Col>
         <Col xs="12">
-        <Col xs="1">
-          <label></label>
-        </Col>
-        <Col xs="10"> 
-          <Col xs="12">
-          <ButtonToolbar>
-              <Button className="buttons boutton-crud Agregar" onClick={() => setModalShow(true)}>
-                Agregar
+          <Col xs="1">
+            <label></label>
+          </Col>
+          <Col xs="10">
+            <Col xs="12">
+              <ButtonToolbar>
+                <Button className="buttons boutton-crud Agregar" onClick={() => setModalShow(true)}>
+                  Agregar
               </Button>
-              <FuncModalAgregar
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-              />
+                <FuncModalAgregar
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                />
 
-              <Button className="buttons boutton-crud Editar" id="Editar" disabled="disabled" onClick={() => setModalShow(true)}>
-                Editar
+                <Button className="buttons boutton-crud Editar" id="Editar" disabled="disabled" onClick={() => setModalShow(true)}>
+                  Editar
               </Button>
-              {/*<FuncModalAgregar
+                {/*<FuncModalAgregar
                   show={modalShow}
                   onHide={() => setModalShow(false)}
                 />*/}
 
-             <Button className="buttons boutton-crud Eliminar" id="Eliminar" disabled="disabled" onClick={() => setModalShow(true)}>
-                Eliminar
-             </Button>
-              {/*<FuncModalAgregar
+                <Button className="buttons boutton-crud Eliminar" id="Eliminar" disabled="disabled" onClick={() => setModalShow(true)}>
+                  Eliminar
+              </Button>
+                {/*<FuncModalAgregar
                 show={modalShow}
                 onHide={() => setModalShow(false)}
               />*/}
-            </ButtonToolbar>
+              </ButtonToolbar>
+            </Col>
+            <Col xs="12">
+              <DataTableServidores />
+            </Col>
           </Col>
-          <Col xs="12">
-            <DataTableServidores/>
+          <Col xs="2">
+            <label></label>
           </Col>
         </Col>
-        <Col xs="2">
-          <label></label>
-        </Col>
-      </Col>
       </Col>
     </div>
   );
