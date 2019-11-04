@@ -5,7 +5,6 @@ import { connectionsActions } from '../actions/conexiones.actions';
 
 import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
-
 class DataTableConexiones extends Component {
 
   constructor (props) {
@@ -29,19 +28,14 @@ class DataTableConexiones extends Component {
     };
 
     const options = {
-
         onRowClick: function(row) {
-
-            document.getElementById('Eliminar').removeAttribute("disabled");
-
-        }
-
+          document.getElementById('Eliminar').removeAttribute("disabled");
+      }
     }
- // const handleIndeterninate = isIndeterminate => (isIndeterminate ? <FontIcon>indeterminate_check_box</FontIcon> : <FontIcon>check_box_outline_blank</FontIcon>)
+     // const handleIndeterninate = isIndeterminate => (isIndeterminate ? <FontIcon>indeterminate_check_box</FontIcon> : <FontIcon>check_box_outline_blank</FontIcon>)
     return(
       <div>        
-        <BootstrapTable 
-              
+        <BootstrapTable               
               data = { connections.allConnections } 
               selectRow = { selectRowProp }
               options = { options }
