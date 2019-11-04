@@ -10,53 +10,52 @@ import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.
 
 class DataTableServidores extends Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.getAllServers = this.getAllServers.bind(this)
-    this.getAllServers() 
   }
 
   getAllServers() {
     this.props.dispatch(serversActions.getAllServers())
   }
-  render(){
+  render() {
     const { servers } = this.props;
-    console.log(servers); 
+    console.log(servers);
     var Servidor;
-  const selectRowProp = {
-        mode: 'radio',
-        clickToSelect: true, 
-        bgColor: '#91c4f7',
-        hideSelectColumn: true
-  };
-  const options={
+    const selectRowProp = {
+      mode: 'radio',
+      clickToSelect: true,
+      bgColor: '#91c4f7',
+      hideSelectColumn: true
+    };
+    const options = {
 
-        onRowClick: function(row){ 
-          
-             Servidor = row.ip;
-             document.getElementById('Editar').removeAttribute("disabled");
-             document.getElementById('Eliminar').removeAttribute("disabled");
+      onRowClick: function (row) {
 
-        }
-  }
+        Servidor = row.ip;
+        document.getElementById('Editar').removeAttribute("disabled");
+        document.getElementById('Eliminar').removeAttribute("disabled");
 
- // const handleIndeterninate = isIndeterminate => (isIndeterminate ? <FontIcon>indeterminate_check_box</FontIcon> : <FontIcon>check_box_outline_blank</FontIcon>)
-    return(
-      <div>        
-        <BootstrapTable             
-              data = { servers.allServers } 
-              selectRow = { selectRowProp }
-              options = { options }
-              pagination>
-                      <TableHeaderColumn isKey={true} dataField='ip' >ip</TableHeaderColumn>
-                      <TableHeaderColumn dataField='name'>name</TableHeaderColumn>
-            </BootstrapTable>
+      }
+    }
+
+    // const handleIndeterninate = isIndeterminate => (isIndeterminate ? <FontIcon>indeterminate_check_box</FontIcon> : <FontIcon>check_box_outline_blank</FontIcon>)
+    return (
+      <div>
+        <BootstrapTable
+          data={servers.allServers}
+          selectRow={selectRowProp}
+          options={options}
+          pagination>
+          <TableHeaderColumn isKey={true} dataField='direccion' >Direccion IP</TableHeaderColumn>
+          <TableHeaderColumn dataField='aliasServidor'>Nombre</TableHeaderColumn>
+        </BootstrapTable>
       </div>
     );
   }
 }
 
-function mapPropsState(state){
+function mapPropsState(state) {
   return {
     servers: state.servers
   }

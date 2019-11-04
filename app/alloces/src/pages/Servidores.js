@@ -15,15 +15,6 @@ import DataTableServidores from "../componentes/DataTableServidores.jsx";
 
 //Funcion principal de servidores, aqui nos armara la estructura principal de la vista servidores
 function Servidores() {
-//Variable que contiene los campos de prueba       
-  const data = [{title: '10.1.1.67', nombre: 'El 67'},
-                {title: '10.1.1.18', nombre: 'El 18'},
-                {title: '10.1.1.40', nombre: 'SAP'}];
-//Variable de tipo arreglo que contiene los campos y encabezados de la DataTable            
-  const columns = [{name: 'IP/DOMINIO', selector: 'title', sortable: true,},
-                   {name: 'NOM SERVIDOR', selector: 'nombre', sortable:true, right: true,}
-                  ];
-
   const [modalShow, setModalShow] = React.useState(false);
 
   return (
