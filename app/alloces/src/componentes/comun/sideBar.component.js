@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { historial } from '../../Utilidades/historial';
 
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
@@ -11,7 +12,7 @@ export default class SideBar extends React.Component {
         }
         return (
             <SideNav onSelect={(selected) => {
-                console.log(selected)
+                console.log(historial)
             }}
             >
                 <Toggle />
