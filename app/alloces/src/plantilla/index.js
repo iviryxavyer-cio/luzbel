@@ -15,6 +15,7 @@ import NotFound from './publico/NoEncuentra';
 import { historial } from '../Utilidades/historial';
 import rutasPublicas from "./rutas/rutasPublicas";
 import rutasPrivadas from "./rutas/rutasPrivadas";
+import { Modal, Button } from 'react-bootstrap';
 
 
 class Plantilla extends Component {
@@ -73,6 +74,36 @@ class Plantilla extends Component {
                     </Switch>
                 </Router>
             </>
+            <Modal
+                show={modal.mostrar}
+                onHide={() => this.ocultarModal()}
+                dialogClassName="modal-90w"
+                size={modal.tamanio}
+                aria-labelledby="example-custom-modal-styling-title"
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title id="example-custom-modal-styling-title">
+                        {modal.titulo}
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {
+                        modal.body ?
+                            <p className='text-center'>{modal.body}</p> :
+                            modal.formulario ?
+                                modal.formulario : null
+                    }
+                </Modal.Body>
+                {
+                    !modal.formulario ?
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={() => this.ocultarModal()}>
+                                console.trace(object)
+                            </Button>
+                        </Modal.Footer> :
+                        null
+                }
+            </Modal>
         )
     }
 }

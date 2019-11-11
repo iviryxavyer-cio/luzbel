@@ -1,4 +1,5 @@
 import { UsersConstants } from '../constants/usuarios.constants'
+import { UsuarioService } from '../services/usuarios.service';
 
 export const usersActions = {
     getAllUsers
@@ -8,12 +9,13 @@ function getAllUsers() {
     return dispatch => {
         dispatch(request())
 
-        const users = [
-            { usuario: 'jabc', contrasenia: '123456', nombres: 'jesus camacho', apellidos: 'briseño camacho', correo: 'jabc55@live.com' },
-            { usuario: 'lmtt', contrasenia: '789012', nombres: 'luis manuel', apellidos: 'torres treviño', correo: 'lmtt@live.com' }
-        ]
-        
-        dispatch(success(users))
+        try {
+            UsuarioService.obtenerUsuarios().then((lista) => {
+                dispatch(success(lista.usuarios))
+            });
+        }catch(error) {
+            console.log(error)
+        }
     }
 
     function request() {

@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-import { usersActions } from '../actions/usuarios.actions';
+import { usersActions } from '../../../actions/usuarios.actions';
 import { connect } from 'react-redux';
 
-import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css'
+import '../../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css'
 
 class DataTableUsuarios extends Component {
     constructor (props) {
         super(props)
-        this.getAllUsers = this.getAllUsers.bind(this)
-        this.getAllUsers()
-    }
-
-    getAllUsers() {
-        this.props.dispatch(usersActions.getAllUsers())
     }
 
     render(){
@@ -40,21 +34,15 @@ class DataTableUsuarios extends Component {
                     selectRow = { selectRowProp }
                     options = { options }
                     pagination>
-                        <TableHeaderColumn dataField='usuario' isKey={ true }>Usuarios</TableHeaderColumn>                        
-                        <TableHeaderColumn dataField='contrasenia'>Contraseña</TableHeaderColumn>
-                        <TableHeaderColumn dataField='nombres'>Nombres</TableHeaderColumn>
-                        <TableHeaderColumn dataField='apellidos'>Apellidos</TableHeaderColumn>
-                        <TableHeaderColumn dataField='correo'>Correo</TableHeaderColumn>
+                        <TableHeaderColumn dataField='usuario' isKey={ true }>Usuarios</TableHeaderColumn>
+                        <TableHeaderColumn dataField='nombreUsuario'>Nombres</TableHeaderColumn>
+                        <TableHeaderColumn dataField='apellidoUsuario'>Apellidos</TableHeaderColumn>
+                        <TableHeaderColumn dataField='correoUsuario'>Correo</TableHeaderColumn>
+                        <TableHeaderColumn dataField='telefonoUsuario'>Telefono</TableHeaderColumn>
                 </BootstrapTable>
             </div>
         );
     }
 }
 
-function mapPropsState(state){
-    return {
-        users: state.users
-    }
-}
-
-export default connect(mapPropsState)(DataTableUsuarios);
+export default DataTableUsuarios;
