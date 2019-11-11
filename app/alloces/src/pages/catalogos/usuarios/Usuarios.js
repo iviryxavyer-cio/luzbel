@@ -1,8 +1,8 @@
 import React from 'react'
-import '../App.css'
+import '../../../App.css'
 import { Col } from 'reactstrap'
 import { ButtonToolbar, Button } from 'react-bootstrap'
-import DataTableUsuarios from '../componentes/DataTableUsuarios'
+import DataTableUsuarios from '../../../componentes/DataTableUsuarios'
 
 function Usuarios(){
     
