@@ -22,7 +22,6 @@ class DataTableServidores extends Component {
 
   render() {
     const { servers } = this.props;
-    console.log(servers);
     var Servidor;
     const selectRowProp = {
       mode: 'radio',

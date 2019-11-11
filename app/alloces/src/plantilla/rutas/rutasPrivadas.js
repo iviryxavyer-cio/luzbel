@@ -8,6 +8,7 @@
 import Servidores from '../../pages/Servidores';
 import Conectores from "../../pages/Conectores";
 import Conexiones from "../../pages/Conexiones";
+import Usuarios from "../../pages/Usuarios";
 import Home from "../../pages/home";
 
 export default {
@@ -26,5 +27,9 @@ export default {
     Home: {
         component: Home,
         path: '/'
+    },
+    Usuarios: {
+        component: Usuarios,
+        path: '/usuarios'
     },
 };

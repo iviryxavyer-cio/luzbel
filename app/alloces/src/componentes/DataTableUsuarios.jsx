@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
-import { connect, usersActions } from '../actions/usuarios.actions'
+import React, { Component } from 'react';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import { usersActions } from '../actions/usuarios.actions';
+import { connect } from 'react-redux';
 
 import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css'
 

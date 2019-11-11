@@ -18,7 +18,7 @@ function Usuarios(){
                     </Col>
                     <Col xs="10">
                         <Col xs="12">
-                            <ButtonToolbar>
+                            {/*<ButtonToolbar>
                                 <Button className="buttons boutton-crud Agregar" onClick={() => setModalShow(true)}>
                                     Agregar
                                 </Button>
@@ -28,7 +28,7 @@ function Usuarios(){
                                 <Button className="buttons boutton-crud Eliminar" onClick={() => setModalShow(true)}>
                                     Eliminar
                                 </Button>
-                            </ButtonToolbar>
+                            </ButtonToolbar>*/}
                         </Col>
                         <Col xs="12">
                             <DataTableUsuarios/>
