@@ -13,11 +13,13 @@ class DataTableServidores extends Component {
   constructor(props) {
     super(props)
     this.getAllServers = this.getAllServers.bind(this)
+    this.getAllServers();
   }
 
   getAllServers() {
     this.props.dispatch(serversActions.getAllServers())
   }
+
   render() {
     const { servers } = this.props;
     console.log(servers);

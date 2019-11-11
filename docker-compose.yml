@@ -8,16 +8,16 @@ services:
     restart: 'always'
     depends_on:
       - 'nginx'
-  #app:
-  #  container_name: 'app'
-  #  build: './app/alloces'
-  #  volumes:
-  #    - './app/alloces:/app'
-  #    - '/app/node_modules'
-  #  environment:
-  #    - 'NODE_ENV=development'
-  #  depends_on:
-  #    - 'nginx'
+  app:
+    container_name: 'app'
+    build: './app/alloces'
+    volumes:
+      - './app/alloces:/app'
+      - '/app/node_modules'
+    environment:
+      - 'NODE_ENV=development'
+    depends_on:
+      - 'nginx'
   nginx:
     container_name: 'web-server'
     restart: 'always'
