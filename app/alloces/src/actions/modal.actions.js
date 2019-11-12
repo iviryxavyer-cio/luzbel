@@ -1,15 +1,32 @@
-import modalConstants from '../constants/modal.constants';
+import {modalConstants} from '../constants/modal.constants';
 
-export const showModal = ({ modalProps, modalType }) => dispatch => {
-    dispatch({
-        type: modalConstants.SHOW_MODAL,
-        modalProps,
-        modalType
-    })
+export const modalAcciones = {
+    exito,
+    error,
+    formulario,
+    limpiar,
+    alerta
 }
 
-export const hideModal = () => dispatch => {
-    dispatch({
-        type: modalConstants.HIDE_MODAL
-    })
+function formulario(formulario) {
+    return {
+        type: modalConstants.ABRIR_FORMULARIO,
+        formulario
+    }
+}
+
+function exito(modal){
+    return { type: modalConstants.EXITO, modal }
+}
+
+function alerta(modal) {
+    return { type: modalConstants.ALERTA, modal }
+}
+
+function error(modal) {
+    return { type: modalConstants.ERROR, modal }
+}
+
+function limpiar() {
+    return { type: modalConstants.LIMPIAR };
 }

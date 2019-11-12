@@ -1,23 +1,46 @@
 import { modalConstants } from '../constants/modal.constants';
 
-const initialState = {
-    modalType: null, 
-    modalProps: {
-        open: false
-    }
-}
-
-export default (state = initialState, action) => {
-    switch (action.type) {
-        case modalConstants.SHOW_MODAL:
+export function modal(state = {}, accion) {
+    switch(accion.type) {
+        case modalConstants.ABRIR_FORMULARIO:
             return {
-                modalProps: action.modalProps,
-                modalType: action.modalType,
-                type: action.type
+                ...state,
+                mostrar: true,
+                titulo: accion.formulario.titulo,
+                formulario: accion.formulario.campos,
+                tamanio: accion.formulario.tamanio
             }
-        case modalConstants.HIDE_MODAL:
-            return initialState
+        case modalConstants.EXITO:
+            return {
+                ...state,
+                mostrar: true,
+                titulo: accion.modal.titulo,
+                body: accion.modal.body
+            }
+        case modalConstants.ALERTA:
+            return {
+                ...state,
+                mostrar: true,
+                titulo: accion.modal.titulo,
+                body: accion.modal.body
+            }
+        case modalConstants.ERROR:
+            return {
+                ...state,
+                mostrar: true,
+                titulo: accion.modal.titulo,
+                body: accion.modal.body,
+            }
+        case modalConstants.LIMPIAR:
+            return {
+                ...state,
+                mostrar: false,
+                titulo: null,
+                formulario: null,
+                tamanio: null,
+                body: null
+            }
         default:
-            return state
+            return state;
     }
 }
