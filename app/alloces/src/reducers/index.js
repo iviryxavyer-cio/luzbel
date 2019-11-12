@@ -4,6 +4,7 @@ import { serverReducer } from './servidores.reducer';
 import { connectionReducer } from './conexiones.reducer';
 import { driversReducer } from './drivers.reducer'
 import { usersReducers } from './usuarios.reducer';
+import { modal } from './modalReducer';
 
 const rootReducers = combineReducers(
     {
@@ -12,6 +13,7 @@ const rootReducers = combineReducers(
         connections: connectionReducer,
         drivers: driversReducer,
         usuarios: usersReducers,
+        modal: modal,
     }
 );
 
