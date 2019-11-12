@@ -14,7 +14,7 @@ class CampoCheck extends Component {
         const { checked } = this.props;
 
         this.state = {
-            isChecked: typeof checked == 'undefined' ? false : checked;
+            isChecked: typeof checked == 'undefined' ? false : checked
         };
 
         this.toggle = this.toggle.bind(this);

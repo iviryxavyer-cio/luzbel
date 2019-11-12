@@ -3,11 +3,12 @@
  * @date 11/11/2019
  * @description Este archivo contiene el componente de campo contraseña
  */
-import { React } from 'react';
+import React  from 'react';
 import { Form, Row, Col } from 'react-bootstrap';
 
 class CampoContrasena extends React.Component {
     constructor(props) {
+        super(props)
         this.state = {
             tipoCampo: this.props.type,
             botonVisible: false,
