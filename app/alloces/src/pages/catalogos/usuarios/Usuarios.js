@@ -6,7 +6,7 @@ import DataTableUsuarios from './DataTableUsuarios'
 import { connect } from 'react-redux';
 import { usersActions } from '../../../actions/usuarios.actions';
 import { modalAcciones } from '../../../actions/modal.actions';
-import UsuariosReduxForm from './FormularioAgregarEditar';
+import FormularioAgregarEditar from './FormularioAgregarEditar';
 
 class Usuarios extends React.Component {
     constructor(props) {
@@ -22,7 +22,7 @@ class Usuarios extends React.Component {
 
     registrar(datosFormulario) {
         console.log(datosFormulario)
-        //this.props.dispatch(usersActions.registrar(datosFormulario))
+        this.props.dispatch(usersActions.registrar(datosFormulario))
     }
 
     modificar(datosFormulario) {
@@ -40,7 +40,7 @@ class Usuarios extends React.Component {
     }
 
     abrirModalRegistrar() {
-        const campos = <UsuariosReduxForm
+        const campos = <FormularioAgregarEditar
             onSubmit={this.registrar}
             cerrarModal={this.cerrarModal}
             labelBoton={'Aceptar'} 

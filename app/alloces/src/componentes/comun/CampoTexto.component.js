@@ -17,7 +17,7 @@ class CampoTexto extends React.Component {
                 {
                     horizontal ?
                         <Form.Group>
-                            <Form.Control {...input} {...rest} onChange={input.onChange} placeholder={placeholder} type={type} />
+                            <Form.Control {...input} {...rest}  onChange={input.onChange} placeholder={placeholder} value={rest.value} type={type} />
                             {
                                 meta.touched && meta.error &&
                                 <span className="error text-danger">{meta.error}</span>
@@ -26,7 +26,7 @@ class CampoTexto extends React.Component {
                         :
 
                         <Form.Group as={Row}>
-                            <Form.Control {...input} {...rest} onChange={input.onChange} className="campo" placeholder={label} type={type} />
+                            <Form.Control {...input} {...rest} onChange={input.onChange} className="campo" placeholder={label} value={rest.value} type={type} />
                             {
                                 meta.touched && meta.error &&
                                 <span className="error text-danger">{meta.error}</span>

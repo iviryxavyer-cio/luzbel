@@ -16,6 +16,7 @@ import { historial } from '../Utilidades/historial';
 import rutasPublicas from "./rutas/rutasPublicas";
 import rutasPrivadas from "./rutas/rutasPrivadas";
 import { Modal, Button } from 'react-bootstrap';
+import { modalAcciones } from '../actions/modal.actions';
 
 
 class Plantilla extends Component {
@@ -30,7 +31,7 @@ class Plantilla extends Component {
 
     ocultarModal() {
         const { dispatch } = this.props;
-        //dispatch(modalAcciones.limpiar());
+        dispatch(modalAcciones.limpiar());
     }
 
     render() {
@@ -97,8 +98,8 @@ class Plantilla extends Component {
                         !modal.formulario ?
                             <Modal.Footer>
                                 <Button variant="secondary" onClick={() => this.ocultarModal()}>
-                                    console.trace(object)
-                            </Button>
+                                    Cerrar
+                                </Button>
                             </Modal.Footer> :
                             null
                     }

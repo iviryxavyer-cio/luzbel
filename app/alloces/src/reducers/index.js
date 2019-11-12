@@ -5,6 +5,7 @@ import { connectionReducer } from './conexiones.reducer';
 import { driversReducer } from './drivers.reducer'
 import { usersReducers } from './usuarios.reducer';
 import { modal } from './modalReducer';
+import { reducer as reducerForm} from 'redux-form';
 
 const rootReducers = combineReducers(
     {
@@ -14,6 +15,7 @@ const rootReducers = combineReducers(
         drivers: driversReducer,
         usuarios: usersReducers,
         modal: modal,
+        form: reducerForm,
     }
 );
 

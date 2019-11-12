@@ -11,7 +11,7 @@ class CampoContrasena extends React.Component {
         super(props)
         this.state = {
             tipoCampo: this.props.type,
-            botonVisible: false,
+            botonVisible: true,
         }
         this.mostrarContrasena = this.mostrarContrasena.bind(this)
         this.ocultarContrasena = this.ocultarContrasena.bind(this)

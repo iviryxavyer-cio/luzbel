@@ -22,11 +22,10 @@ class FormularioAgregarEditar extends Component {
         if (props.datos) {
             this.props.initialize({
                 usuario: props.datos.usuario,
-                nombre: props.datos.nombreUsuario,
-                apellido: props.datos.apellidoUsuario,
-                telefono: props.datos.telefonoUsuario,
-                correo: props.datos.correoUsuario,
-                status: 'A',
+                nombre: props.datos.nombre,
+                apellido: props.datos.apellido,
+                telefono: props.datos.telefono,
+                correo: props.datos.correo,
                 contrasena: props.datos.contrasena
             })
         }
@@ -43,7 +42,6 @@ class FormularioAgregarEditar extends Component {
                     </Form.Label>
                     <Col sm={9}>
                         <Field
-                            label='Usuario'
                             name="usuario"
                             type="text"
                             component={CampoTexto}
@@ -59,7 +57,6 @@ class FormularioAgregarEditar extends Component {
                     </Form.Label>
                     <Col sm={9}>
                         <Field
-                            label='Nombre'
                             name="nombre"
                             type="text"
                             component={CampoTexto}
@@ -75,7 +72,6 @@ class FormularioAgregarEditar extends Component {
                     </Form.Label>
                     <Col sm={9}>
                         <Field
-                            label='Apellido'
                             name="apellido"
                             type="text"
                             component={CampoTexto}
@@ -91,7 +87,6 @@ class FormularioAgregarEditar extends Component {
                     </Form.Label>
                     <Col sm={9}>
                         <Field
-                            label='Correo'
                             name="correo"
                             type="text"
                             component={CampoTexto}
@@ -107,7 +102,6 @@ class FormularioAgregarEditar extends Component {
                     </Form.Label>
                     <Col sm={9}>
                         <Field
-                            label='Telefono'
                             name="telefono"
                             type="text"
                             component={CampoTexto}
@@ -123,12 +117,10 @@ class FormularioAgregarEditar extends Component {
                     </Form.Label>
                     <Col sm={9}>
                         <Field
-                            label='Contraseña'
-                            name="usuario"
-                            type="text"
+                            name="contrasena"
+                            type="password"
                             component={CampoContrasena}
                             validate={[required]}
-                            onChange={handleChange}
                         />
                     </Col>
                 </Form.Group>
@@ -152,7 +144,7 @@ let UsuariosReduxForm = reduxForm({
 UsuariosReduxForm = connect(state => {
     return {
         errors: getFormSyncErrors('usuariosFormularios')(state),
-        nombre: valueSelector(state, 'nombre')
+        nombre: valueSelector(state, "nombre")
     }
 })(UsuariosReduxForm);
 

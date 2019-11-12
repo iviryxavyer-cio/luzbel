@@ -7,7 +7,8 @@ import { UsersConstants } from '../constants/usuarios.constants';
 import { request } from 'graphql-request';
 
 export const UsuarioService = {
-    obtenerUsuarios
+    obtenerUsuarios,
+    registrarUsuario,
 }
 
 /**
@@ -16,4 +17,20 @@ export const UsuarioService = {
 function obtenerUsuarios() {
     return request(UsersConstants.URL_GRAPHQL_USUARIOS,
         UsersConstants.QUERY_GET_ALL_USERS);
+}
+
+
+/**
+ * Esta funcion se encarga de ser el servicio de registro de nuevos usuarios.
+ * @param {Object} datos datos del nuevo usuario
+ */
+function registrarUsuario(datos) {
+    const variables = JSON.stringify(datos)
+    return request(UsersConstants.URL_GRAPHQL_USUARIOS,
+        UsersConstants.QUERY_REGISTRAR_USUARIO,
+        variables)
+        .then(respuesta => {
+            console.log(respuesta)
+            return respuesta;
+        })
 }
