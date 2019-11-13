@@ -30,7 +30,6 @@ function registrarUsuario(datos) {
         UsersConstants.QUERY_REGISTRAR_USUARIO,
         variables)
         .then(respuesta => {
-            console.log(respuesta)
             return respuesta;
         })
 }

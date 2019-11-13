@@ -18,6 +18,7 @@ class Usuarios extends React.Component {
         this.eliminar = this.eliminar.bind(this)
         this.cerrarModal = this.cerrarModal.bind(this)
         this.abrirModalRegistrar = this.abrirModalRegistrar.bind(this)
+        this.abrirModalEditar = this.abrirModalEditar.bind(this)
     }
 
     registrar(datosFormulario) {
@@ -54,6 +55,19 @@ class Usuarios extends React.Component {
         }))
     }
 
+    abrirModalEditar(datosFormulario) {
+        console.log(datosFormulario)
+        const campos = <FormularioAgregarEditar
+            onSubmit={this.modificar}
+            datos={datosFormulario}
+            cerrarModal={this.cerrarModal}
+            labelBoton={'Aceptar'}
+            eliminar={'1'}
+            />;
+        const titulo = 'Modificando usuario';
+        this.props.dispatch(modalAcciones.formulario({titulo, campos, tamanio: 'md'}))
+    }
+
 
     render() {
         const {usuarios} = this.props;
@@ -66,14 +80,11 @@ class Usuarios extends React.Component {
                         onClick={this.abrirModalRegistrar}>
                         Agregar
                     </Button>
-                    <Button className="buttons boutton-crud Editar">
-                        Editar
-                    </Button>
                     <Button className="buttons boutton-crud Eliminar">
                         Eliminar
                     </Button>
                 </ButtonToolbar>
-                <DataTableUsuarios users={usuarios} />
+                <DataTableUsuarios users={usuarios} modificar={this.abrirModalEditar}/>
             </Container>
         )
     }

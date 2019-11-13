@@ -9,7 +9,7 @@ class DataTableUsuarios extends Component {
     }
 
     render(){
-        const { users } = this.props
+        const { users, modificar } = this.props
 
         const selectRowProp = {
             mode: 'radio',
@@ -20,8 +20,7 @@ class DataTableUsuarios extends Component {
 
         const options = {
             onRowClick: function(row) {
-                document.getElementById('Editar').removeAttribute("disabled")
-                document.getElementById('Eliminar').removeAttribute("disabled")
+                modificar(row)
             }
         }
 

@@ -21,21 +21,22 @@ class FormularioAgregarEditar extends Component {
 
         if (props.datos) {
             this.props.initialize({
+                id: props.datos.idUsuario,
                 usuario: props.datos.usuario,
-                nombre: props.datos.nombre,
-                apellido: props.datos.apellido,
-                telefono: props.datos.telefono,
-                correo: props.datos.correo,
+                nombre: props.datos.nombreUsuario,
+                apellido: props.datos.apellidoUsuario,
+                telefono: props.datos.telefonoUsuario,
+                correo: props.datos.correoUsuario,
                 contrasena: props.datos.contrasena
             })
         }
     }
 
     render() {
-        const { handleSubmit, handleChange, labelBoton, cerrarModal } = this.props;
+        const { handleSubmit, handleChange, labelBoton, cerrarModal, eliminar } = this.props;
 
         return (
-            <form onSubmit={handleSubmit} className='form-horizontal' >
+            <form onSubmit={handleSubmit} className='form-horizontal'>
                 <Form.Group as={Row}>
                     <Form.Label column sm={3}>
                         Usuario:
@@ -47,6 +48,7 @@ class FormularioAgregarEditar extends Component {
                             component={CampoTexto}
                             validate={[required]}
                             onChange={handleChange}
+                            value={this.props.data ? this.props.data.usuario : null}
                         />
                     </Col>
                 </Form.Group>
@@ -129,6 +131,14 @@ class FormularioAgregarEditar extends Component {
                     <Button variant="secondary" onClick={cerrarModal}>
                         Cancelar
                     </Button>
+                    { 
+                        eliminar==1 ?
+                        <Button variant="danger" onClick={(e) => console.log('click')}>
+                            Eliminar
+                        </Button>
+                        :
+                        undefined
+                    }
                     <Button type="submit">{labelBoton}</Button>
                 </Modal.Footer>
 
@@ -139,12 +149,12 @@ class FormularioAgregarEditar extends Component {
 
 let UsuariosReduxForm = reduxForm({
     form: 'usuariosFormulario',
+    initialValues: { enabled: true },
 })(FormularioAgregarEditar);
 
 UsuariosReduxForm = connect(state => {
     return {
         errors: getFormSyncErrors('usuariosFormularios')(state),
-        nombre: valueSelector(state, "nombre")
     }
 })(UsuariosReduxForm);
 
