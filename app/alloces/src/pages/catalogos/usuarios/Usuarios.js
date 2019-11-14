@@ -15,25 +15,17 @@ class Usuarios extends React.Component {
 
         this.registrar = this.registrar.bind(this)
         this.modificar = this.modificar.bind(this)
-        this.eliminar = this.eliminar.bind(this)
         this.cerrarModal = this.cerrarModal.bind(this)
         this.abrirModalRegistrar = this.abrirModalRegistrar.bind(this)
         this.abrirModalEditar = this.abrirModalEditar.bind(this)
     }
 
     registrar(datosFormulario) {
-        console.log(datosFormulario)
         this.props.dispatch(usersActions.registrar(datosFormulario))
     }
 
     modificar(datosFormulario) {
-        console.log(datosFormulario)
-        //this.props.dispatch(usersActions.modificar(datosFormulario));
-    }
-
-    eliminar(datosFormulario) {
-        console.log(datosFormulario)
-        //this.props.dispatch(usersActions.eliminar(datosFormulario))
+        this.props.dispatch(usersActions.modificar(datosFormulario));
     }
 
     cerrarModal() {
@@ -56,7 +48,6 @@ class Usuarios extends React.Component {
     }
 
     abrirModalEditar(datosFormulario) {
-        console.log(datosFormulario)
         const campos = <FormularioAgregarEditar
             onSubmit={this.modificar}
             datos={datosFormulario}

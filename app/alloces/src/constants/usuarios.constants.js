@@ -7,6 +7,14 @@ export const UsersConstants = {
     REGISTRAR_USUARIOS_REQUEST_EXITO: 'REGISTRAR_USUARIOS_REQUEST_EXITO',
     REGISTRAR_USUARIOS_REQUEST_FALLO: 'REGISTRAR_USUARIOS_REQUEST_FALLO',
 
+    MODIFICAR_USUARIOS_REQUEST: 'MODIFICAR_USUARIOS_REQUEST',
+    MODIFICAR_USUARIOS_EXITO: 'MODIFICAR_USUARIOS_EXITO',
+    MODIFICAR_USUARIOS_FALLO: 'MODIFICAR_USUARIOS_FALLO',
+
+    ELIMINAR_USUARIO_REQUEST: 'ELIMINAR_USUARIO_REQUEST',
+    ELIMINAR_USUARIO_EXITO: 'ELIMINAR_USUARIO_EXITO',
+    ELIMINAR_USUARIO_FALLO: 'ELIMINAR_USUARIO_FALLO',
+
     URL_GRAPHQL_USUARIOS: 'http://localhost/graphql',
     
     QUERY_GET_ALL_USERS: `{
@@ -40,5 +48,21 @@ export const UsersConstants = {
                 idUsuario
             }
         }
-    }`
+    }`,
+
+    QUERY_MODIFICAR_USUARIO: `mutation ModificarUsuario($idUsuario: Int!, $usuarioData: UsuarioInput!){
+        modificarUsuario(idUsuario: $idUsuario usuarioData: $usuarioData){
+            usuario {
+                idUsuario
+            }
+        }
+    }`,
+
+    QUERY_ELIMINAR_USUARIO: `mutation EliminarUsuario($idUsuario: Int!){
+        eliminarUsuario(idUsuario: $idUsuario){
+            usuario {
+                idUsuario
+            }
+        }
+    }`,
 }

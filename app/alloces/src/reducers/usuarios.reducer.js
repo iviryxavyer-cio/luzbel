@@ -18,6 +18,19 @@ export function usersReducers(state = initialState, action){
         case UsersConstants.REGISTRAR_USUARIOS_REQUEST_FALLO:
             return {...state}
 
+        case UsersConstants.MODIFICAR_USUARIOS_REQUEST:
+            return {...state}
+        case UsersConstants.MODIFICAR_USUARIOS_EXITO:
+            return {...state}
+        case UsersConstants.MODIFICAR_USUARIOS_FALLO:
+            return {...state}
+
+        case UsersConstants.ELIMINAR_USUARIO_REQUEST:
+            return {...state}
+        case UsersConstants.ELIMINAR_USUARIO_EXITO:
+            return {...state}
+        case UsersConstants.ELIMINAR_USUARIO_FALLO:
+            return {...state}
         
         default:
             return { ...state }

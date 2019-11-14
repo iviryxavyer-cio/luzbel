@@ -4,7 +4,9 @@ import { modalAcciones } from './modal.actions';
 
 export const usersActions = {
     getAllUsers,
-    registrar
+    registrar,
+    modificar,
+    eliminar
 }
 
 function getAllUsers() {
@@ -52,4 +54,52 @@ function registrar(datos) {
     function peticion(){ return { type: UsersConstants.REGISTRAR_USUARIOS_REQUEST } }
     function exito(usuario){ return { type: UsersConstants.REGISTRAR_USUARIOS_REQUEST_EXITO, usuario } }
     function fracaso(error){ return { type: UsersConstants.REGISTRAR_USUARIOS_REQUEST_FALLO, error } }
+}
+
+function modificar(datos) {
+    return dispatch => {
+        dispatch(peticion())
+        UsuarioService.modificarUsuario(datos)
+            .then(
+                (id) => {
+                    dispatch(exito(id));
+                    dispatch(getAllUsers());
+                    dispatch(modalAcciones.limpiar());
+                    dispatch(modalAcciones.exito({titulo: "Usuario modificado", body: "Usuario modificado correctamente"}));
+                },
+                (error) => {
+                    dispatch(fracaso(error));
+                    dispatch(modalAcciones.limpiar());
+                    dispatch(modalAcciones.error({ titulo: 'Usuario modificado', body: 'Error al modificar el usuario'}));
+                }
+            )
+    }
+
+    function peticion(){ return { type: UsersConstants.MODIFICAR_USUARIOS_REQUEST } }
+    function exito(id){ return { type: UsersConstants.MODIFICAR_USUARIOS_EXITO, id } }
+    function fracaso(error) { return { type: UsersConstants.MODIFICAR_USUARIOS_FALLO, error } }
+}
+
+function eliminar(datos) {
+    return dispatch => {
+        dispatch(peticion())
+        UsuarioService.eliminarUsuario(datos)
+            .then(
+                (id) => {
+                    dispatch(exito(id));
+                    dispatch(getAllUsers());
+                    dispatch(modalAcciones.limpiar());
+                    dispatch(modalAcciones.exito({titulo: "Usuario modificado", body: "Usuario modificado correctamente"}));
+                }, 
+                (error) => {
+                    dispatch(fracaso(error));
+                    dispatch(modalAcciones.limpiar());
+                    dispatch(modalAcciones.error({ titulo: 'Usuario modificado', body: 'Error al modificar el usuario'}));
+                }
+            )
+    }
+
+    function peticion(){ return { type: UsersConstants.ELIMINAR_USUARIO_REQUEST } };
+    function exito(id){ return { type: UsersConstants.ELIMINAR_USUARIO_EXITO, id } };
+    function fracaso(error) { return { type: UsersConstants.ELIMINAR_USUARIO_FALLO, error } };
 }

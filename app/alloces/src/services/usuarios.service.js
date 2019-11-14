@@ -9,6 +9,8 @@ import { request } from 'graphql-request';
 export const UsuarioService = {
     obtenerUsuarios,
     registrarUsuario,
+    modificarUsuario,
+    eliminarUsuario
 }
 
 /**
@@ -33,3 +35,30 @@ function registrarUsuario(datos) {
             return respuesta;
         })
 }
+
+function modificarUsuario(datos){
+    const variables = {
+        idUsuario: datos.id,
+        usuarioData: {
+            nombreUsuario: datos.nombre,
+            apellidoUsuario: datos.apellido,
+            usuario: datos.usuario,
+            correoUsuario: datos.correo,
+            telefonoUsuario: datos.telefono
+        }
+    }
+    return request(UsersConstants.URL_GRAPHQL_USUARIOS, 
+        UsersConstants.QUERY_MODIFICAR_USUARIO, variables)
+}
+
+function eliminarUsuario(idUsuario){
+    if(!idUsuario){
+        return
+    }
+    const variables = {
+        idUsuario: idUsuario
+    }
+    return request(UsersConstants.URL_GRAPHQL_USUARIOS,
+        UsersConstants.QUERY_ELIMINAR_USUARIO, variables)
+}
+

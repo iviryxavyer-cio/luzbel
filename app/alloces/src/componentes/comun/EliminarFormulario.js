@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { reduxForm, getFormSyncErrors } from 'redux-forms';
+import { reduxForm, getFormSyncErrors } from 'redux-form';
 import { connect } from 'react-redux';
 import { Modal, Button} from 'react-bootstrap';
 
