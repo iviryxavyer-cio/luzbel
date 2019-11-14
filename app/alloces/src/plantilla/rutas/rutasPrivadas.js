@@ -5,7 +5,7 @@
  */
 
  //Se importan los componentes de las rutas.
-import Servidores from '../../pages/Servidores';
+import Servidores from '../../pages/catalogos/servidores/Servidores';
 import Conectores from "../../pages/Conectores";
 import Conexiones from "../../pages/Conexiones";
 import Usuarios from "../../pages/catalogos/usuarios/Usuarios";
