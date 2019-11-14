@@ -16,6 +16,14 @@ class UsuariosSchema(graphene.ObjectType):
     contrasena = graphene.String()
 
 
+class UsuarioInput(graphene.InputObjectType):
+    nombre_usuario = graphene.String()
+    apellido_usuario = graphene.String()
+    usuario = graphene.String()
+    correo_usuario = graphene.String()
+    telefono_usuario = graphene.String()
+
+
 class CrearUsuarios(graphene.Mutation):
     class Arguments:
         nombre = graphene.String()
@@ -46,15 +54,19 @@ class ModificarUsuario(graphene.Mutation):
     """Metodo para modificar usuarios"""
 
     class Arguments:
-        id = graphene.Int()
-        contrasena = graphene.String()
+        id_usuario = graphene.Int()
+        usuario_data = UsuarioInput(required=True)
 
     ok = graphene.Boolean()
     usuario = graphene.Field(UsuariosSchema)
 
-    def mutate(self, info, id, contrasena):
-        usuario = Usuario.select().where(Usuario.id_usuario == id).get()
-        usuario.contrasena = contrasena
+    def mutate(self, info, id_usuario, usuario_data):
+        usuario = Usuario.select().where(Usuario.id_usuario == id_usuario).get()
+        usuario.nombre_usuario = usuario_data.nombre_usuario
+        usuario.apellido_usuario = usuario_data.apellido_usuario
+        usuario.usuario = usuario_data.usuario
+        usuario.correo_usuario = usuario_data.correo_usuario
+        usuario.telefono_usuario = usuario_data.telefono_usuario
         usuario.modificar()
         return ModificarUsuario(usuario=usuario, ok=True)
 
@@ -77,6 +89,22 @@ class LoginUsuario(graphene.Mutation):
         return LoginUsuario(token=token)
 
 
+class UsuarioDeleteMutation(graphene.Mutation):
+
+    class Arguments:
+        id_usuario = graphene.Int()
+    
+    usuario = graphene.Field(UsuariosSchema)
+
+    @staticmethod
+    def mutate(self, info, id_usuario):
+        usuario = Usuario.select().where(Usuario.id_usuario == id_usuario).get()
+        usuario.status = 'E'
+        usuario.save()
+        return UsuarioDeleteMutation(usuario=usuario)
+
+
+
 class Query(graphene.ObjectType):
     # node = graphene.relay.node.Field()
     hello = graphene.String(name=graphene.String(default_value='World'))
@@ -97,7 +125,7 @@ class Query(graphene.ObjectType):
         return query
 
     def resolve_usuarios(self, info):
-        users = Usuario.select()
+        users = Usuario.select().where((Usuario.status == 'A') | (Usuario.status == 'I'))
         return users
 
     def resolve_usuarioByUser(self, info, **kwargs):
@@ -128,6 +156,7 @@ class Mutation(graphene.ObjectType):
     crear_usuario = CrearUsuarios.Field()
     modificar_usuario = ModificarUsuario.Field()
     login_usuario = LoginUsuario.Field()
+    eliminar_usuario = UsuarioDeleteMutation.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

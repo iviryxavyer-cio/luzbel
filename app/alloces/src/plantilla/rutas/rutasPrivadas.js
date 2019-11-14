@@ -8,7 +8,7 @@
 import Servidores from '../../pages/Servidores';
 import Conectores from "../../pages/Conectores";
 import Conexiones from "../../pages/Conexiones";
-import Usuarios from "../../pages/Usuarios";
+import Usuarios from "../../pages/catalogos/usuarios/Usuarios";
 import Home from "../../pages/home";
 
 export default {
