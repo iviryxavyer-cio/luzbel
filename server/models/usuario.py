@@ -40,6 +40,7 @@ class Usuario(Model):
 
     def guardar(self):
         salt = bcrypt.gensalt()
+        self.status = 'I'
         self.contrasena = bcrypt.hashpw(self.contrasena.encode('utf8'), salt)
         self.save()
 

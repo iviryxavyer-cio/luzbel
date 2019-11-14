@@ -1,8 +1,9 @@
 import keyMirror from 'keymirror';
 
-const modalConstants =  keyMirror({
-    HIDE_MODAL: null,
-    SHOW_MODAL: null,
-})
-
-export default modalConstants
+export const modalConstants =  {
+    EXITO: 'MODAL_EXITO',
+    ALERTA: 'MODAL_ALERTA',
+    ERROR: 'MODAL_ERROR',
+    LIMPIAR: 'MODAL_LIMPIAR',
+    ABRIR_FORMULARIO: 'MODAL_ABRIR_FORMULARIO'
+}

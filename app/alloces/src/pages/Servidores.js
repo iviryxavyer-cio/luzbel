@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 //importamos los componentes de Container, rows y col de reactstrap para un mayor estandar
 import { Container, Row, Col } from 'reactstrap'
 //importamos los modales y los buttons
-import {  ButtonToolbar, Button } from 'react-bootstrap';
+import { ButtonToolbar, Button } from 'react-bootstrap';
 //importamos el componente del modal agregar que creamos 
 import FuncModalAgregar from "../componentes/ModalAgregar.jsx";
 import DataTableServidores from "../componentes/DataTableServidores.jsx";
