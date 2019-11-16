@@ -1,9 +1,10 @@
 import React from 'react';
-import { Field, reduxForm, getFormSyncErrors, formValueSelector} from 'redux-form';
+import { Field, reduxForm, getFormSyncErrors, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
 import { required } from '../../../Utilidades/validaciones';
 import CampoTexto from '../../../componentes/comun/CampoTexto.component';
+import CampoRadio from '../../../componentes/comun/CampoRadio';
 import EliminarFormulario from '../../../componentes/comun/EliminarFormulario';
 import { modalAcciones } from '../../../actions/modal.actions';
 import { serversActions } from '../../../actions/servidores.actions';
@@ -14,7 +15,7 @@ class ServidoresFormulario extends React.Component {
     constructor(props) {
         super(props)
 
-        if(props.datos) {
+        if (props.datos) {
             this.props.initialize({
                 id: props.datos.idServidor,
                 alias: props.datos.aliasServidor,
@@ -34,13 +35,13 @@ class ServidoresFormulario extends React.Component {
     abrirModalEliminar(e, datosFormulario) {
         console.log(datosFormulario)
         const campos = <EliminarFormulario
-                            onSubmit={this.eliminar}
-                            datos={datosFormulario}
-                            cerrarModal={this.props.cerrarModal}
-                            mensaje={`¿Seguro que quieres eliminar el servidor "${datosFormulario.aliasServidor}"?`}
-                            botonTitulo={'Aceptar'} />;
+            onSubmit={this.eliminar}
+            datos={datosFormulario}
+            cerrarModal={this.props.cerrarModal}
+            mensaje={`¿Seguro que quieres eliminar el servidor "${datosFormulario.aliasServidor}"?`}
+            botonTitulo={'Aceptar'} />;
         const titulo = 'Eliminar servidor'
-        this.props.dispatch(modalAcciones.formulario({titulo, campos, tamanio: 'md'}));
+        this.props.dispatch(modalAcciones.formulario({ titulo, campos, tamanio: 'md' }));
     }
 
     render() {
@@ -74,19 +75,44 @@ class ServidoresFormulario extends React.Component {
                             validate={!this.props.datos ? [required] : undefined}
                             onChange={handleChange} />
                     </Col>
+
                 </Form.Group>
+
+                {
+                    eliminar == 1 ?
+                        <Form.Group as={Row}>
+                            <Form.Label column sm={3}>
+                                Status:
+                            </Form.Label>
+                            <Col sm={4}>
+                                <Field
+                                    name="status"
+                                    component={CampoRadio}
+                                    label={'Activo'}
+                                    valor={'A'} />
+                            </Col>
+                            <Col sm={4}>
+                                <Field
+                                    name="status"
+                                    component={CampoRadio}
+                                    label={'Inactivo'}
+                                    valor={'I'} />
+                            </Col>
+                        </Form.Group> :
+                    undefined
+                }
 
                 <Modal.Footer>
                     <Button variant="secondary" onClick={cerrarModal}>
                         Cancelar
                     </Button>
-                    { 
-                        eliminar==1 ?
-                        <Button variant="danger" onClick={(e) => this.abrirModalEliminar(e, this.props.datos)}>
-                            Eliminar
+                    {
+                        eliminar == 1 ?
+                            <Button variant="danger" onClick={(e) => this.abrirModalEliminar(e, this.props.datos)}>
+                                Eliminar
                         </Button>
-                        :
-                        undefined
+                            :
+                            undefined
                     }
                     <Button type="submit">{labelBoton}</Button>
                 </Modal.Footer>

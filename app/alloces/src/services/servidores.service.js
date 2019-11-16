@@ -46,9 +46,9 @@ function crearServidor(datos){
 function modificarServidor(datos){
     const variable = {
         idServidor: datos.id,
-        usuarioData: {
+        servidorData: {
             direccion: datos.direccion,
-            aliasServidor: datos.aliasServidor,
+            aliasServidor: datos.alias,
             status: datos.status
         }
     }
