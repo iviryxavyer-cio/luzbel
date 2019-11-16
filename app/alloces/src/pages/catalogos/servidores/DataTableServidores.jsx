@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 //importamos los datatable para su utilizaciones
 //import DataTable from 'react-data-table-component';
-import { serversActions } from '../actions/servidores.actions';
+import { serversActions } from '../../../actions/servidores.actions';
 import { connect } from 'react-redux';
 // with es6
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
-import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
+import '../../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 class DataTableServidores extends Component {
 
@@ -21,7 +21,7 @@ class DataTableServidores extends Component {
   }
 
   render() {
-    const { servers } = this.props;
+    const { servers, modificar } = this.props;
     var Servidor;
     const selectRowProp = {
       mode: 'radio',
@@ -32,11 +32,7 @@ class DataTableServidores extends Component {
     const options = {
 
       onRowClick: function (row) {
-
-        Servidor = row.ip;
-        document.getElementById('Editar').removeAttribute("disabled");
-        document.getElementById('Eliminar').removeAttribute("disabled");
-
+        modificar(row)
       }
     }
 
