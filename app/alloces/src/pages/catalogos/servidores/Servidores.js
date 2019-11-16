@@ -15,6 +15,7 @@ class Servidores extends React.Component {
     this.modificar = this.modificar.bind(this)
     this.cerrarModal = this.cerrarModal.bind(this)
     this.abrirModalRegistrar = this.abrirModalRegistrar.bind(this)
+    this.abrirModalEditar = this.abrirModalEditar.bind(this)
   }
 
   registrar(datos){
@@ -43,6 +44,22 @@ class Servidores extends React.Component {
     }))
   }
 
+  abrirModalEditar(datosFormulario) {
+    const campos = <ServidoresFormulario
+      onSubmit={this.modificar}
+      cerrarModal={this.cerrarModal}
+      datos={datosFormulario}
+      labelBoton={'Aceptar'}
+      eliminar={'1'} />
+    
+    const titulo = 'Modificar servidor';
+    this.props.dispatch(modalAcciones.formulario({
+      titulo,
+      campos,
+      tamanio: 'md'
+    }));
+  }
+
   render() {
     return (
       <Container>
@@ -57,7 +74,7 @@ class Servidores extends React.Component {
               Eliminar
             </Button>
         </ButtonToolbar>
-        <DataTableServidores servers={this.props.servidores} />
+        <DataTableServidores servers={this.props.servidores} modificar={this.abrirModalEditar} />
       </Container>
 
     )

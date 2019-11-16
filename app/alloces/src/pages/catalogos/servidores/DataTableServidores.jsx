@@ -21,7 +21,7 @@ class DataTableServidores extends Component {
   }
 
   render() {
-    const { servers } = this.props;
+    const { servers, modificar } = this.props;
     var Servidor;
     const selectRowProp = {
       mode: 'radio',
@@ -32,11 +32,7 @@ class DataTableServidores extends Component {
     const options = {
 
       onRowClick: function (row) {
-
-        Servidor = row.ip;
-        document.getElementById('Editar').removeAttribute("disabled");
-        document.getElementById('Eliminar').removeAttribute("disabled");
-
+        modificar(row)
       }
     }
 

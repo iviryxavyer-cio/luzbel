@@ -58,8 +58,7 @@ export const ServidoresConstants = {
                     idServidor
                 }
             }
-        }
-    )`,
+        }`,
 
     QUERY_ELIMINAR_SERVIDOR: `mutation DeleteServidor($idServidor: Int!){
         deleteServidor(idServidor: $idServidor){
