@@ -11,7 +11,9 @@ import { ServidoresConstants } from '../constants/servidores.constans';
 //Se exporta un objeto con las funciones de los servicios.
 export const ServidoresService = {
     obtenerServidores,
-    crearServidor
+    crearServidor,
+    modificarServidor,
+    eliminarServidor
 }
 
 /**
@@ -27,15 +29,37 @@ function obtenerServidores(){
  * @param {String} alias Nombre que recibira el servidor
  * @param {String} direccion Direccion ip de la que cuenta el servidor
  */
-function crearServidor(alias, direccion){
+function crearServidor(datos){
     //Se crea un objeto que contienen las variables que serán enviadas al servidor
     //para crear un nuevo servidor en la base de datos.
-    const variables = {
-        aliasServidor: alias,
-        direccion: direccion,
-        status: "A"
+    const data = {
+        aliasServidor: datos.alias,
+        direccion: datos.direccion,
+        status: 'A'
     }
+    const variables = JSON.stringify(data)
     return request(ServidoresConstants.URL_GRAPHQL_SERVIDORES,
         ServidoresConstants.CREATE_NEW_SERVER_QUERY,
         variables)
+}
+
+function modificarServidor(datos){
+    const variable = {
+        idServidor: datos.id,
+        servidorData: {
+            direccion: datos.direccion,
+            aliasServidor: datos.alias,
+            status: datos.status
+        }
+    }
+    return request(ServidoresConstants.URL_GRAPHQL_SERVIDORES,
+        ServidoresConstants.QUERY_MODIFICAR_SERVIDOR, variable);
+}
+
+function eliminarServidor(idServidor){
+    const variables = {
+        idServidor: idServidor
+    }
+    return request(ServidoresConstants.URL_GRAPHQL_SERVIDORES,
+        ServidoresConstants.QUERY_ELIMINAR_SERVIDOR, variables);
 }
