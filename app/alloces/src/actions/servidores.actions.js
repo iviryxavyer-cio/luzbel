@@ -37,7 +37,6 @@ function getAllServers() {
 function registrar(datos){
     return (dispatch) => {
         dispatch(request())
-
         ServidoresService.crearServidor(datos)
             .then(
                 (id) => {
@@ -86,7 +85,7 @@ function modificar(datos){
 function eliminar(datos){
     return dispatch => {
         dispatch(request())
-        UsuarioService.eliminarUsuario(datos)
+        ServidoresService.eliminarServidor(datos)
             .then(
                 (id) => {
                     dispatch(exito(id))

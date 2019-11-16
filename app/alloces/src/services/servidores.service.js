@@ -32,7 +32,12 @@ function obtenerServidores(){
 function crearServidor(datos){
     //Se crea un objeto que contienen las variables que serán enviadas al servidor
     //para crear un nuevo servidor en la base de datos.
-    const variables = JSON.stringify(datos)
+    const data = {
+        aliasServidor: datos.alias,
+        direccion: datos.direccion,
+        status: 'A'
+    }
+    const variables = JSON.stringify(data)
     return request(ServidoresConstants.URL_GRAPHQL_SERVIDORES,
         ServidoresConstants.CREATE_NEW_SERVER_QUERY,
         variables)
