@@ -14,8 +14,8 @@ class ConectoresSchema(graphene.ObjectType):
 
 
 class ConectoresInput(graphene.InputObjectType):
-    nombre_conector = graphene.String(required=True)
-    url_conector = graphene.String(required=True)
+    nombre_conector = graphene.String()
+    url_conector = graphene.String()
 
 
 class ConectoresQuery(graphene.ObjectType):
@@ -62,7 +62,7 @@ class ConectoresDeleteMutation(graphene.Mutation):
 
 
 class ConectoresUpdateMutation(graphene.Mutation):
-    class Argument:
+    class Arguments:
         id_conector = graphene.Int(required=True)
         conector_data = ConectoresInput(required=True)
 

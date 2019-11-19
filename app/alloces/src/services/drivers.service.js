@@ -47,8 +47,23 @@ function registrarDrivers(datos){
         DriversConstants.QUERY_CREAR_CONECTORES, variables);
 }
 
-//TODO: crear este metodo cuando este lista su query.
-function modificarDrivers(datos){}
+/**
+ * Funcion que se encarga de modificar el conector que se le envie por el id.
+ * @param {Object} datos Datos del formulario
+ * @return {Promise} Promesa con el resultado de la api
+ */
+function modificarDrivers(datos){
+    let variables = {
+        idConector: datos.id,
+        conectorData: {
+            nombreConector: datos.nombre,
+            urlConector: datos.url
+        }
+    }
+    variables = JSON.stringify(variables)
+    return request(DriversConstants.URL_CONECTORES_GRAPHQL,
+        DriversConstants.QUERY_MODIFICAR_CONECTORES, variables)
+}
 
 /**
  * Funcion que se encarga de hacer la peticion para eliminar un conector a la api.

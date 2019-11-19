@@ -36,10 +36,13 @@ export const DriversConstants = {
         }
     `,
 
-    //TODO: terminar modificar conector
     QUERY_MODIFICAR_CONECTORES: `
-        mutation ActualizarConector($idConector: Int!){
-            
+        mutation ActualizarConector($idConector: Int!, $conectorData){
+            actualizarConector(idConector: $idConector conectorData: $conectorData){
+                conector{
+                    idConector
+                }
+            }
         }
     `,
 
