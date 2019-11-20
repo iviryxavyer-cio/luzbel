@@ -1,4 +1,5 @@
 import { DriversConstants } from '../constants/drivers.constants';
+import { DriverService } from '../services/drivers.service';
 
 export const driversActions = {
     getAllDrivers
@@ -7,13 +8,7 @@ export const driversActions = {
 function getAllDrivers() {
     return dispatch => {
         dispatch(request())
-
-        const drivers = [
-                {nombre: 'SQL', url: 'SDASQLS'},
-                {nombre: 'MONGODB', url: 'MONDBADB'},
-                {nombre: 'MYSQL', url: 'MSDASQL'}
-        ]
-
+        
         dispatch(success(drivers));
     }
     function request() {
