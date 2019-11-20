@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import '../App.css';
 import '../css/Generales.css';
 import { Col } from 'reactstrap';
-import { showModal, hideModal } from '../actions/modal.actions';
-import { connect } from 'react-redux';
+//import { showModal, hideModal } from '../actions/modal.actions';
+//import { connect } from 'react-redux';
 
 
 class FuncModalAgregar extends Component{

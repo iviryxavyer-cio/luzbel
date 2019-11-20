@@ -44,7 +44,7 @@ class Conexiones extends React.Component {
   }
   
   render(){
-    const servidores = this.props;
+    //const servidores = this.props;
 
     return (
       <div id="divServidores">

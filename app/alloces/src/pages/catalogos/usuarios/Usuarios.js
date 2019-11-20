@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../../App.css'
-import { Col, Row, Container } from 'reactstrap'
+import { Container } from 'reactstrap'
 import { ButtonToolbar, Button } from 'react-bootstrap'
 import DataTableUsuarios from './DataTableUsuarios'
 import { connect } from 'react-redux';

@@ -6,6 +6,7 @@ import '../../../../node_modules/react-bootstrap-table/dist/react-bootstrap-tabl
 class DataTableUsuarios extends Component {
     constructor (props) {
         super(props)
+        this.state = {};
     }
 
     render(){

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { historial } from '../../Utilidades/historial';
+//import { historial } from '../../Utilidades/historial';
 import { connect } from 'react-redux';
 
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';

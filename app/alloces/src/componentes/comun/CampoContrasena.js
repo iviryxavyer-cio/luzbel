@@ -4,7 +4,7 @@
  * @description Este archivo contiene el componente de campo contraseña
  */
 import React  from 'react';
-import { Form, Row, Col } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 class CampoContrasena extends React.Component {
     constructor(props) {
