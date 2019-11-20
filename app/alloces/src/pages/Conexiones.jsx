@@ -1,13 +1,19 @@
 import React from 'react';
+// redux
+import { connect } from "react-redux";
+
+//acciones para redux
+import { serversActions } from "../actions/servidores.actions";
+import { connectionsActions } from "../actions/conexiones.actions"
+
 //importamos los componentes de Container, rows y col de reactstrap para un mayor estandar
 import { Col } from 'reactstrap';
-//import {Checkbox} from 'react-md';
-//importamos los modales y los buttons
 import {  ButtonToolbar, Button } from 'react-bootstrap';
 //importamos el componente del modal agregar que creamos 
 import FuncModalWizard from "../componentes/WizardConexiones.jsx";
 
-import DataTableConexiones from "../componentes/DataTableConexiones.jsx";
+import DataTableConexiones from "../componentes/DataTableConexiones";
+
 
 //Clase principal de servidores, aqui nos armara la estructura principal de la vista servidores
 class Conexiones extends React.Component {
@@ -16,11 +22,15 @@ class Conexiones extends React.Component {
     super(props);
     this.state = {
       modalShow: false
-    }
+    };
+
+    //dispatchs
+    this.props.dispatch(serversActions.getAllServers());
 
 
     //binding de funciones
     this.setModalShow = this.setModalShow.bind(this);
+    this.ok = this.ok.bind(this);
   }
 
   setModalShow(val){
@@ -28,8 +38,14 @@ class Conexiones extends React.Component {
       modalShow:val
     });
   }
+
+  ok(){
+    console.log(this.props.servers.allServers);
+  }
   
   render(){
+    const servidores = this.props;
+
     return (
       <div id="divServidores">
         <Col xs="12"> 
@@ -54,6 +70,7 @@ class Conexiones extends React.Component {
                   <Button className="buttons boutton-crud Eliminar" id="Eliminar" disabled="disabled" onClick={() => this.setModalShow(true)}>
                       Eliminar
                   </Button>
+                  <Button onClick={() => this.ok()} >Hola</Button>
                 </ButtonToolbar>
               </Col>
               <Col xs="12">
@@ -70,4 +87,9 @@ class Conexiones extends React.Component {
   }
 }
 
-export default Conexiones;
+//export default Conexiones;
+export default connect((state) => {
+  return {
+    servers: state.servers
+  }
+})(Conexiones);

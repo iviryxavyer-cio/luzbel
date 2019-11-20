@@ -5,8 +5,13 @@ import { Col } from 'reactstrap';
 import Select from 'react-dropdown-select';
 
 
-  const options = [{label: '10.1.1.18', value: 1}, 
-                    {label: '10.1.1.67', value: 2}];
+/**
+ * 
+ const options = [
+   {label: '10.1.1.18', value: 1}, 
+   {label: '10.1.1.67', value: 2}
+  ];
+ */
 export class StepOne extends React.Component {
   constructor () {
     super()
@@ -38,7 +43,15 @@ export class StepOne extends React.Component {
     this.setState({Puerto: event.target.value})
   }
 
+  extractServidores(){
+    let serv = [];
+    console.log(this.props);
+
+    return serv;
+  }
+
   render () {
+    var servers = this.extractServidores();
     return (
       <div>
         <Col xs="12">
@@ -48,7 +61,11 @@ export class StepOne extends React.Component {
           </Col>
 
           <Col xs="8">
-            <Select options={options} className="WizardInput" onChange={(servidor) => this.setValues(servidor)} />        
+            <Select 
+              options={servers} 
+              className="WizardInput" 
+              onChange={(servidor) => this.setValues(servidor)} 
+              />        
           </Col>
 
           <Col xs="4">

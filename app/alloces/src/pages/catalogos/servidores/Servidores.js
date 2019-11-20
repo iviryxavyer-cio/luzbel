@@ -2,14 +2,14 @@ import React from "react";
 import { connect } from 'react-redux';
 import { serversActions } from '../../../actions/servidores.actions';
 import { modalAcciones } from '../../../actions/modal.actions';
-import DataTableServidores from './DataTableServidores.jsx'
+import DataTableServidores from './DataTableServidores'
 import { Container, ButtonToolbar, Button } from "react-bootstrap";
 import ServidoresFormulario from './ServidoresFormulario';
 
 class Servidores extends React.Component {
   constructor(props) {
-    super(props)
-    this.props.dispatch(serversActions.getAllServers())
+    super(props);
+    //this.props.dispatch(serversActions.getAllServers());
 
     this.registrar = this.registrar.bind(this)
     this.modificar = this.modificar.bind(this)
@@ -81,12 +81,6 @@ class Servidores extends React.Component {
   }
 }
 
-function mapsPropsToState(state) {
-  const { servidores } = state;
+export default connect((state)=>{
 
-  return {
-    servidores
-  }
-}
-
-export default connect(mapsPropsToState)(Servidores);
+})(Servidores);

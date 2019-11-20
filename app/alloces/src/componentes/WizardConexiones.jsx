@@ -1,20 +1,32 @@
-import React, { Component } from 'react';
-import '../App.css';
-import '../css/Generales.css';
-import { steps } from '../steps';
-//import MultiStep from '../../node_modules/react-multistep2';
-import MultiStep from '../Utilidades/MultiSteps';
-//import {Checkbox} from 'react-md';
+import React from 'react';
 
+import MultiStep from '../Utilidades/MultiSteps';
 import { Modal } from 'react-bootstrap';
 
-class FuncModalWizard extends Component{
+//steps
+import { StepOne } from '../pages/StepOne';
+import { StepTwo } from '../pages/StepTwo';
+import { StepThree } from '../pages/StepThree';
+import { StepFour } from '../pages/StepFour';
+
+
+class FuncModalWizard extends React.Component {
 
 constructor(props){
   super(props);
+
 }
 
 render(){
+
+  var steps = [
+    {name: 'Servidores', component: <StepOne/>},
+    {name: 'Conectores', component: <StepTwo/>},
+    {name: 'BD', component: <StepThree/>},
+    {name: 'Resumen', component: <StepFour/>}
+  ]
+
+
   return(
       <Modal
         {...this.props}
@@ -24,7 +36,7 @@ render(){
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            <h4>WIZARD</h4>
+            <h4>Cadena Conexion</h4>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
