@@ -69,7 +69,6 @@ class FormularioAgregarEditar extends Component {
                             component={CampoTexto}
                             validate={[required]}
                             onChange={handleChange}
-                            value={this.props.data ? this.props.data.usuario : null}
                         />
                     </Col>
                 </Form.Group>
@@ -174,7 +173,7 @@ let UsuariosReduxForm = reduxForm({
 
 UsuariosReduxForm = connect(state => {
     return {
-        errors: getFormSyncErrors('usuariosFormularios')(state),
+        errors: getFormSyncErrors('usuariosFormulario')(state),
     }
 })(UsuariosReduxForm);
 

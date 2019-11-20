@@ -36,13 +36,13 @@ class Usuarios extends React.Component {
         const campos = <FormularioAgregarEditar
             onSubmit={this.registrar}
             cerrarModal={this.cerrarModal}
-            labelBoton={'Aceptar'} 
-            />;
+            labelBoton={'Aceptar'}
+        />;
         const titulo = 'Creando usuario'
 
         this.props.dispatch(modalAcciones.formulario({
             titulo,
-            campos, 
+            campos,
             tamanio: 'md'
         }))
     }
@@ -54,19 +54,19 @@ class Usuarios extends React.Component {
             cerrarModal={this.cerrarModal}
             labelBoton={'Aceptar'}
             eliminar={'1'}
-            />;
+        />;
         const titulo = 'Modificando usuario';
-        this.props.dispatch(modalAcciones.formulario({titulo, campos, tamanio: 'md'}))
+        this.props.dispatch(modalAcciones.formulario({ titulo, campos, tamanio: 'md' }))
     }
 
 
     render() {
-        const {usuarios} = this.props;
+        const { usuarios } = this.props;
         return (
             <Container>
                 <h1 className="text-center">Usuarios</h1>
                 <ButtonToolbar>
-                    <Button 
+                    <Button
                         className="buttons boutton-crud Agregar"
                         onClick={this.abrirModalRegistrar}>
                         Agregar
@@ -75,13 +75,13 @@ class Usuarios extends React.Component {
                         Eliminar
                     </Button>
                 </ButtonToolbar>
-                <DataTableUsuarios users={usuarios} modificar={this.abrirModalEditar}/>
+                <DataTableUsuarios users={usuarios} modificar={this.abrirModalEditar} />
             </Container>
         )
     }
 }
 
-function mapsPropsToState(state){
+function mapsPropsToState(state) {
     const { usuarios } = state
 
     return {
