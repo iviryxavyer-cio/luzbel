@@ -98,6 +98,5 @@ export class StepOne extends React.Component {
         </Col>
       </div>
     )
-    console.log(Select);
   }
 }

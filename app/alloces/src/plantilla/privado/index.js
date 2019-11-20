@@ -5,7 +5,7 @@ export default class PlantillaPrivada extends Component {
     render() {
         const Component = this.props.component;
         const route = this.props.route;
-        const state = this.props.state;
+        //const state = this.props.state;
 
         return (
             <>

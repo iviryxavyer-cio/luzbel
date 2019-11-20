@@ -71,7 +71,7 @@ class SideBar extends React.Component {
                     </NavItem>
                     <NavItem eventKey="logout">
                         <NavIcon>
-                            <i className="fa fa-fw fa-sign-out-alt" style={style} />
+                            <i className="fa fa-fw fa-lock" style={style} />
                         </NavIcon>
                         <NavText>
                             Cerrar sesion
