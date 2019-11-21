@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col } from 'reactstrap';
+import { Col } from 'react-bootstrap';
 export class StepFour extends React.Component {
   constructor () {
     super()

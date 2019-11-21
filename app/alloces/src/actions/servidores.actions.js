@@ -20,7 +20,6 @@ function getAllServers() {
                 dispatch(success(lista))
             });
         }catch(error){
-            console.log(error)
         }
     }
     //Función que regresa la acción de la petición

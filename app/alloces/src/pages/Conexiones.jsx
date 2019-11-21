@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 //acciones para redux
 import { connectionsActions } from "../actions/conexiones.actions"
 
-//importamos los componentes de Container, rows y col de reactstrap para un mayor estandar
-import { Col } from 'reactstrap';
+//importamos los componentes de Container, rows y col de react-bootstrap para un mayor estandar
+import { Col } from 'react-bootstrap';
 import {  ButtonToolbar, Button } from 'react-bootstrap';
 //importamos el componente del modal agregar que creamos 
 import FuncModalWizard from "../componentes/WizardConexiones.jsx";
