@@ -18,10 +18,13 @@ class DataTableConectores extends Component {
   
   render(){
     const { drivers } = this.props;
- //Variable que contiene los campos de prueba       
-  const data = [{nombre: 'SQL', url: 'SDASQLS'},
-                {nombre: 'MONGODB', url: 'MONDBADB'},
-                {nombre: 'MYSQL', url: 'MSDASQL'}];
+    //Variable que contiene los campos de prueba
+    /**
+     * 
+     const data = [{nombre: 'SQL', url: 'SDASQLS'},
+     {nombre: 'MONGODB', url: 'MONDBADB'},
+     {nombre: 'MYSQL', url: 'MSDASQL'}];
+  */
 
   const selectRowProp = {
         mode: 'radio',
@@ -30,12 +33,12 @@ class DataTableConectores extends Component {
         hideSelectColumn: true
   };
 
-  var Conector;
+  //var Conector;
   const options={
 
       onRowClick: function(row){
 
-          Conector = row.nombre;
+          //Conector = row.nombre;
           document.getElementById('Editar').removeAttribute("disabled");
           document.getElementById('Eliminar').removeAttribute("disabled");
 

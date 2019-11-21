@@ -1,7 +1,9 @@
 import React from 'react';
-
+import { connect } from "react-redux";
 import MultiStep from '../Utilidades/MultiSteps';
-import { Modal } from 'react-bootstrap';
+import { Modal, Container } from 'react-bootstrap';
+//acciones
+import { serversActions } from "../actions/servidores.actions";
 
 //steps
 import { StepOne } from '../pages/StepOne';
@@ -14,18 +16,28 @@ class FuncModalWizard extends React.Component {
 
 constructor(props){
   super(props);
+  this.state = {
+    servidor:null,
+  };
 
+  //dispatchs
+  this.props.dispatch(serversActions.getAllServers());
+
+  //bindings
+  this.handleServerChange = this.handleServerChange.bind(this);
+}
+
+handleServerChange(){
+  alert("ok");
 }
 
 render(){
-
   var steps = [
-    {name: 'Servidores', component: <StepOne/>},
-    {name: 'Conectores', component: <StepTwo/>},
-    {name: 'BD', component: <StepThree/>},
-    {name: 'Resumen', component: <StepFour/>}
+    {name: 'Servidores',  component: <StepOne servers={this.props.servers} handleChnage={this.handleServerChange} />},
+    {name: 'Conectores',  component: <StepTwo/>},
+    {name: 'BD',          component: <StepThree/>},
+    {name: 'Resumen',     component: <StepFour/>}
   ]
-
 
   return(
       <Modal
@@ -40,7 +52,9 @@ render(){
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-         <MultiStep steps={steps} />
+          <Container>
+            <MultiStep steps={steps} />
+          </Container>
         </Modal.Body>
         <Modal.Footer>
         </Modal.Footer>
@@ -50,4 +64,10 @@ render(){
 }
 
 
-export default FuncModalWizard;
+//export default FuncModalWizard;
+
+export default connect((state) => {
+  return {
+    servers: state.servers
+  }
+})(FuncModalWizard)

@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 
 //importar librerias async/await y logger
 import thunkMiddleware from 'redux-thunk';

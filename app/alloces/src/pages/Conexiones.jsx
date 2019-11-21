@@ -3,7 +3,6 @@ import React from 'react';
 import { connect } from "react-redux";
 
 //acciones para redux
-import { serversActions } from "../actions/servidores.actions";
 import { connectionsActions } from "../actions/conexiones.actions"
 
 //importamos los componentes de Container, rows y col de reactstrap para un mayor estandar
@@ -24,23 +23,17 @@ class Conexiones extends React.Component {
       modalShow: false
     };
 
-    //dispatchs
-    this.props.dispatch(serversActions.getAllServers());
-
-
     //binding de funciones
     this.setModalShow = this.setModalShow.bind(this);
-    this.ok = this.ok.bind(this);
+
+    //dispatch
+    
   }
 
   setModalShow(val){
     this.setState({
       modalShow:val
     });
-  }
-
-  ok(){
-    console.log(this.props.servers.allServers);
   }
   
   render(){
@@ -70,7 +63,6 @@ class Conexiones extends React.Component {
                   <Button className="buttons boutton-crud Eliminar" id="Eliminar" disabled="disabled" onClick={() => this.setModalShow(true)}>
                       Eliminar
                   </Button>
-                  <Button onClick={() => this.ok()} >Hola</Button>
                 </ButtonToolbar>
               </Col>
               <Col xs="12">
@@ -87,9 +79,9 @@ class Conexiones extends React.Component {
   }
 }
 
-//export default Conexiones;
+
 export default connect((state) => {
   return {
-    servers: state.servers
+    //servers: state.servers
   }
 })(Conexiones);

@@ -1,17 +1,9 @@
-//'use strict'
 import React from 'react';
 //importamos los componentes de Container, rows y col de reactstrap para un mayor estandar
-import { Col } from 'reactstrap';
-import Select from 'react-dropdown-select';
+import { Col, Row, Container } from 'react-bootstrap';
+import Select from 'react-select';
 
 
-/**
- * 
- const options = [
-   {label: '10.1.1.18', value: 1}, 
-   {label: '10.1.1.67', value: 2}
-  ];
- */
 export class StepOne extends React.Component {
   constructor () {
     super()
@@ -21,99 +13,88 @@ export class StepOne extends React.Component {
       contrasenia: '',
       puerto: ''
     }
-    this.handleServidorChanged = this.handleServidorChanged.bind(this);
-    this.handleUsuarioChanged = this.handleUsuarioChanged.bind(this);
-    this.handleContraseniaChanged = this.handleContraseniaChanged.bind(this);
-    this.handlePuertoChanged = this.handlePuertoChanged.bind(this);
   }
 
-  handleServidorChanged (event) {
-    this.setState({servidor: event.target.value})
-  }
-
-  handleUsuarioChanged (event) {
-    this.setState({usuario: event.target.value})
-  }
-
-  handleContraseniaChanged (event) {
-    this.setState({Contrasenia: event.target.value})
-  }
-
-  handlePuertoChanged (event) {
-    this.setState({Puerto: event.target.value})
-  }
-
+  /**
+   * regresar array con datos representables por el componente Select
+   */
   extractServidores(){
-    let serv = [];
-    console.log(this.props);
-
-    return serv;
+    let servers = [];
+    this.props.servers.allServers.map((servidor)=>{
+      servers.push({
+        value: servidor.idServidor,
+        label: `${servidor.direccion} | ${servidor.aliasServidor}`
+      })
+    })
+    console.log(servers)
+    return servers;
   }
 
   render () {
     var servers = this.extractServidores();
     return (
-      <div>
-        <Col xs="12">
+      <Container>
+        <Row>
 
-          <Col xs="4">
+          <Col xs="3">
             <label>Servidor: </label>
           </Col>
 
-          <Col xs="8">
-            <Select 
-              options={servers} 
-              className="WizardInput" 
-              onChange={(servidor) => this.setValues(servidor)} 
-              />        
+          <Col xs="9">
+            <Select
+              options={this.extractServidores()}
+              className=""
+              
+            >
+            </Select>
           </Col>
 
-          <Col xs="4">
+          <Col xs="3">
             <label>Usuario: </label>
           </Col>
 
-          <Col xs="8">
+          <Col xs="9">
             <input
-              className='WizardInput' 
+              className='form-control' 
               placeholder='Usuario'
               type='text'
               onChange={this.handleUsuarioChanged}
               value={this.state.Usuario}
             />
           </Col>
-        </Col>
-        <Col xs="12">
-          <Col xs="4">
+        </Row>
+        <Row>
+          <Col xs="3">
             <label>Contraseña: </label>
           </Col>
 
-          <Col xs="8">
+          <Col xs="9">
             <input
-              className='WizardInput' 
+              className='form-control' 
               placeholder='Contraseña'
               type='text'
               onChange={this.handleContraseniaChanged}
               value={this.state.Contrasenia}
             />
           </Col>
-        </Col>
+        </Row>
 
-        <Col xs="12">
-          <Col xs="4">
+        <Row>
+          <Col xs="3">
             <label>Puerto: </label>
           </Col>
 
-          <Col xs="8">
+          <Col xs="9">
             <input
-              className='WizardInput' 
+              className='form-control' 
               placeholder='Puerto'
               type='text'
               onChange={this.handlePuertoChanged}
               value={this.state.Puerto}
             />
           </Col>
-        </Col>
-      </div>
+        </Row>
+      </Container>
     )
   }
 }

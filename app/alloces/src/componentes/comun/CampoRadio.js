@@ -12,7 +12,9 @@ import { Form, Row } from 'react-bootstrap';
 class CampoRadio extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
 
+        };
         //const { checado } = this.props
     }
 
