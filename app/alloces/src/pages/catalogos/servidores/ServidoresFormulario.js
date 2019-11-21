@@ -33,7 +33,7 @@ class ServidoresFormulario extends React.Component {
     }
 
     abrirModalEliminar(e, datosFormulario) {
-        console.log(datosFormulario)
+        
         const campos = <EliminarFormulario
             onSubmit={this.eliminar}
             datos={datosFormulario}

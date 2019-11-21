@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import '../css/Generales.css';
-import { Col } from 'reactstrap';
+import { Col } from 'react-bootstrap';
 //import { showModal, hideModal } from '../actions/modal.actions';
 //import { connect } from 'react-redux';
 
@@ -9,7 +9,7 @@ import { Col } from 'reactstrap';
 class FuncModalAgregar extends Component{
   render(){
     const { Servidores } = this.props
-    console.log(Servidores);
+    
     return(   
       <> 
         <Col xs="10" className="marginXS10 pos-left">
