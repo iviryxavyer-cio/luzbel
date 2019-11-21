@@ -11,8 +11,8 @@ import { loginActions } from '../../actions/login.actions';
 class SideBar extends React.Component {
     constructor(props) {
         super(props)
-
-        console.log(this.props)
+        this.state={};
+        //console.log(this.props)
     }
 
     render() {
@@ -21,7 +21,7 @@ class SideBar extends React.Component {
         }
         return (
             <SideNav onSelect={(selected) => {
-                console.log(selected)
+                
                 if (selected === 'logout') {
                     this.props.dispatch(loginActions.logOut())
                 }

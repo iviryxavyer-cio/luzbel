@@ -1,8 +1,8 @@
 //'use strict'
 import React from 'react'
-//importamos los componentes de Container, rows y col de reactstrap para un mayor estandar
-import { Col } from 'reactstrap';
-import Select from 'react-dropdown-select';
+//importamos los componentes de Container, rows y col de react-bootstrap para un mayor estandar
+import { Col } from 'react-bootstrap';
+import Select from 'react-select';
 
 
 const options = [{label: 'SQL', value: 1}, 

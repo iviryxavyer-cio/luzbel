@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.css';
-//importamos los componentes de Container, rows y col de reactstrap para un mayor estandar
-import { Col } from 'reactstrap';
+//importamos los componentes de Container, rows y col de react-bootstrap para un mayor estandar
+import { Col } from 'react-bootstrap';
 //importamos los modales y los buttons
 import {  ButtonToolbar, Button } from 'react-bootstrap';
 //importamos el componente del modal agregar que creamos 

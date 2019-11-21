@@ -1,18 +1,13 @@
 import React from 'react';
-//importamos los componentes de Container, rows y col de reactstrap para un mayor estandar
+//importamos los componentes de Container, rows y col de react-bootstrap para un mayor estandar
 import { Col, Row, Container } from 'react-bootstrap';
 import Select from 'react-select';
 
 
 export class StepOne extends React.Component {
-  constructor () {
-    super()
-    this.state = { 
-      servidor: '', 
-      usuario: '',
-      contrasenia: '',
-      puerto: ''
-    }
+  constructor (props) {
+    super(props);
+    this.state = {};
   }
 
   /**
@@ -26,25 +21,27 @@ export class StepOne extends React.Component {
         label: `${servidor.direccion} | ${servidor.aliasServidor}`
       })
     })
-    console.log(servers)
     return servers;
   }
 
+  handleServerChange(server){
+    this.props.handleServerChange(server);
+  }
+
   render () {
-    var servers = this.extractServidores();
     return (
       <Container>
         <Row>
-
           <Col xs="3">
             <label>Servidor: </label>
           </Col>
 
           <Col xs="9">
             <Select
+              value={this.state.server}
               options={this.extractServidores()}
               className=""
-              
+              onChange={(server)=>this.handleServerChange(server)}
             >
             </Select>
           </Col>
@@ -58,8 +55,7 @@ export class StepOne extends React.Component {
               className='form-control' 
               placeholder='Usuario'
               type='text'
-              onChange={this.handleUsuarioChanged}
-              value={this.state.Usuario}
+              onChange={(usuario)=>this.props.handleUsuarioChange(usuario.target.value)}
             />
           </Col>
         </Row>
@@ -73,8 +69,7 @@ export class StepOne extends React.Component {
               className='form-control' 
               placeholder='Contraseña'
               type='text'
-              onChange={this.handleContraseniaChanged}
-              value={this.state.Contrasenia}
+              onChange={(contrasena)=>this.props.handleContrasenaChange(contrasena.target.value)}
             />
           </Col>
         </Row>
@@ -89,8 +84,7 @@ export class StepOne extends React.Component {
               className='form-control' 
               placeholder='Puerto'
               type='text'
-              onChange={this.handlePuertoChanged}
-              value={this.state.Puerto}
+              onChange={(puerto)=>this.props.handlePuertoChange(puerto.target.value)}
             />
           </Col>
         </Row>
