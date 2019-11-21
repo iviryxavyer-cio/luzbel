@@ -79,7 +79,7 @@ class ServidoresFormulario extends React.Component {
                 </Form.Group>
 
                 {
-                    eliminar == 1 ?
+                    eliminar === 1 ?
                         <Form.Group as={Row}>
                             <Form.Label column sm={3}>
                                 Status:
@@ -107,7 +107,7 @@ class ServidoresFormulario extends React.Component {
                         Cancelar
                     </Button>
                     {
-                        eliminar == 1 ?
+                        eliminar === 1 ?
                             <Button variant="danger" onClick={(e) => this.abrirModalEliminar(e, this.props.datos)}>
                                 Eliminar
                         </Button>

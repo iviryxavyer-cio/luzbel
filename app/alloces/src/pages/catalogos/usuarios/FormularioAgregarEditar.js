@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm, getFormSyncErrors, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
-import { maxLength10, required } from '../../../Utilidades/validaciones'
+import { required } from '../../../Utilidades/validaciones'
 import CampoTexto from '../../../componentes/comun/CampoTexto.component';
 import CampoContrasena from '../../../componentes/comun/CampoContrasena';
 import EliminarFormulario from '../../../componentes/comun/EliminarFormulario';
@@ -151,7 +151,7 @@ class FormularioAgregarEditar extends Component {
                         Cancelar
                     </Button>
                     { 
-                        eliminar==1 ?
+                        eliminar===1 ?
                         <Button variant="danger" onClick={(e) => this.abrirModalEliminar(e, this.props.datos)}>
                             Eliminar
                         </Button>

@@ -20,8 +20,8 @@ class EliminarFormulario extends React.Component {
 
     render() {
         //importar propiedades del componente
-        const { handleSubmit, cerrarModal, mensaje, botonTitulo, colorFondo } = this.props;
-        const fondoBoton = colorFondo ? colorFondo : 'danger';
+        const { handleSubmit, cerrarModal, mensaje, botonTitulo } = this.props;
+        //const fondoBoton = colorFondo ? colorFondo : 'danger';
 
         return (
             <form onSubmit={handleSubmit} className='form-horizontal' >

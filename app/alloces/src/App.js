@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
-
-import Plantilla from './plantilla'
+import Plantilla from './plantilla';
 
 function App() {
   return (

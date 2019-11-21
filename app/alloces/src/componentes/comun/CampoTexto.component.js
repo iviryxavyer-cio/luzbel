@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Form, Row, Col } from 'react-bootstrap';
+import React from 'react';
+import { Form, Row } from 'react-bootstrap';
 
 class CampoTexto extends React.Component {
 

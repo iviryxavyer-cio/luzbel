@@ -1,20 +1,44 @@
-import React, { Component } from 'react';
-import '../App.css';
-import '../css/Generales.css';
-import { steps } from '../steps';
-//import MultiStep from '../../node_modules/react-multistep2';
+import React from 'react';
+import { connect } from "react-redux";
 import MultiStep from '../Utilidades/MultiSteps';
-//import {Checkbox} from 'react-md';
+import { Modal, Container } from 'react-bootstrap';
+//acciones
+import { serversActions } from "../actions/servidores.actions";
 
-import { Modal } from 'react-bootstrap';
+//steps
+import { StepOne } from '../pages/StepOne';
+import { StepTwo } from '../pages/StepTwo';
+import { StepThree } from '../pages/StepThree';
+import { StepFour } from '../pages/StepFour';
 
-class FuncModalWizard extends Component{
+
+class FuncModalWizard extends React.Component {
 
 constructor(props){
   super(props);
+  this.state = {
+    servidor:null,
+  };
+
+  //dispatchs
+  this.props.dispatch(serversActions.getAllServers());
+
+  //bindings
+  this.handleServerChange = this.handleServerChange.bind(this);
+}
+
+handleServerChange(){
+  alert("ok");
 }
 
 render(){
+  var steps = [
+    {name: 'Servidores',  component: <StepOne servers={this.props.servers} handleChnage={this.handleServerChange} />},
+    {name: 'Conectores',  component: <StepTwo/>},
+    {name: 'BD',          component: <StepThree/>},
+    {name: 'Resumen',     component: <StepFour/>}
+  ]
+
   return(
       <Modal
         {...this.props}
@@ -24,11 +48,13 @@ render(){
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            <h4>WIZARD</h4>
+            <h4>Cadena Conexion</h4>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-         <MultiStep steps={steps} />
+          <Container>
+            <MultiStep steps={steps} />
+          </Container>
         </Modal.Body>
         <Modal.Footer>
         </Modal.Footer>
@@ -38,4 +64,10 @@ render(){
 }
 
 
-export default FuncModalWizard;
+//export default FuncModalWizard;
+
+export default connect((state) => {
+  return {
+    servers: state.servers
+  }
+})(FuncModalWizard)

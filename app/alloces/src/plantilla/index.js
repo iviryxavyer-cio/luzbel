@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { Router, Route, Switch, Redirect } from 'react-router-dom';
-import _ from 'lodash';
+import { Router, Route, Switch} from 'react-router-dom';
 
 import PlantillaPublica from './publico';
 import PlantillaPrivada from './privado';
-
-import RutasPrivadas from './rutas/rutasPrivadas';
-import RutasPublicas from './rutas/rutasPublicas';
 
 import Login from '../pages/Sesion/Login';
 import NotFound from './publico/NoEncuentra';
@@ -18,11 +14,13 @@ import rutasPrivadas from "./rutas/rutasPrivadas";
 import { Modal, Button } from 'react-bootstrap';
 import { modalAcciones } from '../actions/modal.actions';
 
+import _ from "lodash";
+
 
 class Plantilla extends Component {
     constructor(props) {
         super(props);
-        const { dispatch } = this.props;
+        //const { dispatch } = this.props;
 
         historial.listen((location, action) => {
             //dispatch(alertaAcciones.limpiar());
@@ -45,7 +43,7 @@ class Plantilla extends Component {
             <>
                 <Router history={historial}>
                     <Switch>
-                        {_.map(rutasPublicas, (ruta, key) => {
+                        { _.map(rutasPublicas, (ruta, key) => {
                             const { component, path } = ruta;
                             return (
                                 <Route exact
@@ -55,7 +53,7 @@ class Plantilla extends Component {
                                 />
                             );
                         })}
-                        {_.map(rutasPrivadas, (route, key) => {
+                        { _.map(rutasPrivadas, (route, key) => {
                             const { component, path } = route;
                             return (
                                 <Route exact

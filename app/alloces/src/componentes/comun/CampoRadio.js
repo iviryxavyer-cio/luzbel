@@ -5,15 +5,17 @@
  */
 
 import React  from 'react';
-import { Form, Row, Col } from 'react-bootstrap';
-import { getFormSyncErrors } from 'redux-form';
-import { connect } from 'react-redux';
+import { Form, Row } from 'react-bootstrap';
+//import { getFormSyncErrors } from 'redux-form';
+//import { connect } from 'react-redux';
 
 class CampoRadio extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
 
-        const { checado } = this.props
+        };
+        //const { checado } = this.props
     }
 
     render() {

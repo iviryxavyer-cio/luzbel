@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { historial } from '../../Utilidades/historial';
+//import { historial } from '../../Utilidades/historial';
 import { connect } from 'react-redux';
 
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
@@ -71,7 +71,7 @@ class SideBar extends React.Component {
                     </NavItem>
                     <NavItem eventKey="logout">
                         <NavIcon>
-                            <i className="fa fa-fw fa-sign-out-alt" style={style} />
+                            <i className="fa fa-fw fa-lock" style={style} />
                         </NavIcon>
                         <NavText>
                             Cerrar sesion

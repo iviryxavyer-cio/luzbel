@@ -3,7 +3,7 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { connect } from 'react-redux';
 import { connectionsActions } from '../actions/conexiones.actions';
 
-import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
+import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 class DataTableConexiones extends Component {
 
