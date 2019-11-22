@@ -123,7 +123,8 @@ function MultiStep(props) {
    */
   var next = function next() {
     if (props.steps[compState] && props.steps[compState].handleValidation) {
-      let validacion = props.steps[compState].handleValidation(props.data.server);
+
+      let validacion = props.steps[compState].handleValidation(props.data);
 
       if(validacion){
         setStepState(compState + 1);
@@ -181,7 +182,7 @@ function MultiStep(props) {
   var renderSteps = function renderSteps() {
     return props.steps.map(function (s, i) {
       return React.createElement("li", {
-        className: 'progtrckr-' + stylesState[i],
+        className: `progtrckr-${stylesState[i]}`,
         onClick: handleOnClick,
         key: i,
         value: i
@@ -197,7 +198,7 @@ function MultiStep(props) {
   },
 
     React.createElement("ol", {
-      className: "progtrckr"
+      className: "text-center progtrckr"
     }, renderSteps()), props.steps[compState].component, 
 
     React.createElement("div", 

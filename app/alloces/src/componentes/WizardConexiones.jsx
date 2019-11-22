@@ -12,15 +12,18 @@ import { StepThree } from '../pages/StepThree';
 import { StepFour } from '../pages/StepFour';
 
 
-class FuncModalWizard extends React.Component {
+class ModalWizard extends React.Component {
 
   constructor(props){
     super(props);
     this.state = {
+      //paso 1
       server:null,
       usuario:"",
       contrasena:"",
       puerto:"",
+      //paso 2
+      conector:null,
 
       validacionPaso:{
         servidores:false,
@@ -35,6 +38,7 @@ class FuncModalWizard extends React.Component {
     this.handleUsuarioChange = this.handleUsuarioChange.bind(this);
     this.handleContrasenaChange = this.handleContrasenaChange.bind(this);
     this.handlePuertoChange = this.handlePuertoChange.bind(this);
+    this.handleConectorChange = this.handleConectorChange.bind(this);
   }
 
   handleServerChange(server){
@@ -61,28 +65,53 @@ class FuncModalWizard extends React.Component {
     });
   }
 
+  handleConectorChange(conector){
+    this.setState({
+      conector: conector
+    });
+  }
+
+  handleTablaChange(tabla){
+    this.setState({
+      table: tabla
+    });
+  }
+
   /**
    * funcion para validar el primer paso del wizard
-   * @param {*} data 
+   * @param {*} data
    */
   validateStepOne(data){
     let resolution = false;
-    switch (data) {
-      case null:
-        resolution = false;
-        break;
-      case undefined:
-          resolution = false;
-        break
-      default:
-        resolution = true;
-        break;
+    if (data.server) {
+      resolution = true;
     }
     return resolution;
   }
 
   validateStepTwo(data){
     let resolution = false;
+    if (data.conector) {
+      resolution = true;
+    }
+    console.log(data.conector);
+    return resolution;
+  }
+
+  validateStepThree(data){
+    let resolution = false;
+    if (data.BD) {
+      resolution = true;
+    }
+    return resolution;
+  }
+
+  validateFinal(data){
+    let resolution = false;
+    if (data) {
+      resolution = true;
+    }
+    return resolution;
   }
 
 
@@ -102,22 +131,38 @@ class FuncModalWizard extends React.Component {
         handleValidation: this.validateStepOne
       },
       {
-        name: 'Conectores',
+        name: 'DBMS',
         component: 
           <StepTwo
-            server={this.state.server}
+            data={this.state}
+            conectores={this.props.conectores}
+            handleConectorChange={this.handleConectorChange}
           />,
         handleValidation: this.validateStepTwo
       },
-      {name: 'BD',          component: <StepThree  />},
-      {name: 'Resumen',     component: <StepFour  />}
+      {
+        name: 'BD',
+        component: 
+          <StepThree
+            data={this.state}
+          />,
+        handleValidation: this.validateStepThree
+      },
+      {
+        name: 'Resumen',
+        component: 
+          <StepFour
+            data={this.state}
+          />,
+        handleValidation: this.validateFinal
+      }
     ]
 
     return(
       <Modal
         show={this.props.show}
         onHide={this.props.onHide}
-        size="lg" 
+        size="xl" 
         aria-labelledby="contained-modal-title-vcenter" 
         centered 
       >
@@ -149,4 +194,4 @@ export default connect((state) => {
   return {
     servers: state.servers
   }
-})(FuncModalWizard)
+})(ModalWizard)
