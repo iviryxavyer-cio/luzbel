@@ -38,6 +38,11 @@ function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance");
 }
 
+/**
+ * 
+ * @param {*} indx 
+ * @param {*} length 
+ */
 var getNavStyles = function getNavStyles(indx, length) {
   var styles = [];
 
@@ -54,6 +59,12 @@ var getNavStyles = function getNavStyles(indx, length) {
   return styles;
 };
 
+
+/**
+ * determinar si para un paso se debe o no mostrar un boton
+ * @param {*} indx 
+ * @param {*} length 
+ */
 var getButtonsState = function getButtonsState(indx, length) {
   if (indx > 0 && indx < length - 1) {
     return {
@@ -76,6 +87,15 @@ var getButtonsState = function getButtonsState(indx, length) {
   }
 };
 
+
+/**
+ * 
+ * @param {JSON} props {
+ *  {array} steps [
+ *    { name:"name", component: <Component></Component>, handleValidation: func () } 
+ *  ...]
+ * } 
+ */
 function MultiStep(props) {
   var _useState = useState(getNavStyles(0, props.steps.length)),
       _useState2 = _slicedToArray(_useState, 2),
@@ -98,14 +118,33 @@ function MultiStep(props) {
     setButtons(getButtonsState(indx, props.steps.length));
   }
 
+  /**
+   * funcion que se ejecuta para pasar al siguiente paso
+   */
   var next = function next() {
-    return setStepState(compState + 1);
+    if (props.steps[compState] && props.steps[compState].handleValidation) {
+      let validacion = props.steps[compState].handleValidation(props.data.server);
+
+      if(validacion){
+        setStepState(compState + 1);
+      }else{
+        alert("datos invalidos");
+      }
+    }else{
+      return setStepState(compState + 1);
+    }
   };
 
+  /**
+   * 
+   */
   var previous = function previous() {
     return setStepState(compState > 0 ? compState - 1 : compState);
   };
 
+  /**
+   * funcion que se ejecuta en el boton de finalizar en la ultima estapa del wizard
+   */
   var success = function success(){
     return this.setState({ showModal: false });
   }
@@ -114,14 +153,31 @@ function MultiStep(props) {
     return evt.which === 13 ? next(props.steps.length) : {};
   };
 
+  /**
+   * Funcion para manejar el click en navegador superior
+   * @param {*} evt 
+   */
   var handleOnClick = function handleOnClick(evt) {
-    if (evt.currentTarget.value === props.steps.length - 1 && compState === props.steps.length - 1) {
-      setStepState(props.steps.length);
-    } else {
-      setStepState(evt.currentTarget.value);
+    switch (props.canNavigateInMenu) {
+      case (true, null, undefined):
+          console.log("access");
+          if (evt.currentTarget.value === props.steps.length - 1 && compState === props.steps.length - 1) {
+            setStepState(props.steps.length);
+          } else {
+            setStepState(evt.currentTarget.value);
+          }
+        break;
+      case false:
+          alert("No se puede navegar");
+        break;
+      default:
+        break;
     }
   };
 
+  /**
+   * 
+   */
   var renderSteps = function renderSteps() {
     return props.steps.map(function (s, i) {
       return React.createElement("li", {
@@ -129,36 +185,64 @@ function MultiStep(props) {
         onClick: handleOnClick,
         key: i,
         value: i
-      }, React.createElement("em", null, i + 1), React.createElement("span", null, props.steps[i].name));
+      },
+      React.createElement("em", null, i + 1), React.createElement("span", null, props.steps[i].name));
     });
   };
 
+  
   return React.createElement("div", {
     className: "container",
     onKeyDown: handleKeyDown
-  }, React.createElement("ol", {
-    className: "progtrckr"
-  }, renderSteps()), props.steps[compState].component, React.createElement("div", {
-    style: props.showNavigation ? {} : {
-      display: 'none'
-    }
-  }, React.createElement("button", {
-    style: buttonsState.showPreviousBtn ? {} : {
-      display: 'none'
-    },
-    onClick: previous
-  }, "Anterior"), React.createElement("button", {
-    style: buttonsState.showNextBtn ? {} : {
-      display: 'none'
-    },
-    onClick: next
-  }, "Siguiente"), React.createElement("button", {
-    style: buttonsState.showAceptarBtn ? {} : {
-      display: 'none'
-    },
-    onClick: success
-  }, "Aceptar")));
+  },
+
+    React.createElement("ol", {
+      className: "progtrckr"
+    }, renderSteps()), props.steps[compState].component, 
+
+    React.createElement("div", 
+      {
+        style: props.showNavigation ? 
+        {
+        } : 
+        {
+          display: 'none'
+        }
+      },
+
+      React.createElement("button",
+        {
+        style: buttonsState.showPreviousBtn ? {} : {
+          display: 'none'
+        },
+        className:"btn btn-primary",
+        onClick: previous
+      }, "Anterior"),
+
+      React.createElement("button",
+      {
+        style: buttonsState.showNextBtn ? {} : {
+          display: 'none'
+        },
+        className:"btn btn-primary",
+        onClick: next
+      }, "Siguiente"),
+
+      React.createElement("button", 
+      {
+        style: buttonsState.showAceptarBtn ? 
+          {
+          } : 
+          {
+            display: 'none'
+          },
+        className:"btn btn-success",
+        onClick: success
+      }, "Aceptar")
+    )
+  );
 }
+
 MultiStep.defaultProps = {
   showNavigation: true
 };

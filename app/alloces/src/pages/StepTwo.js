@@ -29,7 +29,7 @@ export class StepTwo extends React.Component {
           </Col>
 
           <Col xs="8">
-            <Select options={options} className="WizardInput" onChange={(values) => this.setValues(values)} />        
+            <Select options={options} className="form-control" onChange={(values) => this.setValues(values)} />        
           </Col>
         </Col>        
       </div>

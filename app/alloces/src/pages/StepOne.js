@@ -1,6 +1,6 @@
 import React from 'react';
 //importamos los componentes de Container, rows y col de react-bootstrap para un mayor estandar
-import { Col, Row, Container } from 'react-bootstrap';
+import { Col, Row, Container, FormLabel } from 'react-bootstrap';
 import Select from 'react-select';
 
 
@@ -20,6 +20,7 @@ export class StepOne extends React.Component {
         value: servidor.idServidor,
         label: `${servidor.direccion} | ${servidor.aliasServidor}`
       })
+      return servidor;
     })
     return servers;
   }
@@ -33,25 +34,27 @@ export class StepOne extends React.Component {
       <Container>
         <Row>
           <Col xs="3">
-            <label>Servidor: </label>
+            <FormLabel>Servidor:</FormLabel>
           </Col>
 
           <Col xs="9">
             <Select
-              value={this.state.server}
+              value={this.props.data.server}
               options={this.extractServidores()}
               className=""
+              placeholder="Selecionar ..."
               onChange={(server)=>this.handleServerChange(server)}
             >
             </Select>
           </Col>
 
           <Col xs="3">
-            <label>Usuario: </label>
+            <FormLabel>Usuario:</FormLabel>
           </Col>
 
           <Col xs="9">
             <input
+              value={this.props.data.usuario}
               className='form-control' 
               placeholder='Usuario'
               type='text'
@@ -61,11 +64,12 @@ export class StepOne extends React.Component {
         </Row>
         <Row>
           <Col xs="3">
-            <label>Contraseña: </label>
+            <FormLabel>Contraseña:</FormLabel>
           </Col>
 
           <Col xs="9">
             <input
+              value={this.props.data.contrasena}
               className='form-control' 
               placeholder='Contraseña'
               type='text'
@@ -76,14 +80,15 @@ export class StepOne extends React.Component {
 
         <Row>
           <Col xs="3">
-            <label>Puerto: </label>
+            <FormLabel>Puerto:</FormLabel>
           </Col>
 
           <Col xs="9">
             <input
+              value={this.props.data.puerto}
               className='form-control' 
               placeholder='Puerto'
-              type='text'
+              type='number'
               onChange={(puerto)=>this.props.handlePuertoChange(puerto.target.value)}
             />
           </Col>
