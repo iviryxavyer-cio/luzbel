@@ -6,10 +6,10 @@ import { Modal, Container } from 'react-bootstrap';
 import { serversActions } from "../actions/servidores.actions";
 
 //steps
-import { StepOne } from '../pages/StepOne';
+/*import { StepOne } from '../pages/StepOne';
 import { StepTwo } from '../pages/StepTwo';
 import { StepThree } from '../pages/StepThree';
-import { StepFour } from '../pages/StepFour';
+import { StepFour } from '../pages/StepFour';*/
 
 
 class FuncModalWizard extends React.Component {
@@ -32,13 +32,13 @@ handleServerChange(){
 }
 
 render(){
-  var steps = [
+  /*var steps = [
     {name: 'Servidores',  component: <StepOne servers={this.props.servers} handleChnage={this.handleServerChange} />},
     {name: 'Conectores',  component: <StepTwo/>},
     {name: 'BD',          component: <StepThree/>},
     {name: 'Resumen',     component: <StepFour/>}
-  ]
-
+  ]*/
+  var steps =[]
   return(
       <Modal
         {...this.props}

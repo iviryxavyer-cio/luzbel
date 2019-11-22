@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SideBar from '../../componentes/comun/sideBar.component';
+import TopBar from '../../componentes/comun/AppBar'
 
 export default class PlantillaPrivada extends Component {
     render() {
@@ -9,7 +10,8 @@ export default class PlantillaPrivada extends Component {
 
         return (
             <>
-                <SideBar />
+                <TopBar />
+                {/*<SideBar />*/}
                 <Component route={route} />
             </>
         )

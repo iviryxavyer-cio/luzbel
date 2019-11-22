@@ -21,7 +21,6 @@ function getAllDrivers() {
                     dispatch(fail(error))
                 }
             )
-        dispatch(success(drivers));
     }
     function request() {
         return { type: DriversConstants.GET_ALL_DRIVERS_REQUEST }
