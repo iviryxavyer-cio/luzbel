@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import { Link } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
+import Topbar from '../../componentes/comun/AppBar';
 
 
 export default class PlantillaPublica extends Component {
@@ -11,7 +12,7 @@ export default class PlantillaPublica extends Component {
 
         return (
             <>
-
+                <Topbar />
                 <div>
                     <Container className="contenedor">
                         <Component route={route} />

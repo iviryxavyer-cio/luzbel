@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -30,30 +31,6 @@ const useStyles = makeStyles(theme => ({
             display: 'block',
         },
     },
-    search: {
-        position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: fade(theme.palette.common.white, 0.15),
-        '&:hover': {
-            backgroundColor: fade(theme.palette.common.white, 0.25),
-        },
-        marginRight: theme.spacing(2),
-        marginLeft: 0,
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing(3),
-            width: 'auto',
-        },
-    },
-    searchIcon: {
-        width: theme.spacing(7),
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     inputRoot: {
         color: 'inherit',
     },
@@ -71,11 +48,8 @@ const useStyles = makeStyles(theme => ({
             display: 'flex',
         },
     },
-    sectionMobile: {
-        display: 'flex',
-        [theme.breakpoints.up('md')]: {
-            display: 'none',
-        },
+    botonBarStyle: {
+        float: "right"
     },
 }));
 
@@ -129,22 +103,31 @@ export default function TopBar(props) {
                     <Typography className={classes.title} variant="h6" noWrap>Cain</Typography>
                     <div className={classes.search}></div>
                     <div className={classes.grow}>
-                        <div className={classes.sectionDesktop}>
-                            <IconButton aria-label="notificaciones" color="inherit">
-                                <Badge badgeContent={1} color='secondary'>
-                                    <NotificationsIcon />
-                                </Badge>
-                            </IconButton>
-                            <IconButton 
-                                edge="end"
-                                aria-label="current user"
-                                aria-controls={menuId}
-                                aria-haspopup="true"
-                                onClick={handleProfileMenuOpen}
-                                color="inherit"
-                            >
-                                <AccountCircle />
-                            </IconButton>
+                        <div className={classes.sectionDesktop, classes.botonBarStyle}>
+                            {!authentication.loggedIn ? 
+                                undefined : 
+                                <IconButton aria-label="notificaciones" color="inherit">
+                                    <Badge badgeContent={1} color='secondary'>
+                                        <NotificationsIcon />
+                                    </Badge>
+                                </IconButton>
+                            }
+                            {!authentication.loggedIn ?
+                                <Button 
+                                    variant="contained" 
+                                    color="secondary"
+                                    onClick={e => console.log('click')}>Registrarse</Button> :
+                                <IconButton 
+                                    edge="end"
+                                    aria-label="current user"
+                                    aria-controls={menuId}
+                                    aria-haspopup="true"
+                                    onClick={handleProfileMenuOpen}
+                                    color="inherit"
+                                >
+                                    <AccountCircle />
+                                </IconButton>
+                            }
                         </div>
                     </div>
                 </Toolbar>
