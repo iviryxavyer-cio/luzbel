@@ -1,20 +1,15 @@
 import React, { Component } from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { connect } from 'react-redux';
-import { connectionsActions } from '../actions/conexiones.actions';
+// dispatchs
+//import { ConexionesService } from "../services/conexiones.service";
 
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 class DataTableConexiones extends Component {
-
   constructor (props) {
-    super(props)
-    this.getAllConnections = this.getAllConnections.bind(this);
-    this.getAllConnections()
-  }
-
-  getAllConnections() {
-    this.props.dispatch(connectionsActions.getAllConnections())
+    super(props);
+    this.state = {};
   }
 
   render(){

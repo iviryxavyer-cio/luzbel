@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from "react-redux";
 
 //acciones para redux
-import { connectionsActions } from "../actions/conexiones.actions"
+//import { connectionsActions } from "../actions/conexiones.actions"
 
 //importamos los componentes de Container, rows y col de react-bootstrap para un mayor estandar
 import { Col } from 'react-bootstrap';

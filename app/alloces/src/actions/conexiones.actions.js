@@ -1,23 +1,12 @@
 import { conexionesConstants } from '../constants/conexiones.constants';
+/**
+ * @author Marco A Gallegos
+ * @date 19/11/2019
+ * @description Este archivo contiene los servicios de las conexiones con el servidor api
+ * es decir las funciones que consultaran al api
+ */
 
-export const connectionsActions = {
-    
-    getAllConnections() {
-        return dispatch => {
-            dispatch(request());
-            let connections = [];
-    
-            //request(config.api.url("servidor"))
+export const conexionesActions = {
     
     
-            //QueryServidores.servidores();
-    
-            dispatch(success(connections));
-        }
-    
-        function request() { return { type: conexionesConstants.GET_ALL_CONNECTIONS_REQUEST } }
-        function success(connections) { return { type: conexionesConstants.GET_ALL_CONNECTIONS_REQUEST_SUCCESS, payload:connections} }
-    
-        function Fail(connections) { return { type: conexionesConstants.GET_ALL_CONNECTIONS_REQUEST_FAIL} }
-    }
 }
