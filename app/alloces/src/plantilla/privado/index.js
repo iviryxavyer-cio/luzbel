@@ -11,7 +11,7 @@ export default class PlantillaPrivada extends Component {
         return (
             <>
                 <TopBar />
-                {/*<SideBar />*/}
+                <SideBar />
                 <Component route={route} />
             </>
         )

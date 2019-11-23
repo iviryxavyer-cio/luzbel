@@ -1,92 +1,61 @@
+/**
+ * @author Luis Manuel Torres Treviño
+ * @date 23/11/2019
+ * @fileoverview Este archivo contiene el componente del menu lateral
+ * @version 1.0.0
+ * 
+ * Historial
+ * v.1.0.0 - Esta version del archivo es el que se encarga de crear el menu sidebar
+ */
 import React from 'react';
-import { Link } from 'react-router-dom';
-//import { historial } from '../../Utilidades/historial';
-import { connect } from 'react-redux';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
-import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import Collapse from '@material-ui/core/Collapse';
 
-import { loginActions } from '../../actions/login.actions';
+import IconExpandLess from '@material-ui/icons/ExpandLess';
+import IconExpandMore from '@material-ui/icons/ExpandMore';
+import IconDashboard from '@material-ui/icons/Dashboard';
+import IconShoppingCart from '@material-ui/icons/ShoppingCart';
+import IconPeople from '@material-ui/icons/People';
+import IconBarChart from '@material-ui/icons/BarChart';
+import IconLibraryBooks from '@material-ui/icons/LibraryBooks';
 
-class SideBar extends React.Component {
-    constructor(props) {
-        super(props)
+import '../../css/sidebar.scss';
 
-        console.log(this.props)
+const SideBar = () => {
+    const [open, setOpen] = React.useState(false);
+
+    const handleClick = () => {
+        setOpen(!open)
     }
 
-    render() {
-        const style = {
-            fontSize: '1.75em'
-        }
-        return (
-            <SideNav onSelect={(selected) => {
-                console.log(selected)
-                if (selected === 'logout') {
-                    this.props.dispatch(loginActions.logOut())
+    return (
+        <List component="nav" className="appMenu" disablePadding>
+            <ListItem button onClick={handleClick} className="menuItem">
+                <ListItemIcon className="menuItemIcon">
+                    <IconLibraryBooks className="colorIcon"/>
+                </ListItemIcon>
+                <ListItemText primary="Catalogos" className="textColor"/>
+                {open ? 
+                    <IconExpandLess className="secondaryIcon" /> : 
+                    <IconExpandMore className="secondaryIcon" />
                 }
-            }}
-            >
-                <Toggle />
-                <Nav defaultSelected="home">
-                    <NavItem eventKey="home">
-                        <NavIcon>
-                            <Link to="/"><i className="fa fa-fw fa-home" style={style} /></Link>
-                        </NavIcon>
-                        <NavText>
-                            Home
-                        </NavText>
-                    </NavItem>
-                    <NavItem eventKey="usuarios">
-                        <NavIcon>
-                            <Link to="/usuarios"><i className="fa fa-fw fa-users" style={style} /></Link>
-                        </NavIcon>
-                        <NavText>
-                            Usuarios
-                        </NavText>
-                    </NavItem>
-                    <NavItem eventKey="servidores">
-                        <NavIcon>
-                            <Link to="/servidores"><i className="fa fa-fw fa-server" style={style} /></Link>
-                        </NavIcon>
-                        <NavText>
-                            Servidores
-                        </NavText>
-                    </NavItem>
-                    <NavItem eventKey="conectores">
-                        <NavIcon>
-                            <Link to="/conectores"><i className="fa fa-fw fa-plug" style={style} /></Link>
-                        </NavIcon>
-                        <NavText>
-                            Conectores
-                        </NavText>
-                    </NavItem>
-                    <NavItem eventKey="conexiones">
-                        <NavIcon>
-                            <Link to="/conexiones"><i className="fa fa-fw fa-database" style={style} /></Link>
-                        </NavIcon>
-                        <NavText>
-                            Conexiones
-                        </NavText>
-                    </NavItem>
-                    <NavItem eventKey="logout">
-                        <NavIcon>
-                            <i className="fa fa-fw fa-lock" style={style} />
-                        </NavIcon>
-                        <NavText>
-                            Cerrar sesion
-                        </NavText>
-                    </NavItem>
-                </Nav>
-            </SideNav>
-        )
-    }
+            </ListItem>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+                <Divider />
+                <List component="div" disablePadding>
+                    <ListItem button className="menuItem">
+                        <ListItemText inset primary="Usuarios" className="textColor" />
+                    </ListItem>
+                </List>
+            </Collapse>
+        </List>
+    )
 }
 
-function mapStatetoProps(state) { return { stateApp: state } }
-function mapDispatchtoProps(dispatch) { return { dispatch } }
-
-export default connect(
-    mapStatetoProps,
-    mapDispatchtoProps
-)(SideBar);
+export default SideBar;
