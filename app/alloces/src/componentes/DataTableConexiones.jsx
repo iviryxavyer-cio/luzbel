@@ -1,15 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { connect } from 'react-redux';
 // dispatchs
-//import { ConexionesService } from "../services/conexiones.service";
+import { conexionesActions } from "../actions/conexiones.actions";
 
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
-class DataTableConexiones extends Component {
+class DataTableConexiones extends React.Component {
   constructor (props) {
     super(props);
     this.state = {};
+    //dispatch
+    this.props.dispatch(conexionesActions.getAllConexiones());
   }
 
   render(){
@@ -28,20 +30,21 @@ class DataTableConexiones extends Component {
       }
     }
      // const handleIndeterninate = isIndeterminate => (isIndeterminate ? <FontIcon>indeterminate_check_box</FontIcon> : <FontIcon>check_box_outline_blank</FontIcon>)
+
     return(
       <div>        
         <BootstrapTable               
-              data = { connections.allConnections } 
-              selectRow = { selectRowProp }
-              options = { options }
-              pagination>
-              <TableHeaderColumn dataField='db' isKey={ true }>Base de Datos</TableHeaderColumn>
-              <TableHeaderColumn dataField='servidor'>Servidor</TableHeaderColumn>
-              <TableHeaderColumn dataField='usuario'>Usuario</TableHeaderColumn>
-              <TableHeaderColumn dataField='contrasenia'>Contraseña</TableHeaderColumn>
-              <TableHeaderColumn dataField='conector'>Conector</TableHeaderColumn>
-              <TableHeaderColumn dataField='puerto'>Puerto</TableHeaderColumn>
-            </BootstrapTable>
+          data = { connections.allConexiones } 
+          selectRow = { selectRowProp }
+          options = { options }
+          pagination>
+          <TableHeaderColumn dataField='idConexion' isKey={ true }># Conexion</TableHeaderColumn>
+          <TableHeaderColumn dataField='idServidor'>Servidor</TableHeaderColumn>
+          <TableHeaderColumn dataField='usuario'>Usuario</TableHeaderColumn>
+          <TableHeaderColumn dataField='contrasena'>Contraseña</TableHeaderColumn>
+          <TableHeaderColumn dataField='idConector'>Conector</TableHeaderColumn>
+          <TableHeaderColumn dataField='puerto'>Puerto</TableHeaderColumn>
+        </BootstrapTable>
       </div>
     );
   }

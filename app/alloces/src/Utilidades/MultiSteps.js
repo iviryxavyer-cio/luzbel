@@ -205,20 +205,21 @@ function MultiStep(props) {
       {
         style: props.showNavigation ? 
         {
-        } : 
+        }:
         {
           display: 'none'
-        }
+        },
+        className:"text-right"
       },
 
       React.createElement("button",
         {
-        style: buttonsState.showPreviousBtn ? {} : {
-          display: 'none'
-        },
-        className:"btn btn-primary",
-        onClick: previous
-      }, "Anterior"),
+          style: buttonsState.showPreviousBtn ? {} : {
+            display: 'none'
+          },
+          className:"btn btn-primary",
+          onClick: previous
+        }, "Anterior"),
 
       React.createElement("button",
       {

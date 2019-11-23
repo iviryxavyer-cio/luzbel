@@ -1,16 +1,18 @@
+/**
+ * @editor Marco A Gallegos
+ * @date 19/11/2019
+ * @description Este archivo se encuentra la vista principal del modulo de conexiones
+ */
 import React from 'react';
-// redux
 import { connect } from "react-redux";
 
 //acciones para redux
-//import { connectionsActions } from "../actions/conexiones.actions"
+//import { conexionesActions } from "../actions/conexiones.actions"
 
 //importamos los componentes de Container, rows y col de react-bootstrap para un mayor estandar
-import { Col } from 'react-bootstrap';
-import {  ButtonToolbar, Button } from 'react-bootstrap';
+import { Col, ButtonToolbar, Button } from 'react-bootstrap';
 //importamos el componente del modal agregar que creamos 
 import FuncModalWizard from "../componentes/WizardConexiones.jsx";
-
 import DataTableConexiones from "../componentes/DataTableConexiones";
 
 
@@ -27,7 +29,7 @@ class Conexiones extends React.Component {
     this.setModalShow = this.setModalShow.bind(this);
 
     //dispatch
-    
+    //this.props.dispatch(conexionesActions.getAllConexiones());
   }
 
   setModalShow(val){
@@ -37,8 +39,6 @@ class Conexiones extends React.Component {
   }
   
   render(){
-    //const servidores = this.props;
-
     return (
       <div id="divServidores">
         <Col xs="12"> 
@@ -82,6 +82,6 @@ class Conexiones extends React.Component {
 
 export default connect((state) => {
   return {
-    //servers: state.servers
+    //connections: state.connections
   }
 })(Conexiones);

@@ -1,28 +1,15 @@
 /**
  * @author Marco A Gallegos
  * @date 19/11/2019
- * @description Este archivo contiene la logica para obtener hacer modificaciones al store de redux para el resource conexiiones
+ * @description Este archivo contiene los servicios de las conexiones con el servidor api
+ * es decir las funciones que consultaran al api
  */
-import { conexionesConstants } from '../constants/conexiones.constants';
-import { conexionesActions } from "../actions/conexiones.actions";
+import { config } from "../config";
+import { request } from "graphql-request";
+import { QueryConexiones } from "../graphql/conexiones"
 
 export const ConexionesService = {
-
-    getAllConnections() {
-        return dispatch => {
-            dispatch(request());
-            let connections = [];
-    
-            //request(config.api.url("servidor"))
-    
-    
-            //QueryServidores.servidores();
-    
-            dispatch(success(connections));
-        }
-    
-        function request() { return { type: conexionesConstants.GET_ALL_CONNECTIONS_REQUEST } }
-        function success(connections) { return { type: conexionesConstants.GET_ALL_CONNECTIONS_REQUEST_SUCCESS, payload:connections} }
-        function fail(connections) { return { type: conexionesConstants.GET_ALL_CONNECTIONS_REQUEST_FAIL} }
+    getAllConexiones(){
+        return request(config.api.url("conexion"), QueryConexiones.conexiones());
     }
 }
