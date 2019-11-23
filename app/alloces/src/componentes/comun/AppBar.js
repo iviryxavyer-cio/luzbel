@@ -11,7 +11,8 @@ import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import {useSelector,useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { loginActions } from '../../actions/login.actions';
 
@@ -65,6 +66,10 @@ export default function TopBar(props) {
         setAnchorEl(event.currentTarget);
     }
 
+    const handleSystemMenuOpen = event => {
+        setAnchorEl(event.currentTarget);
+    }
+
     const handleMenuClose = () => {
         setAnchorEl(null);
     }
@@ -74,17 +79,33 @@ export default function TopBar(props) {
     }
 
     const menuId = 'primary-search-account-menu';
+    const systemMenuId = 'primary-system-menu';
+
     const renderMenu = (
         <Menu
             anchorEl={anchorEl}
-            anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
             id={menuId}
             keepMounted
-            transformOrigin={{vertical: 'top', horizontal: 'rigth'}}
+            transformOrigin={{ vertical: 'top', horizontal: 'rigth' }}
             open={isMenuOpen}
             onClose={handleMenuClose} >
             <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        </Menu>
+    )
+
+    const renderSystemMenu = (
+        <Menu
+            id={systemMenuId}
+            anchorEl={anchorEl}
+            keepMounted
+            open={isMenuOpen}
+            onClose={handleMenuClose}
+        >
+            <Link to="/usuarios"><MenuItem onClick={handleMenuClose}>Usuarios</MenuItem></Link>
+            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
         </Menu>
     )
 
@@ -98,14 +119,14 @@ export default function TopBar(props) {
                         color="inherit"
                         aria-label="abrir"
                     >
-                        <MenuIcon />
+                        <MenuIcon onClick={handleSystemMenuOpen} />
                     </IconButton>
                     <Typography className={classes.title} variant="h6" noWrap>Cain</Typography>
                     <div className={classes.search}></div>
                     <div className={classes.grow}>
                         <div className={classes.sectionDesktop, classes.botonBarStyle}>
-                            {!authentication.loggedIn ? 
-                                undefined : 
+                            {!authentication.loggedIn ?
+                                undefined :
                                 <IconButton aria-label="notificaciones" color="inherit">
                                     <Badge badgeContent={1} color='secondary'>
                                         <NotificationsIcon />
@@ -113,11 +134,11 @@ export default function TopBar(props) {
                                 </IconButton>
                             }
                             {!authentication.loggedIn ?
-                                <Button 
-                                    variant="contained" 
+                                <Button
+                                    variant="contained"
                                     color="secondary"
                                     onClick={e => console.log('click')}>Registrarse</Button> :
-                                <IconButton 
+                                <IconButton
                                     edge="end"
                                     aria-label="current user"
                                     aria-controls={menuId}
@@ -133,6 +154,7 @@ export default function TopBar(props) {
                 </Toolbar>
             </AppBar>
             {renderMenu}
+            {renderSystemMenu}
         </div>
     )
 

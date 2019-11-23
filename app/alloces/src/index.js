@@ -10,6 +10,7 @@ import * as serviceWorker from './serviceWorker';
 //import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
+import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import { Provider } from 'react-redux';
 
 import {store} from './store';
