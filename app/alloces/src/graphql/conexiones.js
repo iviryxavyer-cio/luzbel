@@ -11,11 +11,13 @@ export const QueryConexiones = {
     conexiones(){
         return `
         {
-            servidores {
+            conexiones {
+                idConexion
                 idServidor
-                direccion
-                aliasServidor
-                status
+                idConector
+                puerto
+                usuario
+                contrasena
             }
         }
         `

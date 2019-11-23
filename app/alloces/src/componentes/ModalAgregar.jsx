@@ -8,7 +8,7 @@ import { Col } from 'react-bootstrap';
 
 class FuncModalAgregar extends Component{
   render(){
-    const { Servidores } = this.props
+    //const { Servidores } = this.props
     
     return(   
       <> 
@@ -26,8 +26,8 @@ class FuncModalAgregar extends Component{
               this.setState({ip:newValue})}
             />
           </Col>
-         </Col>
-         <Col xs="10" className="marginXS10 pos-left">
+        </Col>
+        <Col xs="10" className="marginXS10 pos-left">
             <Col xs="3" className="pos-left">
               <label>Nombre: </label>
             </Col>
