@@ -19,8 +19,20 @@ export const conexionesActions = {
             });
         }
     
-        function request() { return { type: conexionesConstants.GET_ALL_CONNECTIONS_REQUEST } }
-        function success(connections) { return { type: conexionesConstants.GET_ALL_CONNECTIONS_REQUEST_SUCCESS, payload:connections} }
-        function fail() { return { type: conexionesConstants.GET_ALL_CONNECTIONS_REQUEST_FAIL} }
+        function request()              { return { type: conexionesConstants.GET_ALL_CONNECTIONS_REQUEST } }
+        function success(connections)   { return { type: conexionesConstants.GET_ALL_CONNECTIONS_REQUEST_SUCCESS, payload:connections} }
+        function fail()                 { return { type: conexionesConstants.GET_ALL_CONNECTIONS_REQUEST_FAIL} }
+    },
+    
+    storeConexion(data){
+        return dispatch => {
+            dispatch(request());
+
+
+            
+        }
+        function request()              { return { type: conexionesConstants.STORE_CONNECTION_REQUEST } }
+        //function success(connection)   { return { type: conexionesConstants.STORE_CONNECTION_REQUEST_SUCCESS, payload:connection} }
+        //function fail()                 { return { type: conexionesConstants.STORE_CONNECTION_REQUEST_FAIL} }
     }
 }

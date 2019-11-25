@@ -8,6 +8,10 @@
  * Este Json contendra las funciones que retornan el query segun sea solicitado
  */
 export const QueryConexiones = {
+
+    /**
+     * query para obtener cualquier servidor
+     */
     conexiones(){
         return `
         {
@@ -21,5 +25,33 @@ export const QueryConexiones = {
             }
         }
         `
-    }
+    },
+
+    /**
+     * Debe retornar el query para almacenar
+     * 
+     * @param {JSON} data 
+     */
+    storeConexion(data){
+        return `
+        mutation {
+            createConexion(
+                idConector:1
+                idServidor:1
+                puerto:"${data.puerto}"
+                usuario:"${data.usuario}"
+                contrasena:"${data.contrasena}"
+            ){
+                conexion {
+                    idConexion
+                    idServidor
+                    idConector
+                    puerto
+                    usuario
+                    contrasena
+                }
+            }
+        }
+        `
+    },
 }

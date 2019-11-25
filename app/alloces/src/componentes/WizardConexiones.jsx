@@ -27,11 +27,21 @@ class ModalWizard extends React.Component {
 
       validacionPaso:{
         servidores:false,
-      }
+      },
+
+      conectores:[
+        {
+          idConector:1,
+          nombreConector:"MS SQL",
+          urlConector:"",
+          status:"A",
+        }
+      ],
     };
 
     //dispatchs
     this.props.dispatch(serversActions.getAllServers());
+    //yo habia ponido mis dispatch a conectores aqui
 
     //bindings
     this.handleServerChange = this.handleServerChange.bind(this);
@@ -78,7 +88,8 @@ class ModalWizard extends React.Component {
   }
 
   /**
-   * funcion para validar el primer paso del wizard
+   * Debe validar el primer paso del wizard
+   * relativo a la seleccion de servidor, usuario, contraseña, password y puerto
    * @param {*} data
    */
   validateStepOne(data){
@@ -89,6 +100,11 @@ class ModalWizard extends React.Component {
     return resolution;
   }
 
+  /**
+   * Debe validar validar que se seleccione conector y de ser asi
+   * debe realizar la peticion para validar la conectividad con el servidor
+   * @param {JSON} data 
+   */
   validateStepTwo(data){
     let resolution = false;
     if (data.conector) {
