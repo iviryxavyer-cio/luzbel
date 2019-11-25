@@ -6,10 +6,10 @@ import { Modal, Container } from 'react-bootstrap';
 import { serversActions } from "../actions/servidores.actions";
 
 //steps
-/*import { StepOne } from '../pages/StepOne';
+import { StepOne } from '../pages/StepOne';
 import { StepTwo } from '../pages/StepTwo';
 import { StepThree } from '../pages/StepThree';
-import { StepFour } from '../pages/StepFour';*/
+import { StepFour } from '../pages/StepFour';
 
 
 class ModalWizard extends React.Component {
