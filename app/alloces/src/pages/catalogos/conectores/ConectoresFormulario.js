@@ -1,3 +1,10 @@
+/**
+ * @author JesusAlberto Briseño Camacho <jabc55@live.com>
+ * @date 06/11/2019
+ * @fileoverview Formulario de los conectores
+ * @version 1.0.0
+ * 
+ */
 import React from 'react';
 import { Field, reduxForm, getFormSyncErrors, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
@@ -7,39 +14,40 @@ import CampoTexto from '../../../componentes/comun/CampoTexto.component';
 import CampoRadio from '../../../componentes/comun/CampoRadio';
 import EliminarFormulario from '../../../componentes/comun/EliminarFormulario';
 import { modalAcciones } from '../../../actions/modal.actions';
-import { serversActions } from '../../../actions/servidores.actions';
+import { driversActions } from '../../../actions/drivers.actions';
 
-const valueSelector = formValueSelector('servidorFormulario');
+const valueSelector = formValueSelector('conectoresFormulario');
 
-class ServidoresFormulario extends React.Component {
-    constructor(props) {
+class ConectoresFormulario extends React.Component {
+
+    constructor(props){
         super(props)
 
-        if (props.datos) {
+        if(props.datos) {
             this.props.initialize({
-                id: props.datos.idServidor,
-                alias: props.datos.aliasServidor,
-                direccion: props.datos.direccion,
-                status: props.datos.status
+                idConector: props.datos.idConector,
+                nombreConector: props.datos.nombreConector,
+                urlConector: props.datos.urlConector,
+                status: props.datos.urlConector
             })
         }
-
         this.eliminar = this.eliminar.bind(this)
         this.abrirModalEliminar = this.abrirModalEliminar.bind(this)
     }
-
-    eliminar(datos) {
-        this.props.dispatch(serversActions.eliminar(datos.idServidor))
+    //Función de eliminar 
+    eliminar(datos){
+        this.props.dispatch(driversActions.eliminar(datos.idConector))
     }
-
+    //Funcion para abrir el modal de eliminación y agregar el formulario de eliminación
     abrirModalEliminar(e, datosFormulario) {
         const campos = <EliminarFormulario
-            onSubmit={this.eliminar}
-            datos={datosFormulario}
-            cerrarModal={this.props.cerrarModal}
-            mensaje={`¿Seguro que quieres eliminar el servidor "${datosFormulario.aliasServidor}"?`}
-            botonTitulo={'Aceptar'} />;
-        const titulo = 'Eliminar servidor'
+                            onSubmit={this.eliminar}
+                            datos={datosFormulario}
+                            cerrarModal={this.props.cerrarModal}
+                            mensaje={`¿Seguro que quieres eliminar el conector "${datosFormulario.nombreConector}"?`}
+                            botonTitulo={'Aceptar'}
+                        />
+        const titulo = 'Eliminar conector'
         this.props.dispatch(modalAcciones.formulario({ titulo, campos, tamanio: 'md' }));
     }
 
@@ -50,36 +58,35 @@ class ServidoresFormulario extends React.Component {
             <form onSubmit={handleSubmit} className='form-horizontal'>
                 <Form.Group as={Row}>
                     <Form.Label column sm={3}>
-                        Direccion:
+                        Nombre Conector:
                     </Form.Label>
                     <Col sm={9}>
                         <Field
-                            name="direccion"
+                            name="nombre"
                             type="text"
                             component={CampoTexto}
                             validate={!this.props.datos ? [required] : undefined}
-                            onChange={handleChange} />
-                    </Col>
+                            onChange={handleChange}
+                        />
+                    </Col>                    
                 </Form.Group>
-
                 <Form.Group as={Row}>
                     <Form.Label column sm={3}>
-                        Alias:
+                        UrlConector:
                     </Form.Label>
                     <Col sm={9}>
-                        <Field
-                            name="alias"
+                        <Field 
+                            name="url"
                             type="text"
                             component={CampoTexto}
                             validate={!this.props.datos ? [required] : undefined}
-                            onChange={handleChange} />
+                            onChange={handleChange}
+                        />
                     </Col>
-
                 </Form.Group>
-
                 {
                     eliminar === 1 ?
-                        <Form.Group as={Row}>
+                        <Form.Group as = {Row}>
                             <Form.Label column sm={3}>
                                 Status:
                             </Form.Label>
@@ -88,47 +95,51 @@ class ServidoresFormulario extends React.Component {
                                     name="status"
                                     component={CampoRadio}
                                     label={'Activo'}
-                                    valor={'A'} />
+                                    valor={'A'}
+                                />
                             </Col>
                             <Col sm={4}>
                                 <Field
                                     name="status"
                                     component={CampoRadio}
                                     label={'Inactivo'}
-                                    valor={'I'} />
+                                    valor={'I'}
+                                />
                             </Col>
                         </Form.Group> :
                     undefined
                 }
 
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={cerrarModal}>
+                    <Button variant="secundary" onClick={cerrarModal}>
                         Cancelar
                     </Button>
                     {
                         eliminar === 1 ?
                             <Button variant="danger" onClick={(e) => this.abrirModalEliminar(e, this.props.datos)}>
                                 Eliminar
-                        </Button>
-                            :
-                            undefined
+                            </Button>
+                                :
+                                undefined
                     }
-                    <Button type="submit">{labelBoton}</Button>
+                    <Button type="submit">
+                        {labelBoton}
+                    </Button>
                 </Modal.Footer>
             </form>
         )
     }
 }
 
-let ServidoresReduxForm = reduxForm({
-    form: 'servidorFormulario',
+let DriversReduxForm = reduxForm({
+    form: 'conectoresFormulario',
     initialValues: { enabled: true }
-})(ServidoresFormulario)
+})(ConectoresFormulario)
 
-ServidoresReduxForm = connect(state => {
+DriversReduxForm = connect(state => {
     return {
-        errors: getFormSyncErrors('servidorFormulario')(state),
+        errors: getFormSyncErrors('conectoresFormulario')(state),
     }
-})(ServidoresReduxForm);
+})(DriversReduxForm);
 
-export default ServidoresReduxForm;
+export default DriversReduxForm;

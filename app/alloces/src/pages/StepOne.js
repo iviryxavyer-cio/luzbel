@@ -1,7 +1,8 @@
 import React from 'react';
 //importamos los componentes de Container, rows y col de reactstrap para un mayor estandar
 import { Col, Row, Container } from 'react-bootstrap';
-import Select from 'react-select';
+//import Select from 'react-select';
+import Select from 'react-dropdown-select';
 
 
 export class StepOne extends React.Component {

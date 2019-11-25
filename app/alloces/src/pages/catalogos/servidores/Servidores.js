@@ -9,7 +9,7 @@ import ServidoresFormulario from './ServidoresFormulario';
 class Servidores extends React.Component {
   constructor(props) {
     super(props);
-    //this.props.dispatch(serversActions.getAllServers());
+    this.props.dispatch(serversActions.getAllServers());
 
     this.registrar = this.registrar.bind(this)
     this.modificar = this.modificar.bind(this)

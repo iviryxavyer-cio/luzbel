@@ -20,7 +20,7 @@ export const DriverService = {
     registrarDrivers,
     modificarDrivers,
     eliminarDrivers
-}
+} 
 
 /**
  * Funcion para obtener los conectores que devuelve la api
@@ -54,7 +54,7 @@ function registrarDrivers(datos){
  */
 function modificarDrivers(datos){
     let variables = {
-        idConector: datos.id,
+        idConector: datos.idConector,
         conectorData: {
             nombreConector: datos.nombre,
             urlConector: datos.url
