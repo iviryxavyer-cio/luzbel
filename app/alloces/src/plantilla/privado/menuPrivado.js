@@ -33,4 +33,12 @@ export const menuPrivado = [
             { name: 'Conexiones', link: '/conexiones' },
         ]
     },
+    {
+        name: 'Sqoop',
+        icon: undefined,
+        openIcon: undefined,
+        closeIcon: undefined,
+        collapse: false,
+        collapseItems: undefined
+    }
 ]

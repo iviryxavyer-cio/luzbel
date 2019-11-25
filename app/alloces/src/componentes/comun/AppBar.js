@@ -66,10 +66,6 @@ export default function TopBar(props) {
         setAnchorEl(event.currentTarget);
     }
 
-    const handleSystemMenuOpen = event => {
-        setAnchorEl(event.currentTarget);
-    }
-
     const handleMenuClose = () => {
         setAnchorEl(null);
     }
@@ -95,20 +91,6 @@ export default function TopBar(props) {
         </Menu>
     )
 
-    const renderSystemMenu = (
-        <Menu
-            id={systemMenuId}
-            anchorEl={anchorEl}
-            keepMounted
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-        >
-            <Link to="/usuarios"><MenuItem onClick={handleMenuClose}>Usuarios</MenuItem></Link>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
-        </Menu>
-    )
-
     return (
         <div className={classes.grow}>
             <AppBar position="static" className={classes.appBar}>
@@ -119,7 +101,7 @@ export default function TopBar(props) {
                         color="inherit"
                         aria-label="abrir"
                     >
-                        <MenuIcon onClick={handleSystemMenuOpen} />
+                        <MenuIcon />
                     </IconButton>
                     <Typography className={classes.title} variant="h6" noWrap>Cain</Typography>
                     <div className={classes.search}></div>
@@ -154,7 +136,6 @@ export default function TopBar(props) {
                 </Toolbar>
             </AppBar>
             {renderMenu}
-            {renderSystemMenu}
         </div>
     )
 

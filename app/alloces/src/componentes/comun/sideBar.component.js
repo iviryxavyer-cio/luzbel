@@ -8,7 +8,6 @@
  * v.1.0.0 - Esta version del archivo es el que se encarga de crear el menu sidebar
  */
 import React from 'react';
-import _ from 'lodash';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -22,13 +21,24 @@ import { menuPrivado } from '../../plantilla/privado/menuPrivado';
 import '../../css/sidebar.scss';
 
 const SideBar = () => {
+    //Se crea una propiedad en el state del componente y una funcion para interactuar con esta 
+    // propiedad.
     const [open, setOpen] = React.useState(false);
 
+    //Se crea una funcion para manejar el click en dentro del menu
     const handleClick = () => {
         setOpen(!open)
     }
+
     return (
         <List component="nav" className="appMenu" disablePadding>
+            {/* Se itera el array menuPrivado que contiene los elementos y sus propiedades del menu.
+                Si la propiedad collapse del elemento es true quiere decir que tiene un sub menu y 
+                    contruira primero un elemento con el icono, texto y botones de abrir y cerrar. Despues
+                    iterara cada uno de lo elementos dentro de esa propiedad para agregarlos al submenu.
+                Si la propiedad collapse es false entonces es un elemento sin submenu y se creará
+                    con sus propiedades.
+            */}
             {menuPrivado.map((element, key) => {
                 return (
                 element.collapse ? 
