@@ -15,8 +15,6 @@ import EliminarFormulario from '../../../componentes/comun/EliminarFormulario';
 import { modalAcciones } from '../../../actions/modal.actions';
 import { usersActions } from '../../../actions/usuarios.actions';
 
-//const valueSelector = formValueSelector('usuariosFormulario');
-
 
 class FormularioAgregarEditar extends Component {
     constructor(props) {

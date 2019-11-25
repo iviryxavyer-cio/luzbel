@@ -6,21 +6,38 @@ import '../../../../node_modules/react-bootstrap-table/dist/react-bootstrap-tabl
 class DataTableUsuarios extends Component {
     constructor (props) {
         super(props)
-        this.state = {};
+        this.state = {
+            selected: [],
+        };
+        this.onSelectRow = this.onSelectRow.bind(this);
+    }
+
+    onSelectRow({idUsuario}) {
+        const findID = this.state.selected.find((id) => {
+            return id == idUsuario;
+        })
+
+        if (!findID) {
+            this.state.selected.push(idUsuario)
+        } else {
+            this.state.selected.splice( this.state.selected.indexOf(idUsuario), 1)            
+        }
+        this.props.onChange(this.state.selected);
     }
 
     render(){
         const { users, modificar } = this.props
 
         const selectRowProp = {
-            mode: 'radio',
+            mode: 'checkbox',
             clickToSelect: true,
             bgColor: '#91c4f7',
-            hideSelectColumn: true
+            hideSelectColumn: true,
+            onSelect: this.onSelectRow,
         };
 
         const options = {
-            onRowClick: function(row) {
+            onRowDoubleClick: function(row) {
                 modificar(row)
             }
         }
@@ -28,6 +45,7 @@ class DataTableUsuarios extends Component {
         return(
             <div>
                 <BootstrapTable
+                    version='4'
                     data = { users.allUsers }
                     selectRow = { selectRowProp }
                     options = { options }
