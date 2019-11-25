@@ -12,17 +12,17 @@ class DataTableUsuarios extends Component {
         this.onSelectRow = this.onSelectRow.bind(this);
     }
 
-    onSelectRow({idUsuario}, isSelected) {
-        console.log(isSelected)
-        if(isSelected){
-            this.setState({
-                selected: [...this.state.selected, idUsuario].sort()
-            });
+    onSelectRow({idUsuario}) {
+        const findID = this.state.selected.find((id) => {
+            return id == idUsuario;
+        })
+
+        if (!findID) {
+            this.state.selected.push(idUsuario)
         } else {
-            this.setState({selected: this.state.selected.filter(it => it !== idUsuario) });
+            this.state.selected.splice( this.state.selected.indexOf(idUsuario), 1)            
         }
-        console.log(this.state);
-        return false;
+        this.props.onChange(this.state.selected);
     }
 
     render(){
