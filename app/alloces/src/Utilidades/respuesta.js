@@ -9,7 +9,7 @@ import { LoginService } from '../services/login.service';
 export function manejarRespuesta(respuesta) {
     debugger;
     const respuestaJson = JSON.parse(respuesta)
-    console.log(respuestaJson)
+    
     /*return respuesta.text().then(texto => {
         const datos = texto && JSON.parse(texto);
         if(!respuesta.ok) {

@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import '../App.css';
 import '../css/Generales.css';
-import { Col } from 'reactstrap';
+import { Col } from 'react-bootstrap';
 //import { showModal, hideModal } from '../actions/modal.actions';
 //import { connect } from 'react-redux';
 
 
 class FuncModalAgregar extends Component{
   render(){
-    const { Servidores } = this.props
-    console.log(Servidores);
+    //const { Servidores } = this.props
+    
     return(   
       <> 
         <Col xs="10" className="marginXS10 pos-left">
@@ -26,8 +26,8 @@ class FuncModalAgregar extends Component{
               this.setState({ip:newValue})}
             />
           </Col>
-         </Col>
-         <Col xs="10" className="marginXS10 pos-left">
+        </Col>
+        <Col xs="10" className="marginXS10 pos-left">
             <Col xs="3" className="pos-left">
               <label>Nombre: </label>
             </Col>

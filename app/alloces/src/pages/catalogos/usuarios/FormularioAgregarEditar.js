@@ -5,7 +5,7 @@
  * y modificación de usuarios.
  */
 import React, { Component } from 'react';
-import { Field, reduxForm, getFormSyncErrors, formValueSelector } from 'redux-form';
+import { Field, reduxForm, getFormSyncErrors } from 'redux-form';
 import { connect } from 'react-redux';
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
 import { required } from '../../../Utilidades/validaciones'
@@ -14,8 +14,6 @@ import CampoContrasena from '../../../componentes/comun/CampoContrasena';
 import EliminarFormulario from '../../../componentes/comun/EliminarFormulario';
 import { modalAcciones } from '../../../actions/modal.actions';
 import { usersActions } from '../../../actions/usuarios.actions';
-
-const valueSelector = formValueSelector('usuariosFormulario');
 
 
 class FormularioAgregarEditar extends Component {

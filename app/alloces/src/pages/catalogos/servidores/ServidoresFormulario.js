@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, reduxForm, getFormSyncErrors, formValueSelector } from 'redux-form';
+import { Field, reduxForm, getFormSyncErrors } from 'redux-form';
 import { connect } from 'react-redux';
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
 import { required } from '../../../Utilidades/validaciones';
@@ -9,7 +9,7 @@ import EliminarFormulario from '../../../componentes/comun/EliminarFormulario';
 import { modalAcciones } from '../../../actions/modal.actions';
 import { serversActions } from '../../../actions/servidores.actions';
 
-const valueSelector = formValueSelector('servidorFormulario');
+//const valueSelector = formValueSelector('servidorFormulario');
 
 class ServidoresFormulario extends React.Component {
     constructor(props) {
@@ -33,6 +33,7 @@ class ServidoresFormulario extends React.Component {
     }
 
     abrirModalEliminar(e, datosFormulario) {
+        
         const campos = <EliminarFormulario
             onSubmit={this.eliminar}
             datos={datosFormulario}

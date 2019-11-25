@@ -6,43 +6,163 @@ import { Modal, Container } from 'react-bootstrap';
 import { serversActions } from "../actions/servidores.actions";
 
 //steps
-import { StepOne } from '../pages/StepOne';
+/*import { StepOne } from '../pages/StepOne';
 import { StepTwo } from '../pages/StepTwo';
 import { StepThree } from '../pages/StepThree';
-import { StepFour } from '../pages/StepFour';
+import { StepFour } from '../pages/StepFour';*/
 
 
-class FuncModalWizard extends React.Component {
+class ModalWizard extends React.Component {
 
-constructor(props){
-  super(props);
-  this.state = {
-    servidor:null,
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      //paso 1
+      server:null,
+      usuario:"",
+      contrasena:"",
+      puerto:"",
+      //paso 2
+      conector:null,
 
-  //dispatchs
-  this.props.dispatch(serversActions.getAllServers());
+      validacionPaso:{
+        servidores:false,
+      }
+    };
 
-  //bindings
-  this.handleServerChange = this.handleServerChange.bind(this);
-}
+    //dispatchs
+    this.props.dispatch(serversActions.getAllServers());
 
-handleServerChange(){
-  alert("ok");
-}
+    //bindings
+    this.handleServerChange = this.handleServerChange.bind(this);
+    this.handleUsuarioChange = this.handleUsuarioChange.bind(this);
+    this.handleContrasenaChange = this.handleContrasenaChange.bind(this);
+    this.handlePuertoChange = this.handlePuertoChange.bind(this);
+    this.handleConectorChange = this.handleConectorChange.bind(this);
+  }
 
-render(){
-  var steps = [
-    {name: 'Servidores',  component: <StepOne servers={this.props.servers} handleChnage={this.handleServerChange} />},
-    {name: 'Conectores',  component: <StepTwo/>},
-    {name: 'BD',          component: <StepThree/>},
-    {name: 'Resumen',     component: <StepFour/>}
-  ]
+  handleServerChange(server){
+    this.setState({
+      server:server
+    });
+  }
 
-  return(
+  handleUsuarioChange(usuario){
+    this.setState({
+      usuario:usuario
+    });
+  }
+
+  handleContrasenaChange(contrasena){
+    this.setState({
+      contrasena:contrasena
+    });
+  }
+
+  handlePuertoChange(puerto){
+    this.setState({
+      puerto:puerto
+    });
+  }
+
+  handleConectorChange(conector){
+    this.setState({
+      conector: conector
+    });
+  }
+
+  handleTablaChange(tabla){
+    this.setState({
+      table: tabla
+    });
+  }
+
+  /**
+   * funcion para validar el primer paso del wizard
+   * @param {*} data
+   */
+  validateStepOne(data){
+    let resolution = false;
+    if (data.server) {
+      resolution = true;
+    }
+    return resolution;
+  }
+
+  validateStepTwo(data){
+    let resolution = false;
+    if (data.conector) {
+      resolution = true;
+    }
+    console.log(data.conector);
+    return resolution;
+  }
+
+  validateStepThree(data){
+    let resolution = false;
+    if (data.BD) {
+      resolution = true;
+    }
+    return resolution;
+  }
+
+  validateFinal(data){
+    let resolution = false;
+    if (data) {
+      resolution = true;
+    }
+    return resolution;
+  }
+
+
+  render(){
+    var steps = [
+      {
+        name: 'Servidores',
+        component: 
+          <StepOne 
+            data={this.state}
+            servers={this.props.servers}
+            handleServerChange={this.handleServerChange}
+            handleUsuarioChange={this.handleUsuarioChange}
+            handleContrasenaChange={this.handleContrasenaChange}
+            handlePuertoChange={this.handlePuertoChange}
+          />,
+        handleValidation: this.validateStepOne
+      },
+      {
+        name: 'DBMS',
+        component: 
+          <StepTwo
+            data={this.state}
+            conectores={this.props.conectores}
+            handleConectorChange={this.handleConectorChange}
+          />,
+        handleValidation: this.validateStepTwo
+      },
+      {
+        name: 'BD',
+        component: 
+          <StepThree
+            data={this.state}
+          />,
+        handleValidation: this.validateStepThree
+      },
+      {
+        name: 'Resumen',
+        component: 
+          <StepFour
+            data={this.state}
+          />,
+        handleValidation: this.validateFinal
+      }
+    ]
+
+    return(
       <Modal
-        {...this.props}
-        size="lg" 
+        show={this.props.show}
+        onHide={this.props.onHide}
+        size="xl" 
         aria-labelledby="contained-modal-title-vcenter" 
         centered 
       >
@@ -53,7 +173,11 @@ render(){
         </Modal.Header>
         <Modal.Body>
           <Container>
-            <MultiStep steps={steps} />
+            <MultiStep
+              data={this.state}
+              steps={steps}
+              canNavigateInMenu={false}
+            />
           </Container>
         </Modal.Body>
         <Modal.Footer>
@@ -70,4 +194,4 @@ export default connect((state) => {
   return {
     servers: state.servers
   }
-})(FuncModalWizard)
+})(ModalWizard)

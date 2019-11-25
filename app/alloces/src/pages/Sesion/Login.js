@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from '../../logo.svg';
 import '../../App.css';
 import '../../css/Generales.css';
-import { Col } from 'reactstrap';
+import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { loginActions } from '../../actions/login.actions';
 import { Form, Row, Col as Column, Button} from 'react-bootstrap'
