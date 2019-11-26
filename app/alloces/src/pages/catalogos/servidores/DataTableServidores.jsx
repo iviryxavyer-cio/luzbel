@@ -14,10 +14,25 @@ class DataTableServidores extends Component {
     super(props)
     this.getAllServers = this.getAllServers.bind(this)
     this.getAllServers();
+
+    this.state = {
+      selected: [],
+    }
+    this.onSelectRow = this.onSelectRow.bind(this);
   }
 
   getAllServers() {
     this.props.dispatch(serversActions.getAllServers())
+  }
+
+  onSelectRow({idServidor}) {
+    const findID = this.state.selected.find(id => id===idServidor);
+    if(!findID){
+      this.state.selected.push(idServidor)
+    }else {
+      this.state.selected.splice(this.state.selected.indexOf(idServidor), 1)
+    }
+    this.props.onSelected(this.state.selected)
   }
 
   render() {
@@ -26,11 +41,12 @@ class DataTableServidores extends Component {
       mode: 'radio',
       clickToSelect: true,
       bgColor: '#91c4f7',
-      hideSelectColumn: true
+      hideSelectColumn: true,
+      onSelect: this.onSelectRow
     };
     const options = {
 
-      onRowClick: function (row) {
+      onRowDoubleClick: function (row) {
         modificar(row)
       }
     }

@@ -5,9 +5,6 @@ import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
 import { required } from '../../../Utilidades/validaciones';
 import CampoTexto from '../../../componentes/comun/CampoTexto.component';
 import CampoRadio from '../../../componentes/comun/CampoRadio';
-import EliminarFormulario from '../../../componentes/comun/EliminarFormulario';
-import { modalAcciones } from '../../../actions/modal.actions';
-import { serversActions } from '../../../actions/servidores.actions';
 
 //const valueSelector = formValueSelector('servidorFormulario');
 
@@ -23,25 +20,6 @@ class ServidoresFormulario extends React.Component {
                 status: props.datos.status
             })
         }
-
-        this.eliminar = this.eliminar.bind(this)
-        this.abrirModalEliminar = this.abrirModalEliminar.bind(this)
-    }
-
-    eliminar(datos) {
-        this.props.dispatch(serversActions.eliminar(datos.idServidor))
-    }
-
-    abrirModalEliminar(e, datosFormulario) {
-        
-        const campos = <EliminarFormulario
-            onSubmit={this.eliminar}
-            datos={datosFormulario}
-            cerrarModal={this.props.cerrarModal}
-            mensaje={`¿Seguro que quieres eliminar el servidor "${datosFormulario.aliasServidor}"?`}
-            botonTitulo={'Aceptar'} />;
-        const titulo = 'Eliminar servidor'
-        this.props.dispatch(modalAcciones.formulario({ titulo, campos, tamanio: 'md' }));
     }
 
     render() {
@@ -79,7 +57,7 @@ class ServidoresFormulario extends React.Component {
                 </Form.Group>
 
                 {
-                    eliminar === 1 ?
+                    eliminar === '1' ?
                         <Form.Group as={Row}>
                             <Form.Label column sm={3}>
                                 Status:
@@ -106,14 +84,6 @@ class ServidoresFormulario extends React.Component {
                     <Button variant="secondary" onClick={cerrarModal}>
                         Cancelar
                     </Button>
-                    {
-                        eliminar === 1 ?
-                            <Button variant="danger" onClick={(e) => this.abrirModalEliminar(e, this.props.datos)}>
-                                Eliminar
-                        </Button>
-                            :
-                            undefined
-                    }
                     <Button type="submit">{labelBoton}</Button>
                 </Modal.Footer>
             </form>

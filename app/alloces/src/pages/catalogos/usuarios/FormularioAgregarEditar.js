@@ -11,9 +11,6 @@ import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
 import { required } from '../../../Utilidades/validaciones'
 import CampoTexto from '../../../componentes/comun/CampoTexto.component';
 import CampoContrasena from '../../../componentes/comun/CampoContrasena';
-import EliminarFormulario from '../../../componentes/comun/EliminarFormulario';
-import { modalAcciones } from '../../../actions/modal.actions';
-import { usersActions } from '../../../actions/usuarios.actions';
 
 
 class FormularioAgregarEditar extends Component {
@@ -31,28 +28,10 @@ class FormularioAgregarEditar extends Component {
                 contrasena: props.datos.contrasena
             })
         }
-        
-        this.eliminar = this.eliminar.bind(this)
-        this.abrirModalEliminar = this.abrirModalEliminar.bind(this)
-    }
-
-    eliminar(datos) {
-        this.props.dispatch(usersActions.eliminar(datos.idUsuario))
-    }
-
-    abrirModalEliminar(e, datosFormulario) {
-        const campos = <EliminarFormulario
-                            onSubmit={this.eliminar}
-                            datos={datosFormulario}
-                            cerrarModal={this.props.cerrarModal}
-                            mensaje={`¿Seguro que quires eliminar el usuario "${datosFormulario.nombreUsuario}"?`}
-                            botonTitulo={'Aceptar'} />;
-        const titulo = 'Eliminar usuario';
-        this.props.dispatch(modalAcciones.formulario({titulo, campos, tamanio: 'md'}));
     }
 
     render() {
-        const { handleSubmit, handleChange, labelBoton, cerrarModal, eliminar} = this.props;
+        const { handleSubmit, handleChange, labelBoton, cerrarModal} = this.props;
 
         return (
             <form onSubmit={handleSubmit} className='form-horizontal'>
@@ -148,14 +127,6 @@ class FormularioAgregarEditar extends Component {
                     <Button variant="secondary" onClick={cerrarModal}>
                         Cancelar
                     </Button>
-                    { 
-                        eliminar===1 ?
-                        <Button variant="danger" onClick={(e) => this.abrirModalEliminar(e, this.props.datos)}>
-                            Eliminar
-                        </Button>
-                        :
-                        undefined
-                    }
                     <Button type="submit">{labelBoton}</Button>
                 </Modal.Footer>
 
