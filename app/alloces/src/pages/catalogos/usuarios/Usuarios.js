@@ -68,16 +68,18 @@ class Usuarios extends React.Component {
         const campos = <EliminarFormulario
                             onSubmit={this.eliminarSeleccionados}
                             datos={this.state.selectedRow}
-                            cerrar={this.cerrarModal}
+                            cerrarModal={this.cerrarModal}
                             mensaje={'¿Seguro que quieres eliminar los usuarios seleccionados?'}
-                            botonTitulo={'Aceptar'} />
+                            botonTitulo={'Aceptar'} /> 
         const titulo = 'Eliminar usuarios';
         this.props.dispatch(modalAcciones.formulario({titulo, campos, tamanio:'md'}))
     }
 
 
     handleGetChildrenState(data){
-        this.state.selectedRow = [...data]
+        this.setState({
+            selectedRow: data
+        })
     }
 
     eliminarSeleccionados(datos){

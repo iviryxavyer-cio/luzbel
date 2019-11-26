@@ -18,7 +18,7 @@ class DataTableUsuarios extends Component {
         })
 
         if (!findID) {
-            this.state.selected.push(idUsuario)
+            this.state.selected.push(idUsuario) 
         } else {
             this.state.selected.splice( this.state.selected.indexOf(idUsuario), 1)            
         }
