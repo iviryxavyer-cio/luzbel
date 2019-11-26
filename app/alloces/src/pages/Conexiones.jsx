@@ -79,7 +79,7 @@ class Conexiones extends React.Component {
   }
 }
 
-
+//binding de redux con el componente
 export default connect((state) => {
   return {
     //connections: state.connections

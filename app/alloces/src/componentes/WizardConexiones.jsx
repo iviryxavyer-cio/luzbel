@@ -6,10 +6,10 @@ import { Modal, Container } from 'react-bootstrap';
 import { serversActions } from "../actions/servidores.actions";
 
 //steps
-/*import { StepOne } from '../pages/StepOne';
+import { StepOne } from '../pages/StepOne';
 import { StepTwo } from '../pages/StepTwo';
 import { StepThree } from '../pages/StepThree';
-import { StepFour } from '../pages/StepFour';*/
+import { StepFour } from '../pages/StepFour';
 
 
 class ModalWizard extends React.Component {
@@ -29,13 +29,20 @@ class ModalWizard extends React.Component {
         servidores:false,
       },
 
+      //algunos conetores de prueba
       conectores:[
         {
           idConector:1,
           nombreConector:"MS SQL",
           urlConector:"",
           status:"A",
-        }
+        },
+        {
+          idConector:2,
+          nombreConector:"SQL Server",
+          urlConector:"",
+          status:"A",
+        },
       ],
     };
 
@@ -43,7 +50,7 @@ class ModalWizard extends React.Component {
     this.props.dispatch(serversActions.getAllServers());
     //yo habia ponido mis dispatch a conectores aqui
 
-    //bindings
+    //bindings para cceder a state local
     this.handleServerChange = this.handleServerChange.bind(this);
     this.handleUsuarioChange = this.handleUsuarioChange.bind(this);
     this.handleContrasenaChange = this.handleContrasenaChange.bind(this);
@@ -108,6 +115,9 @@ class ModalWizard extends React.Component {
   validateStepTwo(data){
     let resolution = false;
     if (data.conector) {
+
+      //se hace request para obtener la validacion y las bd en caso de ser correcat la informacion
+      
       resolution = true;
     }
     console.log(data.conector);
