@@ -13,7 +13,7 @@ class Usuarios extends React.Component {
     constructor(props) {
         super(props)
         this.props.dispatch(usersActions.getAllUsers());
-        this.state = {selectedRow: []};
+        this.state = { selectedRow: [] };
 
         this.registrar = this.registrar.bind(this);
         this.modificar = this.modificar.bind(this);
@@ -64,26 +64,31 @@ class Usuarios extends React.Component {
         this.props.dispatch(modalAcciones.formulario({ titulo, campos, tamanio: 'md' }))
     }
 
-    abrirModalEliminarSeleccion(){
-        const campos = <EliminarFormulario
-                            onSubmit={this.eliminarSeleccionados}
-                            datos={this.state.selectedRow}
-                            cerrarModal={this.cerrarModal}
-                            mensaje={'¿Seguro que quieres eliminar los usuarios seleccionados?'}
-                            botonTitulo={'Aceptar'} /> 
-        const titulo = 'Eliminar usuarios';
-        this.props.dispatch(modalAcciones.formulario({titulo, campos, tamanio:'md'}))
+    abrirModalEliminarSeleccion() {
+        if (this.state.selectedRow.length === 0) {
+            this.props.dispatch(modalAcciones.error({ titulo: 'Error al eliminar usuarios', body: 'Debes de seleccionar un usuario para eliminar' }))
+        } else {
+
+            const campos = <EliminarFormulario
+                onSubmit={this.eliminarSeleccionados}
+                datos={this.state.selectedRow}
+                cerrarModal={this.cerrarModal}
+                mensaje={'¿Seguro que quieres eliminar los usuarios seleccionados?'}
+                botonTitulo={'Aceptar'} />
+            const titulo = 'Eliminar usuarios';
+            this.props.dispatch(modalAcciones.formulario({ titulo, campos, tamanio: 'md' }))
+        }
     }
 
 
-    handleGetChildrenState(data){
+    handleGetChildrenState(data) {
         this.setState({
             selectedRow: data
         })
     }
 
-    eliminarSeleccionados(datos){
-        this.props.dispatch(usersActions.eliminarSeleccionados(datos))
+    eliminarSeleccionados(datos) {
+        this.props.dispatch(usersActions.eliminar(datos[0]))
     }
     render() {
         const { usuarios } = this.props;
@@ -96,16 +101,16 @@ class Usuarios extends React.Component {
                         onClick={this.abrirModalRegistrar}>
                         Agregar
                     </Button>
-                    <Button 
-                    className="buttons boutton-crud Eliminar"
-                    onClick={this.abrirModalEliminarSeleccion}>
+                    <Button
+                        className="buttons boutton-crud Eliminar"
+                        onClick={this.abrirModalEliminarSeleccion}>
                         Eliminar
                     </Button>
                 </ButtonToolbar>
-                <DataTableUsuarios 
-                    users={usuarios} 
+                <DataTableUsuarios
+                    users={usuarios}
                     modificar={this.abrirModalEditar}
-                    onChange={this.handleGetChildrenState}/>
+                    onChange={this.handleGetChildrenState} />
             </Container>
         )
     }

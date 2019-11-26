@@ -70,11 +70,13 @@ class Servidores extends React.Component {
   }
 
   abrirModalEliminar(e, datosFormulario) {
-
+    if(this.state.selectedRow.length === 0){
+      this.props.dispatch(modalAcciones.error({ titulo: 'Error al eliminar servidor', body: 'Debes de seleccionar un servidor para eliminar' }))
+    }
     const campos = <EliminarFormulario
       onSubmit={this.eliminar}
       datos={this.state.selectedRow}
-      cerrarModal={this.props.cerrarModal}
+      cerrarModal={this.cerrarModal}
       mensaje={`¿Seguro que quieres eliminar el servidor?`}
       botonTitulo={'Aceptar'} />;
     const titulo = 'Eliminar servidor'
