@@ -27,8 +27,6 @@ export const conexionesActions = {
     storeConexion(data){
         return dispatch => {
             dispatch(request());
-
-
             
         }
         function request()              { return { type: conexionesConstants.STORE_CONNECTION_REQUEST } }

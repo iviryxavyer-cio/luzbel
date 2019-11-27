@@ -10,25 +10,6 @@ export class StepOne extends React.Component {
     this.state = {};
   }
 
-  /**
-   * regresar array con datos representables por el componente Select
-   */
-  extractServidores(){
-    let servers = [];
-    this.props.servers.allServers.map((servidor)=>{
-      servers.push({
-        value: servidor.idServidor,
-        label: `${servidor.direccion} | ${servidor.aliasServidor}`
-      })
-      return servidor;
-    })
-    return servers;
-  }
-
-  handleServerChange(server){
-    this.props.handleServerChange(server);
-  }
-
   render () {
     return (
       <Container>
@@ -40,10 +21,13 @@ export class StepOne extends React.Component {
           <Col xs="9">
             <Select
               value={this.props.data.server}
-              options={this.extractServidores()}
+              options={this.props.servers.allServers}
               className=""
               placeholder="Selecionar ..."
-              onChange={(server)=>this.handleServerChange(server)}
+              onChange={(server)=>this.props.handleServerChange(server)}
+
+              getOptionLabel={option => `${option.direccion} | ${option.aliasServidor}`}
+              getOptionValue={option => option.idServidor}
             >
             </Select>
           </Col>

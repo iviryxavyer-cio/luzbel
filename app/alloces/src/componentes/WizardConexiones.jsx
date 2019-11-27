@@ -5,13 +5,18 @@ import { Modal, Container } from 'react-bootstrap';
 //acciones
 import { serversActions } from "../actions/servidores.actions";
 
+//querys graphql
+import { QueryValidaciones } from "../graphql/validaciones";
+
 //steps
 import { StepOne } from '../pages/StepOne';
 import { StepTwo } from '../pages/StepTwo';
 import { StepThree } from '../pages/StepThree';
 import { StepFour } from '../pages/StepFour';
 
-
+/**
+ * Componente para renderizar un wizard
+ */
 class ModalWizard extends React.Component {
 
   constructor(props){
@@ -19,15 +24,19 @@ class ModalWizard extends React.Component {
     this.state = {
       //paso 1
       server:null,
-      usuario:"",
+      usuario:"tca",
       contrasena:"",
-      puerto:"",
+      puerto:"1433",
       //paso 2
       conector:null,
-
-      validacionPaso:{
-        servidores:false,
+      validacionConexion:{
+        cargando:true,
+        error:false,
+        errorData:"",
       },
+      databases:[],
+      //paso 3
+      database:"",
 
       //algunos conetores de prueba
       conectores:[
@@ -56,48 +65,71 @@ class ModalWizard extends React.Component {
     this.handleContrasenaChange = this.handleContrasenaChange.bind(this);
     this.handlePuertoChange = this.handlePuertoChange.bind(this);
     this.handleConectorChange = this.handleConectorChange.bind(this);
+    this.handleDatabaseChange = this.handleDatabaseChange.bind(this);
+    this.validateStepTwo = this.validateStepTwo.bind(this);
+    this.validateFinal = this.validateFinal.bind(this);
   }
 
+  // funcion para modificar el servidor seleccionado en algun paso del wizard
   handleServerChange(server){
     this.setState({
       server:server
     });
   }
-
+  
+  // funcion para modificar el usuario seleccionado en algun paso del wizard
   handleUsuarioChange(usuario){
     this.setState({
       usuario:usuario
     });
   }
 
+  // funcion para modificar la contraseña seleccionada en algun paso del wizard
   handleContrasenaChange(contrasena){
     this.setState({
       contrasena:contrasena
     });
   }
-
+  
+  // funcion para modificar el puerto seleccionado en algun paso del wizard
   handlePuertoChange(puerto){
     this.setState({
       puerto:puerto
     });
   }
-
+  
+  // funcion para modificar el conector seleccionado en algun paso del wizard
   handleConectorChange(conector){
     this.setState({
       conector: conector
     });
   }
-
+  
+  // funcion para modificar la tabla seleccionada en algun paso del wizard
   handleTablaChange(tabla){
     this.setState({
       table: tabla
+    });
+  }
+  
+  // funcion para modificar la tabla seleccionada en algun paso del wizard
+  handleDatabaseChange(database){
+    this.setState({
+      database: database
+    });
+  }
+  
+  //
+  changeValidacionConexionStatus(){
+    this.setState({
+      validacionConexion: !this.state.validacionConexion
     });
   }
 
   /**
    * Debe validar el primer paso del wizard
    * relativo a la seleccion de servidor, usuario, contraseña, password y puerto
-   * @param {*} data
+   * @param {*} data es el state de this (Modalwizard)
    */
   validateStepOne(data){
     let resolution = false;
@@ -110,34 +142,73 @@ class ModalWizard extends React.Component {
   /**
    * Debe validar validar que se seleccione conector y de ser asi
    * debe realizar la peticion para validar la conectividad con el servidor
-   * @param {JSON} data 
+   * @param {JSON} data es el state de this (Modalwizard)
    */
   validateStepTwo(data){
-    let resolution = false;
     if (data.conector) {
+      let requestData = {
+        idServidor: this.state.server.idServidor,
+        idConector: this.state.conector.idConector,
+        usuario: this.state.usuario,
+        contrasena: this.state.contrasena,
+        puerto: this.state.puerto,
+      };
+      window.graphqlRequest(window.config.api.url("validacion"), QueryValidaciones.validacion(requestData))
+      .then(response=>{
 
-      //se hace request para obtener la validacion y las bd en caso de ser correcat la informacion
-      
-      resolution = true;
+        switch (response.validacion.status) {
+          case true:
+            this.setState({
+              validacionConexion:{
+                cargando:false,
+                error:false,
+                errorData:"",
+              },
+              databases:response.validacion.data
+            });
+            break;
+          case false:
+            this.setState({
+              validacionConexion:{
+                cargando:false,
+                error:true,
+                errorData: response.validacion.error
+              },
+              databases:[]
+            });
+            break;
+          default:
+            break;
+        }
+
+        console.log(response.validacion);
+      }).catch(err=>{
+        console.log(err);
+      });
+      return true;
+    }else{
+      return false;
     }
-    console.log(data.conector);
-    return resolution;
   }
 
+  /**
+   * 
+   * @param {JSON} data es el state de this (Modalwizard)
+   */
   validateStepThree(data){
     let resolution = false;
-    if (data.BD) {
+    if (data.database.nombre) {
       resolution = true;
     }
     return resolution;
   }
 
-  validateFinal(data){
-    let resolution = false;
-    if (data) {
-      resolution = true;
-    }
-    return resolution;
+  /**
+   * 
+   */
+  validateFinal(){
+    console.log("cerrando modal");
+    this.props.hide();
   }
 
 
@@ -170,30 +241,34 @@ class ModalWizard extends React.Component {
         name: 'BD',
         component: 
           <StepThree
-            data={this.state}
+            databases={this.state.databases}
+            cargando={this.state.validacionConexion.cargando}
+            error={this.state.validacionConexion.error}
+            errorData={this.state.validacionConexion.errorData}
+            handleDatabaseChange={this.handleDatabaseChange}
           />,
         handleValidation: this.validateStepThree
       },
       {
         name: 'Resumen',
-        component: 
+        component:
           <StepFour
             data={this.state}
           />,
-        handleValidation: this.validateFinal
+        handleSuccess: this.validateFinal
       }
     ]
 
     return(
       <Modal
         show={this.props.show}
-        onHide={this.props.onHide}
+        hide={this.props.hide}
         size="xl" 
         aria-labelledby="contained-modal-title-vcenter" 
         centered 
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
+          <Modal.Title id="contained-modal-title-vcenter" className="animated bounce infinite">
             <h4>Cadena Conexion</h4>
           </Modal.Title>
         </Modal.Header>

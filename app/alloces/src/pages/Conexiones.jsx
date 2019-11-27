@@ -57,7 +57,7 @@ class Conexiones extends React.Component {
                   </Button>
                   <FuncModalWizard
                     show={this.state.modalShow}
-                    onHide={() => this.setModalShow(false)}
+                    hide={() => this.setModalShow(false)}
                   />
   
                   <Button className="buttons boutton-crud Eliminar" id="Eliminar" disabled="disabled" onClick={() => this.setModalShow(true)}>
