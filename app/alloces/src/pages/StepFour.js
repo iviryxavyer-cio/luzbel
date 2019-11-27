@@ -1,102 +1,97 @@
 import React from 'react'
-import { Col } from 'react-bootstrap';
-export class StepFour extends React.Component {
-  constructor () {
-    super()
-    this.state = { 
-      checked: '' 
-    }
-    this.handleCheckedChanged = this.handleCheckedChanged.bind(this);
-  }
+import { Col, Container, Row } from 'react-bootstrap';
 
-  handleCheckedChanged (event) {
-    this.setState({checked: event.target.checked})
+export class StepFour extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+    }
   }
 
   render () {
     //var basesDatos = this.state.currentValue.replace('\\n', '\n');
     return (
-      <div>
-          <Col xs="12">
-            <Col xs="4">  
+      <Container>
+          <Row>
+            <Col xs="3">  
               <label>Servidor: </label>
             </Col>
-            <Col xs="8">
+            <Col xs="9">
               <input
-                className="WizardInput"
-                //value={$X}
+                className="form-control"
                 type='text'
                 disabled='disabled'
+                value={`${this.props.data.server.direccion} | ${this.props.data.server.aliasServidor}`}
               />
             </Col>
-          </Col>
-          <Col xs="12">
-            <Col xs="4">
+          </Row>
+          <Row>
+            <Col xs="3">
               <label>Usuario: </label>
             </Col>
-            <Col xs="8">
+            <Col xs="9">
               <input
-                className='WizardInput'
+                className='form-control'
                 type='text'
                 disabled='disabled'
-                //value={$value}
+                value={this.props.data.usuario}
               />
             </Col>
-          </Col>
-          <Col xs="12">
-            <Col xs="4">
+          </Row>
+          <Row>
+            <Col xs="3">
               <label>Contraseña: </label>
             </Col>
-            <Col xs="8">
+            <Col xs="9">
               <input
-                className='WizardInput'
+                className='form-control'
                 type='text'
                 disabled='disabled'
-                //value={$Value}
+                value={this.props.data.contrasena}
               />
             </Col>
-          </Col>
-          <Col xs="12">
-            <Col xs="4">
+          </Row>
+          <Row>
+            <Col xs="3">
               <label>Puerto: </label>
             </Col>
-            <Col xs="8">
+            <Col xs="9">
               <input 
-                className='WizardInput'
+                className='form-control'
                 type='text'
                 disabled='disabled'
-                //value={$Value}
+                value={this.props.data.puerto}
               />
             </Col>
-          </Col>
-          <Col xs="12">
-            <Col xs="4">
+          </Row>
+          <Row>
+            <Col xs="3">
               <label>Conector: </label>
             </Col>
-            <Col xs="8">
+            <Col xs="9">
               <input 
-                className='WizardInput'
+                className='form-control'
                 type='text'
                 disabled='disabled'
-                //value={$Value}
-              />
+                value={this.props.data.conector.nombreConector}
+                />
             </Col>
-          </Col>
-          <Col xs="12">
-            <Col xs="4">
+          </Row>
+          <Row>
+            <Col xs="3">
               <label>Bases de Datos: </label>
             </Col>
-            <Col xs="8">
-              <textarea value={this.state.value} 
-              className='WizardInput'
-              onChange={this.handleChange} 
-              rows={5} 
+            <Col xs="9">
+              <input
+              className='form-control'
+              type="text"
               disabled='disabled'
+              value={this.props.data.database.nombre}
               />
             </Col>
-          </Col>
+          </Row>
 
-      </div>
+      </Container>
     )
   }
 }

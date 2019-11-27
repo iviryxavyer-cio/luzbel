@@ -25,7 +25,7 @@ class ModalWizard extends React.Component {
       //paso 1
       server:null,
       usuario:"tca",
-      contrasena:"",
+      contrasena:"ITerp01@02",
       puerto:"1433",
       //paso 2
       conector:null,
@@ -204,10 +204,13 @@ class ModalWizard extends React.Component {
   }
 
   /**
-   * 
+   * esta funcion se ejecuta al final del wizard y debe
+   * - crear en api
+   * - cerrar modal cuando este proceso finalice
+   * - limpiar la informacion ()
    */
   validateFinal(){
-    console.log("cerrando modal");
+    
     this.props.hide();
   }
 
@@ -241,6 +244,7 @@ class ModalWizard extends React.Component {
         name: 'BD',
         component: 
           <StepThree
+            data={this.state}
             databases={this.state.databases}
             cargando={this.state.validacionConexion.cargando}
             error={this.state.validacionConexion.error}

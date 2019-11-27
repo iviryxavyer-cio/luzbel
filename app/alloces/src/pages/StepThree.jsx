@@ -57,6 +57,7 @@ export class StepThree extends React.Component {
               </Col>
               <Col xs="12">
                 <Select
+                  value={this.props.data.database}
                   options={this.convertResponse()}
                   placeholder="Seleccionar ..."
                   onChange={(database) => this.props.handleDatabaseChange(database)}

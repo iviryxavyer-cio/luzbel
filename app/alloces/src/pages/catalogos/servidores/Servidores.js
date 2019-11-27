@@ -110,7 +110,6 @@ class Servidores extends React.Component {
           modificar={this.abrirModalEditar}
           onSelected={this.handleGetChildrenState} />
       </Container>
-
     )
   }
 }
