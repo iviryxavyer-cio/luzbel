@@ -14,11 +14,11 @@ class DataTableUsuarios extends Component {
 
     onSelectRow({idUsuario}) {
         const findID = this.state.selected.find((id) => {
-            return id == idUsuario;
+            return id === idUsuario;
         })
 
         if (!findID) {
-            this.state.selected.push(idUsuario)
+            this.state.selected.push(idUsuario) 
         } else {
             this.state.selected.splice( this.state.selected.indexOf(idUsuario), 1)            
         }
@@ -29,7 +29,7 @@ class DataTableUsuarios extends Component {
         const { users, modificar } = this.props
 
         const selectRowProp = {
-            mode: 'checkbox',
+            mode: 'radio',
             clickToSelect: true,
             bgColor: '#91c4f7',
             hideSelectColumn: true,
