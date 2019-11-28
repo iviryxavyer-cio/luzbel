@@ -1,5 +1,5 @@
 import React from 'react';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -12,7 +12,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 
 import { loginActions } from '../../actions/login.actions';
 
@@ -76,7 +76,7 @@ export default function TopBar(props) {
     }
 
     const menuId = 'primary-search-account-menu';
-    const systemMenuId = 'primary-system-menu';
+    //const systemMenuId = 'primary-system-menu';
 
     const renderMenu = (
         <Menu
@@ -91,7 +91,8 @@ export default function TopBar(props) {
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
     )
-
+    
+    const clases = (classes.sectionDesktop , classes.botonBarStyle);
     return (
         <div className={classes.grow}>
             <AppBar position="static" className={classes.appBar}>
@@ -107,7 +108,7 @@ export default function TopBar(props) {
                     <Typography className={classes.title} variant="h6" noWrap>Cain</Typography>
                     <div className={classes.search}></div>
                     <div className={classes.grow}>
-                        <div className={classes.sectionDesktop, classes.botonBarStyle}>
+                        <div className={clases}>
                             {!authentication.loggedIn ?
                                 undefined :
                                 <IconButton aria-label="notificaciones" color="inherit">

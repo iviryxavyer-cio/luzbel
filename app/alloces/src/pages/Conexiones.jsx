@@ -7,12 +7,12 @@ import React from 'react';
 import { connect } from "react-redux";
 
 //acciones para redux
-//import { conexionesActions } from "../actions/conexiones.actions"
+import { conexionesActions } from "../actions/conexiones.actions"
 
 //importamos los componentes de Container, rows y col de react-bootstrap para un mayor estandar
 import { Col, ButtonToolbar, Button } from 'react-bootstrap';
 //importamos el componente del modal agregar que creamos 
-import FuncModalWizard from "../componentes/WizardConexiones.jsx";
+import FuncModalWizard from "../componentes/WizardConexiones";
 import DataTableConexiones from "../componentes/DataTableConexiones";
 
 
@@ -22,23 +22,75 @@ class Conexiones extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      modalShow: false
+      modalShow: false,
+      conexionTabla:{},
     };
 
     //binding de funciones
     this.setModalShow = this.setModalShow.bind(this);
-
-    //dispatch
-    //this.props.dispatch(conexionesActions.getAllConexiones());
+    this.handleRowSelection = this.handleRowSelection.bind(this);
+    this.eliminarConexionSeleccionada = this.eliminarConexionSeleccionada.bind(this);
   }
 
+  /**
+   * Cambia el estado del modal
+   * @param {bool} val para cambiar el estado del modal
+   */
   setModalShow(val){
     this.setState({
-      modalShow:val
+      modalShow:val,
+      conexionSeleccionada:{},
+      puedeEliminar:false,
     });
+  }
+
+  /**
+   * 
+   * @param {JSON} row json elemeto unico de el array pasado como data a el componente (tabla)
+   * @param {bool} isSelected regresa el estado del que provenia el componente es decir si al dar click estaba seleccionado o no
+   * @param {JSON} e 
+   */
+  handleRowSelection(row, isSelected, e){
+    if(isSelected){
+      this.setState({
+        conexionSeleccionada:row,
+        puedeEliminar:true,
+      });
+    }else{
+      this.setState({
+        conexionSeleccionada:{},
+        puedeEliminar:false
+      });
+    }
+  }
+
+  /**
+   * Eliminar conexion seleccionada
+   */
+  eliminarConexionSeleccionada(){
+    if (this.state.puedeEliminar) {
+      this.props.dispatch(conexionesActions.deleteConexion(this.state.conexionSeleccionada.idConexion))
+      this.setState({
+        conexionSeleccionada:{},
+        puedeEliminar:false
+      });
+    }
   }
   
   render(){
+    let botonEliminar = null;
+
+    if(this.state.puedeEliminar){
+      botonEliminar =(
+      <Button 
+        className="buttons boutton-crud Eliminar"
+        id="Eliminar"
+        onClick={this.eliminarConexionSeleccionada}>
+          Eliminar
+      </Button>
+      )
+    }
+
     return (
       <div id="divServidores">
         <Col xs="12"> 
@@ -51,22 +103,21 @@ class Conexiones extends React.Component {
             </Col>
             <Col xs="10"> 
               <Col xs="12">
-              <ButtonToolbar>
+                <ButtonToolbar>
                   <Button className="buttons boutton-crud Agregar" onClick={() => this.setModalShow(true)}>
                     Agregar
                   </Button>
+                  {botonEliminar}
                   <FuncModalWizard
                     show={this.state.modalShow}
-                    onHide={() => this.setModalShow(false)}
+                    hide={() => this.setModalShow(false)}
                   />
-  
-                  <Button className="buttons boutton-crud Eliminar" id="Eliminar" disabled="disabled" onClick={() => this.setModalShow(true)}>
-                      Eliminar
-                  </Button>
                 </ButtonToolbar>
               </Col>
               <Col xs="12">
-                <DataTableConexiones/>
+                <DataTableConexiones
+                  handleRowSelection={this.handleRowSelection}
+                />
               </Col>
             </Col>
             <Col xs="2">
@@ -79,7 +130,7 @@ class Conexiones extends React.Component {
   }
 }
 
-
+//binding de redux con el componente
 export default connect((state) => {
   return {
     //connections: state.connections

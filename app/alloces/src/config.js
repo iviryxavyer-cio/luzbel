@@ -1,4 +1,4 @@
-export const config = {
+export var config = {
     api:{
         //se hace a traves de una funcion para poder regresar 
         url(url){

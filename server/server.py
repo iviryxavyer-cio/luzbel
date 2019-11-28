@@ -50,6 +50,7 @@ def create_app(config_name):
         )
     )
 
+
     app.add_url_rule('/validacion',
         view_func=GraphQLView.as_view(
             'validacion',
