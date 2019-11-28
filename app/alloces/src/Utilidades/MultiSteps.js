@@ -119,13 +119,11 @@ function MultiStep(props) {
   }
 
   /**
-   * funcion que se ejecuta para pasar al siguiente paso
+   * funcion que se ejecuta paravalidar si se puede ir al siguiente paso
    */
   var next = function next() {
     if (props.steps[compState] && props.steps[compState].handleValidation) {
-
       let validacion = props.steps[compState].handleValidation(props.data);
-
       if(validacion){
         setStepState(compState + 1);
       }else{
@@ -147,7 +145,12 @@ function MultiStep(props) {
    * funcion que se ejecuta en el boton de finalizar en la ultima estapa del wizard
    */
   var success = function success(){
-    return this.setState({ showModal: false });
+    if(props.steps[compState] && props.steps[compState].handleSuccess){
+      props.steps[compState].handleSuccess();
+    }else{
+      alert("no hay funcion de finalizado");
+    }
+    //return this.setState({ showModal: false });
   }
 
   var handleKeyDown = function handleKeyDown(evt) {

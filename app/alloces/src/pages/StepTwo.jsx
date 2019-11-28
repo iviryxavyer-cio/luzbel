@@ -5,10 +5,7 @@ import { Col, Row, Container } from 'react-bootstrap';
 import Select from 'react-select';
 
 
-const options = [
-  {label: 'SQL', value: 1},
-  {label: 'MongoDB', value: 2}
-];
+
 export class StepTwo extends React.Component {
   constructor (props) {
     super(props);
@@ -26,9 +23,13 @@ export class StepTwo extends React.Component {
 
           <Col xs="8">
             <Select
-              options={options}
+              value={this.props.data.conector}
+              options={this.props.conectores}
               placeholder="Seleccionar ..."
               onChange={(conector) => this.props.handleConectorChange(conector)}
+
+              getOptionLabel={option => `${option.nombreConector}`}
+              getOptionValue={option => option.idConector}
             />        
           </Col>
         </Row>        
