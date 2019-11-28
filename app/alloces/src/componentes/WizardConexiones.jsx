@@ -39,27 +39,10 @@ class ModalWizard extends React.Component {
       databases:[],
       //paso 3
       database:"",
-
-      //algunos conetores de prueba
-      /*conectores:[
-        {
-          idConector:1,
-          nombreConector:"MS SQL",
-          urlConector:"",
-          status:"A",
-        },
-        {
-          idConector:2,
-          nombreConector:"SQL Server",
-          urlConector:"",
-          status:"A",
-        },
-      ],
-      */
     };
 
+    //dispatch para obtener state global
     this.props.dispatch(serversActions.getAllServers());
-    //yo habia ponido mis dispatch a conectores aqui
     this.props.dispatch(driversActions.getAllDrivers());
 
     //bindings para acceder a state local
@@ -246,22 +229,6 @@ class ModalWizard extends React.Component {
       databases:[],
       //paso 3
       database:"",
-
-      //algunos conetores de prueba se cambiara
-      conectores:[
-        {
-          idConector:1,
-          nombreConector:"MS SQL",
-          urlConector:"",
-          status:"A",
-        },
-        {
-          idConector:2,
-          nombreConector:"SQL Server",
-          urlConector:"",
-          status:"A",
-        },
-      ],
     });
   }
 
