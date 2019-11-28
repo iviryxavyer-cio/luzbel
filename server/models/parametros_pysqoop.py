@@ -43,7 +43,6 @@ class ParametrosPysqoop(Model):
     fecha_modificacion = DateTimeField(
         default=datetime.utcnow)  # campo fechamodificacion
 
-    @staticmethod
     def get_all_parametros_pysqoop(self):
         """
         get_all_parametros_pysqoop
@@ -55,7 +54,6 @@ class ParametrosPysqoop(Model):
         )
         return result
 
-    @staticmethod
     def get_parametro_pysqoop(self, id):
         """
         get_parametro_pysqoop

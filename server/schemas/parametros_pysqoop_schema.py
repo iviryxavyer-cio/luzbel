@@ -63,8 +63,11 @@ class ParametrosPysqoopQuery(graphene.ObjectType):
         Este metodo resuelve las peticiones de información de todos los registros
         de la tabla parametros_pysqoop
         """
-        resultado = ParametrosPysqoop.get_all_parametros_pysqoop()
-        return resultado
+        try:
+            resultado = ParametrosPysqoop().get_all_parametros_pysqoop()
+            return resultado
+        except GraphQLError:
+            api_logger.warning('Problemas al resolver la lista de parametros_pysqoop')
 
     @staticmethod
     def resolve_parametro_pysqoop(self, info, id):
