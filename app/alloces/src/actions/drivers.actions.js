@@ -16,7 +16,8 @@ export const driversActions = {
     getAllDrivers,
     crearConector,
     modificarDrivers,
-    eliminarConector
+    eliminarConector,
+    eliminarSeleccionados
 }
 //Funcion que nos trae todos los Conectores de nuestra base de datos
 function getAllDrivers() {
@@ -123,4 +124,29 @@ function eliminarConector(idConector){
     function exito(data){ return { type: DriversConstants.ELIMINAR_CONECTORES_EXITO, data} }
     //Función que regresa el fracaso y el error de la petición del servidor
     function fracaso(error){ return { type:DriversConstants.ELIMINAR_CONECTORES_FRACASO, error} }
+}
+//
+function eliminarSeleccionados(datos) {
+    return dispatch => {
+        dispatch(request())
+        datos.forEach(async(element, index) => {
+            try{
+                const id = await DriverService.eliminarDrivers(element)
+                dispatch(exito(id))
+            }catch(e){
+                dispatch(fracaso(e))
+            }
+        });
+        dispatch(modalAcciones.limpiar());
+        dispatch(modalAcciones.exito({titulo: "Conectores eliminados", body: "Los Conectores se eliminaron correctamente." }));;
+        dispatch(getAllDrivers());
+
+    }
+    //Función que regresa la acción de la petición 
+    function request(){ return { type: DriversConstants.ELIMINAR_CONECTORES_REQUEST } }
+    //Función que regresa el exitó de la petición con los datos del servidor
+    function exito(data){ return { type: DriversConstants.ELIMINAR_CONECTORES_EXITO, data} }
+    //Función que regresa el fracaso y el error de la petición del servidor
+    function fracaso(error){ return { type:DriversConstants.ELIMINAR_CONECTORES_FRACASO, error} }
+
 }

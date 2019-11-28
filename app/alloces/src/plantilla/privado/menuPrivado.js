@@ -35,10 +35,15 @@ export const menuPrivado = [
     },
     {
         name: 'Sqoop',
-        icon: undefined,
-        openIcon: undefined,
-        closeIcon: undefined,
-        collapse: false,
-        collapseItems: undefined
+        icon: <IconLibraryBooks className="colorIcon" />,
+        openIcon: <IconExpandLess className="secondaryIcon" />,
+        closeIcon: <IconExpandMore className="secondaryIcon" />,
+        collapse: true,
+        collapseItems: [
+            {
+                name: 'Monitor de procesos',
+                link: '/MonitorProcesos'
+            },
+        ]
     }
 ]

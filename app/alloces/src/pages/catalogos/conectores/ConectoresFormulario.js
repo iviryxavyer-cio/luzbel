@@ -28,7 +28,7 @@ class ConectoresFormulario extends React.Component {
                 idConector: props.datos.idConector,
                 nombreConector: props.datos.nombreConector,
                 urlConector: props.datos.urlConector,
-                status: props.datos.urlConector
+                //status: props.datos.urlConector
             })
         }
         this.eliminar = this.eliminar.bind(this)
@@ -62,7 +62,7 @@ class ConectoresFormulario extends React.Component {
                     </Form.Label>
                     <Col sm={9}>
                         <Field
-                            name="nombre"
+                            name="nombreConector"
                             type="text"
                             component={CampoTexto}
                             validate={!this.props.datos ? [required] : undefined}
@@ -76,7 +76,7 @@ class ConectoresFormulario extends React.Component {
                     </Form.Label>
                     <Col sm={9}>
                         <Field 
-                            name="url"
+                            name="urlConector"
                             type="text"
                             component={CampoTexto}
                             validate={!this.props.datos ? [required] : undefined}
@@ -84,7 +84,7 @@ class ConectoresFormulario extends React.Component {
                         />
                     </Col>
                 </Form.Group>
-                {
+                {/*{
                     eliminar === 1 ?
                         <Form.Group as = {Row}>
                             <Form.Label column sm={3}>
@@ -108,20 +108,20 @@ class ConectoresFormulario extends React.Component {
                             </Col>
                         </Form.Group> :
                     undefined
-                }
+                }*/}
 
                 <Modal.Footer>
                     <Button variant="secundary" onClick={cerrarModal}>
                         Cancelar
                     </Button>
-                    {
+                    {/*{
                         eliminar === 1 ?
                             <Button variant="danger" onClick={(e) => this.abrirModalEliminar(e, this.props.datos)}>
                                 Eliminar
                             </Button>
                                 :
                                 undefined
-                    }
+                    }*/}
                     <Button type="submit">
                         {labelBoton}
                     </Button>

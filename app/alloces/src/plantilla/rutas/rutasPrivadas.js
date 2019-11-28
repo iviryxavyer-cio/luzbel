@@ -10,6 +10,7 @@ import Conectores from "../../pages/catalogos/conectores/Conectores";
 import Conexiones from "../../pages/Conexiones";
 import Usuarios from "../../pages/catalogos/usuarios/Usuarios";
 import Home from "../../pages/home";
+import MonitorProcesos from "../../pages/catalogos/procesos/MonitorProcesos";
 
 export default {
     Servidores: {
@@ -31,5 +32,10 @@ export default {
     Usuarios: {
         component: Usuarios,
         path: '/usuarios'
+    },
+    MonitorProcesos: {
+        component: MonitorProcesos,
+        path: '/MonitorProcesos'
+
     },
 };
