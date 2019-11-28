@@ -5,6 +5,7 @@ from models.conector import Conector
 from models.conexiones import Conexiones
 from models.parametros_pysqoop import ParametrosPysqoop
 from peewee import DatabaseError
+from utils.api_logger import api_logger
 
 
 def crear_tabla(db, tabla):
@@ -12,7 +13,7 @@ def crear_tabla(db, tabla):
     try:
         db.connect()
         db.create_tables([tabla])
-        print('Tabla {} creada'.format(tabla.__name__))
+        api_logger.info('Tabla {} creada'.format(tabla.__name__))
     except DatabaseError as exc:
         print(exc)
     except Exception:
@@ -36,7 +37,7 @@ def crear_tipo_status(db):
 def alterar_campo_status(db, tabla):
     try:
         db.connect()
-        print('Se alterará el campo de status de la tabla {}'.format(tabla))
+        api_logger.info('Se alterará el campo de status de la tabla {}'.format(tabla))
         db.execute_sql(
             'ALTER TABLE {} ALTER COLUMN status TYPE status using status::status'
             .format(tabla))
