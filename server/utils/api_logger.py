@@ -13,6 +13,8 @@ import os
 import logging
 from logging.config import dictConfig
 
+from constants import APP_DIR
+
 loggin_config = dict(
     version=1,
     formatters={
@@ -30,7 +32,7 @@ loggin_config = dict(
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'verbose',
             'level': logging.DEBUG,
-            'filename': './logs/{}'.format(os.getenv('LOG_FILENAME')),
+            'filename': '{}/{}/{}'.format(APP_DIR, 'logs', os.getenv('LOG_FILENAME')),
             'maxBytes': 52428800,
             'backupCount': 7
         },
@@ -38,7 +40,7 @@ loggin_config = dict(
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'verbose',
             'level': logging.DEBUG,
-            'filename': './logs/batch.log',
+            'filename': '{}/{}/{}'.format(APP_DIR, 'logs', os.getenv('LOG_FILENAME')),
             'maxBytes': 52428800,
             'backupCount': 7
         },
