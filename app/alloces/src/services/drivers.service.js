@@ -20,7 +20,7 @@ export const DriverService = {
     registrarDrivers,
     modificarDrivers,
     eliminarDrivers
-}
+} 
 
 /**
  * Funcion para obtener los conectores que devuelve la api
@@ -39,8 +39,8 @@ function obtenerDrivers(){
  */
 function registrarDrivers(datos){
     let variables = {
-        nombreConector: datos.nombre,
-        urlConector: datos.url
+        nombreConector: datos.nombreConector,
+        urlConector: datos.urlConector
     };
     variables = JSON.stringify(variables);
     return request(DriversConstants.URL_CONECTORES_GRAPHQL,
@@ -53,11 +53,12 @@ function registrarDrivers(datos){
  * @return {Promise} Promesa con el resultado de la api
  */
 function modificarDrivers(datos){
+    console.log(datos)
     let variables = {
-        idConector: datos.id,
+        idConector: datos.idConector,
         conectorData: {
-            nombreConector: datos.nombre,
-            urlConector: datos.url
+            nombreConector: datos.nombreConector,
+            urlConector: datos.urlConector
         }
     }
     variables = JSON.stringify(variables)

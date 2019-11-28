@@ -1,3 +1,10 @@
+/**
+ * @author JesusAlberto Briseño Camacho <jabc55@live.com>
+ * @date 06/11/2019
+ * @fileoverview Constantes de conectores
+ * @version 1.0.0
+ * 
+ */
 export const DriversConstants = {
     GET_ALL_DRIVERS_REQUEST: 'GET_ALL_DRIVERS_REQUEST',
     GET_ALL_DRIVERS_REQUEST_SUCCESS: 'GET_ALL_DRIVERS_REQUEST_SUCCESS',
@@ -37,7 +44,7 @@ export const DriversConstants = {
     `,
 
     QUERY_MODIFICAR_CONECTORES: `
-        mutation ActualizarConector($idConector: Int!, $conectorData){
+        mutation ActualizarConector($idConector: Int!, $conectorData: ConectoresInput!){
             actualizarConector(idConector: $idConector conectorData: $conectorData){
                 conector{
                     idConector
