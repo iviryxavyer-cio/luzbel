@@ -9,9 +9,13 @@ historial
 v.1.0.0 - Creacion de schema, querys y subscripciones
 """
 import graphene
+from graphql import GraphQLError
 
 from models.parametros_pysqoop import ParametrosPysqoop
 from .conexiones_schema import ConexionesSchema
+
+from utils.api_logger import api_logger
+import constants
 
 
 class ParametrosPysqoopSchema(graphene.ObjectType):
@@ -116,8 +120,8 @@ class ParametrosPysqoopDeleteMutation(graphene.Mutation):
             parm_pysqoop.status = 'E'
             parm_pysqoop.save()
             return ParametrosPysqoopDeleteMutation(parametro_pysqoop=parm_pysqoop)
-        except e:
-            pass
+        except GraphQLError:
+            api_logger.error(constants.ERROR_GRAPHQL)
 
 
 class ParametrosPysqoopUpdateMutation(graphene.Mutation):
