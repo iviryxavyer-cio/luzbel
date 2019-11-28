@@ -7,6 +7,7 @@ from schemas.conector_schema import SchemaConectores
 from schemas.validacion_conexiones_schema import SchemaValidacionConexion
 from schemas.conexiones_schema import SchemaConexiones
 from schemas.tablasdb_schema import SchemaTablaDB
+from schemas.parametros_pysqoop_schema import schema_parametros_pysqoop
 from utils.middleware import login_required
 
 
@@ -26,45 +27,53 @@ def create_app(config_name):
 
     # ruta para servidores GQL
     app.add_url_rule('/servidor',
-        view_func=GraphQLView.as_view(
-            'servidor',
-            schema=SchemaServidores,
-            graphiql=True
-        )
-    )
+                     view_func=GraphQLView.as_view(
+                         'servidor',
+                         schema=SchemaServidores,
+                         graphiql=True
+                     )
+                     )
 
     # ruta para conexiones GQL
     app.add_url_rule('/conexion',
-        view_func=GraphQLView.as_view(
-            'conexion',
-            schema=SchemaConexiones,
-            graphiql=True
-        )
-    )
+                     view_func=GraphQLView.as_view(
+                         'conexion',
+                         schema=SchemaConexiones,
+                         graphiql=True
+                     )
+                     )
 
     app.add_url_rule('/conector',
-        view_func=GraphQLView.as_view(
-            'conector',
-            schema=SchemaConectores,
-            graphiql=True
-        )
-    )
+                     view_func=GraphQLView.as_view(
+                         'conector',
+                         schema=SchemaConectores,
+                         graphiql=True
+                     )
+                     )
 
     app.add_url_rule('/validacion',
-        view_func=GraphQLView.as_view(
-            'validacion',
-            schema=SchemaValidacionConexion,
-            graphiql=True
-        )
-    )
+                     view_func=GraphQLView.as_view(
+                         'validacion',
+                         schema=SchemaValidacionConexion,
+                         graphiql=True
+                     )
+                     )
 
     app.add_url_rule('/tabla',
-         view_func=GraphQLView.as_view(
-             'tabla',
-             schema=SchemaTablaDB,
-             graphiql=True
-         )
-     )
+                     view_func=GraphQLView.as_view(
+                         'tabla',
+                         schema=SchemaTablaDB,
+                         graphiql=True
+                     )
+                     )
+
+    app.add_url_rule('/parametros_pysqoop',
+                     view_func=GraphQLView.as_view(
+                         'parametros_pysqoop',
+                         schema=schema_parametros_pysqoop,
+                         graphiql=True
+                     )
+                     )
 
     return app
 

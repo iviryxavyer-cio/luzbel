@@ -37,7 +37,9 @@ def alterar_campo_status(db, tabla):
     try:
         db.connect()
         print('Se alterará el campo de status de la tabla {}'.format(tabla))
-        db.execute_sql('ALTER TABLE {} ALTER COLUMN status TYPE status using status::status'.format(tabla))
+        db.execute_sql(
+            'ALTER TABLE {} ALTER COLUMN status TYPE status using status::status'
+            .format(tabla))
     except DatabaseError as exc:
         print(exc)
     except Exception:

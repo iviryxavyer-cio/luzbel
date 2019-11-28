@@ -38,5 +38,31 @@ class ParametrosPysqoop(Model):
     id_conexion = ForeignKeyField(Conexiones, null=False,
                                   column_name='id_conexion')  # campo conexion
     status = CharField()  # campo status
-    fecha_creacion = DateTimeField(default=datetime.utcnow)  # campo fecha_creacion
-    fecha_modificacion = DateTimeField(default=datetime.utcnow)  # campo fechamodificacion
+    fecha_creacion = DateTimeField(
+        default=datetime.utcnow)  # campo fecha_creacion
+    fecha_modificacion = DateTimeField(
+        default=datetime.utcnow)  # campo fechamodificacion
+
+    @staticmethod
+    def get_all_parametros_pysqoop(self):
+        """
+        get_all_parametros_pysqoop
+        Este metodo se encarga de regresar una lista de los elementos de la tabla
+        parametros_pysqoop con su join con conexiones
+        """
+        result = ParametrosPysqoop.select().join(Conexiones).where(
+            Conexiones.id_conexion == ParametrosPysqoop.id_conexion
+        )
+        return result
+
+    @staticmethod
+    def get_parametro_pysqoop(self, id):
+        """
+        get_parametro_pysqoop
+        Este metodo se encarga de regresar un elemento de la tabla de parametros_pysqoop
+        con su conexion
+        """
+        result = ParametrosPysqoop.select().join(Conexiones).where(
+            Conexiones.id_conexion == ParametrosPysqoop.id_conexion
+        ).where(ParametrosPysqoop.id_parametro_pysqoop == id).get()
+        return result
