@@ -53,7 +53,10 @@ export class StepThree extends React.Component {
           <Container>
             <Row>
               <Col xs="12">
-                <h2>Sellecciona alguna de las bases de datos</h2>
+                <h2>Selecciona alguna de las bases de datos</h2>
+              </Col>
+              <Col xs="12" >
+                <label>Base de datos:</label>
               </Col>
               <Col xs="12">
                 <Select

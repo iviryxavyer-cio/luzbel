@@ -7,13 +7,13 @@ import { serversActions } from "../actions/servidores.actions";
 
 //querys graphql
 import { QueryValidaciones } from "../graphql/validaciones";
+import { conexionesActions } from '../actions/conexiones.actions';
 
 //steps
 import { StepOne } from '../pages/StepOne';
 import { StepTwo } from '../pages/StepTwo';
 import { StepThree } from '../pages/StepThree';
 import { StepFour } from '../pages/StepFour';
-import { conexionesActions } from '../actions/conexiones.actions';
 
 /**
  * Componente para renderizar un form-wizard
@@ -59,7 +59,7 @@ class ModalWizard extends React.Component {
     this.props.dispatch(serversActions.getAllServers());
     //yo habia ponido mis dispatch a conectores aqui
 
-    //bindings para cceder a state local
+    //bindings para acceder a state local
     this.handleServerChange = this.handleServerChange.bind(this);
     this.handleUsuarioChange = this.handleUsuarioChange.bind(this);
     this.handleContrasenaChange = this.handleContrasenaChange.bind(this);
@@ -186,7 +186,7 @@ class ModalWizard extends React.Component {
   }
 
   /**
-   * 
+   * Debe validar que se selecciono alguna base de datos
    * @param {JSON} data es el state de this -> (Modalwizard)
    */
   validateStepThree(data){
@@ -204,6 +204,7 @@ class ModalWizard extends React.Component {
    * - limpiar el state
    */
   validateFinal(){
+    console.log("conector ",this.state.conector.idConector);
     let dataToStore = {
       idConector:         this.state.conector.idConector,
       idServidor:         this.state.server.idServidor,
@@ -212,23 +213,22 @@ class ModalWizard extends React.Component {
       puerto:             this.state.puerto,
     }
     this.props.dispatch(conexionesActions.storeConexion(dataToStore));
-    this.resetWizardSate().then(()=>{
-      this.props.hide();
-    })
+    this.props.hide();
+    this.resetWizardSate();
   }
 
   /**
    * Limpiar el state relacionado con el wizard
    */
-  resetWizardSate(){
-    return this.setState({
+  resetWizardSate(func){
+    this.setState({
       //paso 1
-      server:null,
+      //server:null,
       usuario:"",
       contrasena:"",
       puerto:"",
       //paso 2
-      conector:null,
+      //conector:null,
       validacionConexion:{
         cargando:true,
         error:false,
@@ -308,7 +308,7 @@ class ModalWizard extends React.Component {
     return(
       <Modal
         show={this.props.show}
-        hide={this.props.hide}
+        onHide={this.props.hide}
         size="xl" 
         aria-labelledby="contained-modal-title-vcenter" 
         centered 

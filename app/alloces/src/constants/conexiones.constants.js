@@ -1,7 +1,7 @@
 /**
  * @author Marco A Gallegos
  * @date 19/11/2019
- * @description Este archivo contiene las contantes para usar con redux debe exportar un json con las conatantes
+ * @description Este archivo contiene las constantes para usar con redux, debe exportar un json con las constantes
  */
 
 export const conexionesConstants = {
@@ -11,4 +11,7 @@ export const conexionesConstants = {
     STORE_CONNECTION_REQUEST: 'STORE_CONNECTION_REQUEST',
     STORE_CONNECTION_REQUEST_SUCCESS: 'STORE_CONNECTION_REQUEST_SUCCESS',
     STORE_CONNECTION_REQUEST_FAIL: 'STORE_CONNECTION _REQUEST_FAIL',
+    DELETE_CONNECTION_REQUEST: 'DELETE_CONNECTION_REQUEST',
+    DELETE_CONNECTION_REQUEST_SUCCESS: 'DELETE_CONNECTION_REQUEST_SUCCESS',
+    DELETE_CONNECTION_REQUEST_FAIL: 'DELETE_CONNECTION _REQUEST_FAIL',
 }

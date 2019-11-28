@@ -14,5 +14,9 @@ export const ConexionesService = {
 
     storeConexion(data){
         return window.graphqlRequest(window.config.api.url("conexion"), QueryConexiones.mutationCreateConexion(data));
-    }
+    },
+    
+    deleteConexion(idConexion){
+        return window.graphqlRequest(window.config.api.url("conexion"), QueryConexiones.mutationDeleteConexion(idConexion));
+    },
 }
