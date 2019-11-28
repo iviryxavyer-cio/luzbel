@@ -27,9 +27,6 @@ class Conexiones extends React.Component {
 
     //binding de funciones
     this.setModalShow = this.setModalShow.bind(this);
-
-    //dispatch
-    //this.props.dispatch(conexionesActions.getAllConexiones());
   }
 
   setModalShow(val){

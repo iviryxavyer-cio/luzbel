@@ -28,9 +28,17 @@ export const conexionesActions = {
         return dispatch => {
             dispatch(request());
             
+            ConexionesService.storeConexion(data)
+            .then(response=>{
+                dispatch(success())
+                dispatch(this.getAllConexiones());
+            })
+            .error(err=>{
+                dispatch(fail());
+            });
         }
         function request()              { return { type: conexionesConstants.STORE_CONNECTION_REQUEST } }
-        //function success(connection)   { return { type: conexionesConstants.STORE_CONNECTION_REQUEST_SUCCESS, payload:connection} }
-        //function fail()                 { return { type: conexionesConstants.STORE_CONNECTION_REQUEST_FAIL} }
+        function success()              { return { type: conexionesConstants.STORE_CONNECTION_REQUEST_SUCCESS} }
+        function fail()                 { return { type: conexionesConstants.STORE_CONNECTION_REQUEST_FAIL} }
     }
 }

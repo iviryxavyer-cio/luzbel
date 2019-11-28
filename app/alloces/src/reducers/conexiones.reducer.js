@@ -10,6 +10,8 @@ export function conexionesReducer(state = initialState, action){
             return { ...state }
         case conexionesConstants.GET_ALL_CONNECTIONS_REQUEST_SUCCESS:
             return { ...state, allConexiones: action.payload }
+        case conexionesConstants.STORE_CONNECTION_REQUEST:
+            return { ...state }
         // el default atiende todas las constantes que no modifican pero no sirven para debugear
         default:
             return { ...state }

@@ -13,9 +13,10 @@ import { StepOne } from '../pages/StepOne';
 import { StepTwo } from '../pages/StepTwo';
 import { StepThree } from '../pages/StepThree';
 import { StepFour } from '../pages/StepFour';
+import { conexionesActions } from '../actions/conexiones.actions';
 
 /**
- * Componente para renderizar un wizard
+ * Componente para renderizar un form-wizard
  */
 class ModalWizard extends React.Component {
 
@@ -24,9 +25,9 @@ class ModalWizard extends React.Component {
     this.state = {
       //paso 1
       server:null,
-      usuario:"tca",
-      contrasena:"ITerp01@02",
-      puerto:"1433",
+      usuario:"",
+      contrasena:"",
+      puerto:"",
       //paso 2
       conector:null,
       validacionConexion:{
@@ -55,7 +56,6 @@ class ModalWizard extends React.Component {
       ],
     };
 
-    //dispatchs
     this.props.dispatch(serversActions.getAllServers());
     //yo habia ponido mis dispatch a conectores aqui
 
@@ -68,6 +68,7 @@ class ModalWizard extends React.Component {
     this.handleDatabaseChange = this.handleDatabaseChange.bind(this);
     this.validateStepTwo = this.validateStepTwo.bind(this);
     this.validateFinal = this.validateFinal.bind(this);
+    this.resetWizardSate = this.resetWizardSate.bind(this);
   }
 
   // funcion para modificar el servidor seleccionado en algun paso del wizard
@@ -116,13 +117,6 @@ class ModalWizard extends React.Component {
   handleDatabaseChange(database){
     this.setState({
       database: database
-    });
-  }
-  
-  //
-  changeValidacionConexionStatus(){
-    this.setState({
-      validacionConexion: !this.state.validacionConexion
     });
   }
 
@@ -193,7 +187,7 @@ class ModalWizard extends React.Component {
 
   /**
    * 
-   * @param {JSON} data es el state de this (Modalwizard)
+   * @param {JSON} data es el state de this -> (Modalwizard)
    */
   validateStepThree(data){
     let resolution = false;
@@ -207,11 +201,59 @@ class ModalWizard extends React.Component {
    * esta funcion se ejecuta al final del wizard y debe
    * - crear en api
    * - cerrar modal cuando este proceso finalice
-   * - limpiar la informacion ()
+   * - limpiar el state
    */
   validateFinal(){
-    
-    this.props.hide();
+    let dataToStore = {
+      idConector:         this.state.conector.idConector,
+      idServidor:         this.state.server.idServidor,
+      usuario:            this.state.usuario,
+      contrasena:         this.state.contrasena,
+      puerto:             this.state.puerto,
+    }
+    this.props.dispatch(conexionesActions.storeConexion(dataToStore));
+    this.resetWizardSate().then(()=>{
+      this.props.hide();
+    })
+  }
+
+  /**
+   * Limpiar el state relacionado con el wizard
+   */
+  resetWizardSate(){
+    return this.setState({
+      //paso 1
+      server:null,
+      usuario:"",
+      contrasena:"",
+      puerto:"",
+      //paso 2
+      conector:null,
+      validacionConexion:{
+        cargando:true,
+        error:false,
+        errorData:"",
+      },
+      databases:[],
+      //paso 3
+      database:"",
+
+      //algunos conetores de prueba se cambiara
+      conectores:[
+        {
+          idConector:1,
+          nombreConector:"MS SQL",
+          urlConector:"",
+          status:"A",
+        },
+        {
+          idConector:2,
+          nombreConector:"SQL Server",
+          urlConector:"",
+          status:"A",
+        },
+      ],
+    });
   }
 
 

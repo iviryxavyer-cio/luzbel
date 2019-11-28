@@ -32,12 +32,12 @@ export const QueryConexiones = {
      * 
      * @param {JSON} data 
      */
-    storeConexion(data){
+    mutationCreateConexion(data){
         return `
         mutation {
             createConexion(
-                idConector:1
-                idServidor:1
+                idConector:${data.idConextor}
+                idServidor:${data.idServidor}
                 puerto:"${data.puerto}"
                 usuario:"${data.usuario}"
                 contrasena:"${data.contrasena}"

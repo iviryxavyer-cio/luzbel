@@ -10,5 +10,9 @@ import { QueryConexiones } from "../graphql/conexiones";
 export const ConexionesService = {
     getAllConexiones(){
         return window.graphqlRequest(window.config.api.url("conexion"), QueryConexiones.conexiones());
+    },
+
+    storeConexion(data){
+        return window.graphqlRequest(window.config.api.url("conexion"), QueryConexiones.mutationCreateConexion(data));
     }
 }
