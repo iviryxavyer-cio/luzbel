@@ -24,7 +24,7 @@ export class StepTwo extends React.Component {
           <Col xs="8">
             <Select
               value={this.props.data.conector}
-              options={this.props.data.conectores}
+              options={this.props.conectores}
               placeholder="Seleccionar ..."
               onChange={(conector) => this.props.handleConectorChange(conector)}
 

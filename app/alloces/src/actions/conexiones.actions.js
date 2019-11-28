@@ -54,9 +54,9 @@ export const conexionesActions = {
 
     /**
      * Eliminar conexion con PK igual al parametro
-     * @param {int} idconexion PK de la conexion
+     * @param {int} idConexion PK de la conexion
      */
-    deleteConexion(idconexion){
+    deleteConexion(idConexion){
         return dispatch => {
             dispatch(request());
             

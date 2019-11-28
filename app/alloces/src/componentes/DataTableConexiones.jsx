@@ -9,7 +9,8 @@ import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 class DataTableConexiones extends React.Component {
   constructor (props) {
     super(props);
-    this.state = {};
+    this.state = {
+    };
     //dispatch
     this.props.dispatch(conexionesActions.getAllConexiones());
   }
@@ -18,17 +19,21 @@ class DataTableConexiones extends React.Component {
     const { connections } = this.props;
 
     const selectRowProp = {
-          mode: 'radio',
-          clickToSelect: true, 
-          bgColor: '#91c4f7',
-          hideSelectColumn: true
+      mode: 'radio',
+      clickToSelect: true,
+      //bgColor: '#91c4f7',
+      className:"bg-info",
+      hideSelectColumn: true,
+      onSelect: this.props.handleRowSelection
     };
 
+    /*
     const options = {
         onRowClick: function(row) {
           document.getElementById('Eliminar').removeAttribute("disabled");
       }
     }
+    */
      // const handleIndeterninate = isIndeterminate => (isIndeterminate ? <FontIcon>indeterminate_check_box</FontIcon> : <FontIcon>check_box_outline_blank</FontIcon>)
 
     return(
@@ -36,8 +41,9 @@ class DataTableConexiones extends React.Component {
         <BootstrapTable               
           data = { connections.allConexiones } 
           selectRow = { selectRowProp }
-          options = { options }
-          pagination>
+          //options = { options }
+          pagination
+        >
           <TableHeaderColumn dataField='idConexion' isKey={ true }># Conexion</TableHeaderColumn>
           <TableHeaderColumn dataField='idServidor'>Servidor</TableHeaderColumn>
           <TableHeaderColumn dataField='usuario'>Usuario</TableHeaderColumn>
@@ -50,6 +56,7 @@ class DataTableConexiones extends React.Component {
   }
 }
 
+// vincular store
 function mapPropsState(state){
   return {
     connections: state.connections

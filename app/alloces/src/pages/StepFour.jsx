@@ -9,7 +9,6 @@ export class StepFour extends React.Component {
   }
 
   render () {
-    //var basesDatos = this.state.currentValue.replace('\\n', '\n');
     return (
       <Container>
           <Row>

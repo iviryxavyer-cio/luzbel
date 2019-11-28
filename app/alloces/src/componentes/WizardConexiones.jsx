@@ -4,10 +4,11 @@ import MultiStep from '../Utilidades/MultiSteps';
 import { Modal, Container } from 'react-bootstrap';
 //acciones
 import { serversActions } from "../actions/servidores.actions";
+import { conexionesActions } from '../actions/conexiones.actions';
+import { driversActions } from "../actions/drivers.actions";
 
 //querys graphql
 import { QueryValidaciones } from "../graphql/validaciones";
-import { conexionesActions } from '../actions/conexiones.actions';
 
 //steps
 import { StepOne } from '../pages/StepOne';
@@ -40,7 +41,7 @@ class ModalWizard extends React.Component {
       database:"",
 
       //algunos conetores de prueba
-      conectores:[
+      /*conectores:[
         {
           idConector:1,
           nombreConector:"MS SQL",
@@ -54,10 +55,12 @@ class ModalWizard extends React.Component {
           status:"A",
         },
       ],
+      */
     };
 
     this.props.dispatch(serversActions.getAllServers());
     //yo habia ponido mis dispatch a conectores aqui
+    this.props.dispatch(driversActions.getAllDrivers());
 
     //bindings para acceder a state local
     this.handleServerChange = this.handleServerChange.bind(this);
@@ -127,7 +130,7 @@ class ModalWizard extends React.Component {
    */
   validateStepOne(data){
     let resolution = false;
-    if (data.server) {
+    if (data.server && data.puerto.trim() !== "") {
       resolution = true;
     }
     return resolution;
@@ -149,7 +152,6 @@ class ModalWizard extends React.Component {
       };
       window.graphqlRequest(window.config.api.url("validacion"), QueryValidaciones.validacion(requestData))
       .then(response=>{
-
         switch (response.validacion.status) {
           case true:
             this.setState({
@@ -177,7 +179,14 @@ class ModalWizard extends React.Component {
 
         console.log(response.validacion);
       }).catch(err=>{
-        console.log(err);
+        this.setState({
+          validacionConexion:{
+            cargando:false,
+            error:true,
+            errorData: "ALgo inesperado salio mal :C"
+          },
+          databases:[]
+        });
       });
       return true;
     }else{
@@ -220,7 +229,7 @@ class ModalWizard extends React.Component {
   /**
    * Limpiar el state relacionado con el wizard
    */
-  resetWizardSate(func){
+  resetWizardSate(){
     this.setState({
       //paso 1
       //server:null,
@@ -256,7 +265,7 @@ class ModalWizard extends React.Component {
     });
   }
 
-
+  
   render(){
     var steps = [
       {
@@ -277,7 +286,7 @@ class ModalWizard extends React.Component {
         component: 
           <StepTwo
             data={this.state}
-            conectores={this.props.conectores}
+            conectores={this.props.drivers.allDrivers.conectores}
             handleConectorChange={this.handleConectorChange}
           />,
         handleValidation: this.validateStepTwo
@@ -334,11 +343,9 @@ class ModalWizard extends React.Component {
   }
 }
 
-
-//export default FuncModalWizard;
-
 export default connect((state) => {
   return {
-    servers: state.servers
+    servers: state.servers,
+    drivers: state.drivers,
   }
 })(ModalWizard)
