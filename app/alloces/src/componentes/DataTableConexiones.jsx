@@ -46,9 +46,8 @@ class DataTableConexiones extends React.Component {
         >
           <TableHeaderColumn dataField='idConexion' isKey={ true }># Conexion</TableHeaderColumn>
           <TableHeaderColumn dataField='idServidor'>Servidor</TableHeaderColumn>
-          <TableHeaderColumn dataField='usuario'>Usuario</TableHeaderColumn>
-          <TableHeaderColumn dataField='contrasena'>Contraseña</TableHeaderColumn>
           <TableHeaderColumn dataField='idConector'>Conector</TableHeaderColumn>
+          <TableHeaderColumn dataField='usuario'>Usuario</TableHeaderColumn>
           <TableHeaderColumn dataField='puerto'>Puerto</TableHeaderColumn>
         </BootstrapTable>
       </div>
