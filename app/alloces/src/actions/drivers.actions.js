@@ -1,42 +1,53 @@
+/**
+ * @author JesusAlberto Briseño Camacho <jabc55@live.com>
+ * @date 21/11/2019
+ * @fileoverview Funciones de la logica del crud de drivers (conectores), Mostrar, Agregar, Editar y Eliminar
+ * @version 1.0.0
+ * 
+ * Historial
+ * v.1.0.0 - Se crean los 4 principales metodos de comunicación entre el crud de conectores
+ *  y la api.
+ */
 import { DriversConstants } from '../constants/drivers.constants';
 import { DriverService } from '../services/drivers.service';
 import { modalAcciones } from './modal.actions';
-
+//Exportamos todas las acciones de los conectores
 export const driversActions = {
     getAllDrivers,
     crearConector,
-    modificarConector,
-    eliminarConector
+    modificarDrivers,
+    eliminarConector,
+    eliminarSeleccionados
 }
-
+//Funcion que nos trae todos los Conectores de nuestra base de datos
 function getAllDrivers() {
+    //Peticion API
     return dispatch => {
+        //Dispara la acción de la petición
         dispatch(request())
-        DriverService.obtenerDrivers()
-            .then(
-                (data) => {
-                    dispatch(success(data))
-                },
-                (error) => {
-                    dispatch(fail(error))
-                }
-            )
+        //Petición HTTP Get
+        try {
+            DriverService.obtenerDrivers().then((lista) => {
+                dispatch(success(lista))
+            });
+        }catch(error){
+            dispatch(fracaso(error))
+        }
     }
-    function request() {
-        return { type: DriversConstants.GET_ALL_DRIVERS_REQUEST }
-    }
-
-    function success(drivers) {
-        return { type: DriversConstants.GET_ALL_DRIVERS_REQUEST_SUCCESS, payload:drivers }
-    }
-
-    function fail(error){ return { type: DriversConstants.GET_ALL_DRIVERS_REQUEST_FAIL, error} }
+    //Función que regresa la acción de la petición
+    function request() { return { type: DriversConstants.GET_ALL_DRIVERS_REQUEST } }
+    //Función que regresa el exitó de la petición con los datos del servidor
+    function success(drivers) { return { type: DriversConstants.GET_ALL_DRIVERS_REQUEST_SUCCESS, payload:drivers } }
+    //Función que regresa el fracaso y el error de la petición al servidor
+    function fracaso(error){ return { type: DriversConstants.GET_ALL_DRIVERS_REQUEST_FAIL, error} }
 }
-
+//Función que guarda en la base de datos el conector 
 function crearConector(data){
+    //Peticion API
     return dispatch => {
+        //Dispara la acción de la petición 
         dispatch(request)
-        DriverService.crearConector(data)
+        DriverService.registrarDrivers(data)
             .then(
                 (id) => {
                     dispatch(exito(id))
@@ -51,13 +62,18 @@ function crearConector(data){
                 }
             )
     }
+    //Función que regresa la acción de la petición 
     function request(){ return { type: DriversConstants.CREAR_CONECTORES_REQUEST } }
+    //Función que regresa el exitó de la petición con los datos del servidor
     function exito(data){ return { type: DriversConstants.CREAR_CONECTORES_EXITO, data } }
+    //Función que regresa el fracaso y el error de la petición del servidor
     function fracaso(error){ return { type: DriversConstants.CREAR_CONECTORES_FRACASO, error } }
 }
-
-function modificarConector(data){
+//Función para modificar el conector en la base de datos
+function modificarDrivers(data){
+    //Petición API
     return dispatch => {
+        //Dispara la acción de la petición
         dispatch(request())
         DriverService.modificarDrivers(data)
             .then(
@@ -74,17 +90,19 @@ function modificarConector(data){
                 }
             )
     }
-
-
+    //Función que regresa la acción de la petición 
     function request(){ return { type: DriversConstants.MODIFICAR_CONECTORES_REQUEST } }
+    //Función que regresa el exitó de la petición con los datos del servidor
     function exito(data){ return { type: DriversConstants.MODIFICAR_CONECTORES_EXITO, data} }
+    //Función que regresa el fracaso y el error de la petición del servidor
     function fracaso(error){ return { type: DriversConstants.MODIFICAR_CONECTORES_FRACASO, error } }
 }
-
+//Función para eliminar el conector seleccionado
 function eliminarConector(idConector){
+    //Petición API
     return dispatch => {
+        //Dispara la acción de la petición
         dispatch(request())
-
         DriverService.eliminarDrivers(idConector)
             .then(
                 (id) => {
@@ -100,7 +118,35 @@ function eliminarConector(idConector){
                 }
             )
     }
+    //Función que regresa la acción de la petición 
     function request(){ return { type: DriversConstants.ELIMINAR_CONECTORES_REQUEST } }
-    function exito(data){ return { type: DriversConstants.ELIMINAR_CONECTORES_EXITO, data}}
-    function fracaso(error){ return { type:DriversConstants.ELIMINAR_CONECTORES_FRACASO, error}}
+    //Función que regresa el exitó de la petición con los datos del servidor
+    function exito(data){ return { type: DriversConstants.ELIMINAR_CONECTORES_EXITO, data} }
+    //Función que regresa el fracaso y el error de la petición del servidor
+    function fracaso(error){ return { type:DriversConstants.ELIMINAR_CONECTORES_FRACASO, error} }
+}
+//
+function eliminarSeleccionados(datos) {
+    return dispatch => {
+        dispatch(request())
+        datos.forEach(async(element, index) => {
+            try{
+                const id = await DriverService.eliminarDrivers(element)
+                dispatch(exito(id))
+            }catch(e){
+                dispatch(fracaso(e))
+            }
+        });
+        dispatch(modalAcciones.limpiar());
+        dispatch(modalAcciones.exito({titulo: "Conectores eliminados", body: "Los Conectores se eliminaron correctamente." }));;
+        dispatch(getAllDrivers());
+
+    }
+    //Función que regresa la acción de la petición 
+    function request(){ return { type: DriversConstants.ELIMINAR_CONECTORES_REQUEST } }
+    //Función que regresa el exitó de la petición con los datos del servidor
+    function exito(data){ return { type: DriversConstants.ELIMINAR_CONECTORES_EXITO, data} }
+    //Función que regresa el fracaso y el error de la petición del servidor
+    function fracaso(error){ return { type:DriversConstants.ELIMINAR_CONECTORES_FRACASO, error} }
+
 }
