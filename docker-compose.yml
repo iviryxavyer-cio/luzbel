@@ -3,6 +3,8 @@ services:
   api:
     container_name: 'api'
     build: './server'
+    env_file:
+      - './server/develop.env'
     volumes:
       - './server:/app'
     restart: 'always'

@@ -111,6 +111,7 @@ class Query(graphene.ObjectType):
     usuario = graphene.Field(UsuariosSchema, id=graphene.Int())
     usuarioByUser = graphene.Field(UsuariosSchema, usuario=graphene.String())
     usuarios = graphene.List(UsuariosSchema)
+
     def resolve_hello(self, info, name):
         print(name)
         return 'hello {}'.format(name)

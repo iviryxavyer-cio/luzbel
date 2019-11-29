@@ -22,6 +22,7 @@ export const QueryConexiones = {
                 puerto
                 usuario
                 contrasena
+                bd
             }
         }
         `
@@ -30,7 +31,7 @@ export const QueryConexiones = {
     /**
      * Query para almacenar una conexion
      * 
-     * @param {JSON} data 
+     * @param {JSON} data  { idConector, idServidor, puerto, usuario, contrasena, bd }
      */
     mutationCreateConexion(data){
         return `
@@ -41,6 +42,7 @@ export const QueryConexiones = {
                 puerto:"${data.puerto}"
                 usuario:"${data.usuario}"
                 contrasena:"${data.contrasena}"
+                bd:"${data.bd}"
             ){
                 conexion {
                     idConexion
@@ -49,6 +51,7 @@ export const QueryConexiones = {
                     puerto
                     usuario
                     contrasena
+                    bd
                 }
             }
         }

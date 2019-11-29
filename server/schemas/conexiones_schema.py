@@ -2,6 +2,8 @@ from models.conexiones import Conexiones
 import graphene
 
 # usado para definir los datos que se recuperan de un objeto(modelo peewee) tpo Servidores por GQL
+
+
 class ConexionesSchema(graphene.ObjectType):
     id_conexion = graphene.Int()
     id_servidor = graphene.Int()
@@ -25,7 +27,8 @@ class ConexionesInput(graphene.InputObjectType):
 
 class ConexionesQuery(graphene.ObjectType):
     conexiones = graphene.List(ConexionesSchema)
-    conexion = graphene.Field(ConexionesSchema, id_conexion=graphene.Int(required=True))
+    conexion = graphene.Field(
+        ConexionesSchema, id_conexion=graphene.Int(required=True))
 
     @staticmethod
     def resolve_conexiones(self, info):
@@ -59,7 +62,7 @@ class ConexionesCreateMutation(graphene.Mutation):
 
 class ConexionesDeleteMutation(graphene.Mutation):
     class Arguments:
-        id_conexion=graphene.Int(required=True)
+        id_conexion = graphene.Int(required=True)
 
     conexion = graphene.Field(ConexionesSchema)
 
@@ -99,4 +102,5 @@ class ConexionesMutations(graphene.ObjectType):
     updateConexion = ConexionesUpdateMutation.Field()
 
 
-SchemaConexiones = graphene.Schema(query=ConexionesQuery, mutation=ConexionesMutations)
+SchemaConexiones = graphene.Schema(
+    query=ConexionesQuery, mutation=ConexionesMutations)
