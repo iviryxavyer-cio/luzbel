@@ -159,8 +159,6 @@ class ModalWizard extends React.Component {
           default:
             break;
         }
-
-        console.log(response.validacion);
       }).catch(err=>{
         this.setState({
           validacionConexion:{
@@ -203,7 +201,9 @@ class ModalWizard extends React.Component {
       usuario:            this.state.usuario,
       contrasena:         this.state.contrasena,
       puerto:             this.state.puerto,
+      db:                 this.state.database.nombre ? this.state.database.nombre:null,
     }
+    console.log(dataToStore);
     this.props.dispatch(conexionesActions.storeConexion(dataToStore));
     this.props.hide();
     this.resetWizardSate();

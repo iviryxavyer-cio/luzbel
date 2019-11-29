@@ -11,6 +11,8 @@ class ConexionesSchema(graphene.ObjectType):
     puerto = graphene.String()
     usuario = graphene.String()
     contrasena = graphene.String()
+    bd = graphene.String()
+
 
 
 # usado para recibir un objeto tipo servidor como parametro en graphql
@@ -20,6 +22,7 @@ class ConexionesInput(graphene.InputObjectType):
     puerto = graphene.String(required=True)
     usuario = graphene.String(required=True)
     contrasena = graphene.String(required=True)
+    bd = graphene.String(required=True)
 
 
 class ConexionesQuery(graphene.ObjectType):
@@ -46,13 +49,13 @@ class ConexionesCreateMutation(graphene.Mutation):
         puerto = graphene.String(required=True)
         usuario = graphene.String(required=True)
         contrasena = graphene.String(required=True)
+        bd = graphene.String(required=True)
 
     conexion = graphene.Field(ConexionesSchema)
 
     @staticmethod
-    def mutate(self, info, id_servidor, id_conector, puerto, usuario, contrasena):
-        modelo = Conexiones(id_servidor=id_servidor, id_conector=id_conector,
-                            puerto=puerto, usuario=usuario, contrasena=contrasena)
+    def mutate(self, info, id_servidor, id_conector, puerto, usuario, contrasena, bd):
+        modelo = Conexiones(id_servidor=id_servidor, id_conector=id_conector, puerto=puerto, usuario=usuario, contrasena=contrasena, bd=bd)
         modelo.save()
         return ConexionesCreateMutation(conexion=modelo)
 
@@ -88,6 +91,7 @@ class ConexionesUpdateMutation(graphene.Mutation):
         modelo.puerto = conexion_data.puerto
         modelo.usuario = conexion_data.usuario
         modelo.contrasena = conexion_data.contrasena
+        modelo.bd = conexion_data.bd
         modelo.save()
         return ConexionesUpdateMutation(conexion=modelo)
 
