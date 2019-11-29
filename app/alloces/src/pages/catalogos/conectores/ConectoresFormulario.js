@@ -6,17 +6,17 @@
  * 
  */
 import React from 'react';
-import { Field, reduxForm, getFormSyncErrors, formValueSelector } from 'redux-form';
+import { Field, reduxForm, getFormSyncErrors } from 'redux-form';
 import { connect } from 'react-redux';
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
 import { required } from '../../../Utilidades/validaciones';
 import CampoTexto from '../../../componentes/comun/CampoTexto.component';
-import CampoRadio from '../../../componentes/comun/CampoRadio';
+//import CampoRadio from '../../../componentes/comun/CampoRadio';
 import EliminarFormulario from '../../../componentes/comun/EliminarFormulario';
 import { modalAcciones } from '../../../actions/modal.actions';
 import { driversActions } from '../../../actions/drivers.actions';
 
-const valueSelector = formValueSelector('conectoresFormulario');
+//const valueSelector = formValueSelector('conectoresFormulario');
 
 class ConectoresFormulario extends React.Component {
 
@@ -52,7 +52,7 @@ class ConectoresFormulario extends React.Component {
     }
 
     render() {
-        const { handleSubmit, handleChange, labelBoton, cerrarModal, eliminar } = this.props;
+        const { handleSubmit, handleChange, labelBoton, cerrarModal } = this.props;
 
         return (
             <form onSubmit={handleSubmit} className='form-horizontal'>

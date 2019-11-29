@@ -27,15 +27,6 @@ class DataTableConexiones extends React.Component {
       onSelect: this.props.handleRowSelection
     };
 
-    /*
-    const options = {
-        onRowClick: function(row) {
-          document.getElementById('Eliminar').removeAttribute("disabled");
-      }
-    }
-    */
-     // const handleIndeterninate = isIndeterminate => (isIndeterminate ? <FontIcon>indeterminate_check_box</FontIcon> : <FontIcon>check_box_outline_blank</FontIcon>)
-
     return(
       <div>        
         <BootstrapTable               
@@ -47,6 +38,7 @@ class DataTableConexiones extends React.Component {
           <TableHeaderColumn dataField='idConexion' isKey={ true }># Conexion</TableHeaderColumn>
           <TableHeaderColumn dataField='idServidor'>Servidor</TableHeaderColumn>
           <TableHeaderColumn dataField='idConector'>Conector</TableHeaderColumn>
+          <TableHeaderColumn dataField='bd'>BD</TableHeaderColumn>
           <TableHeaderColumn dataField='usuario'>Usuario</TableHeaderColumn>
           <TableHeaderColumn dataField='puerto'>Puerto</TableHeaderColumn>
         </BootstrapTable>
