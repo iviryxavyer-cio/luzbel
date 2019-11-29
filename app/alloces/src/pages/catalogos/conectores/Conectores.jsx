@@ -85,7 +85,10 @@ class Conectores extends React.Component {
   }
   //
   handleGetChildrenState(data){
-    this.state.selectedRow = [...data]
+    //this.state.selectedRow = [...data]
+    this.setState({
+      selectedRow:[...data]
+    });
   }
   //
   eliminarSeleccionados(datos){
