@@ -42,7 +42,7 @@ export const QueryConexiones = {
                 puerto:"${data.puerto}"
                 usuario:"${data.usuario}"
                 contrasena:"${data.contrasena}"
-                bd:"${data.bd}"
+                bd:"${data.db}"
             ){
                 conexion {
                     idConexion
