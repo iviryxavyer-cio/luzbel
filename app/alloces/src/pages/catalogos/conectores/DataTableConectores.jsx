@@ -28,7 +28,7 @@ class DataTableConectores extends Component {
     }
     onSelectRow({idConector}) {
       const findID = this.state.selected.find((id) => {
-        return id == idConector;
+        return id === idConector;
       })
 
       if (!findID) {
