@@ -24,11 +24,11 @@ class TablaDBQuery(graphene.ObjectType):
     )
 
     @staticmethod
-    def resolve_tablas(self, info, id_conexion:int, database:str):
+    def resolve_tablas(self, info, id_conexion: int, database: str):
         response = {
-            "status":False,
-            "error":"",
-            "data":""
+            "status": False,
+            "error": "",
+            "data": ""
         }
         try:
             conexion = Conexiones.select().where(Conexiones.id_conexion == id_conexion).get()
@@ -38,19 +38,22 @@ class TablaDBQuery(graphene.ObjectType):
 
         if conexion:
             try:
-                servidor = Servidores.select().where(Servidores.id_servidor == conexion.id_servidor).get()
+                servidor = Servidores.select().where(
+                    Servidores.id_servidor == conexion.id_servidor).get()
             except:
                 response["error"] = f"no se encontro el servidor con id : {conexion.id_servidor} proveniente de la conexion : {conexion.id_conexion}"
                 servidor = None
 
             try:
-                conector = Conector.select().where(Conector.id_conector == conexion.id_conector).get()
+                conector = Conector.select().where(
+                    Conector.id_conector == conexion.id_conector).get()
             except:
                 response["error"] = f"no se encontro el conector con id {conexion.id_conector} proveniente de la conexion : {conexion.id_conexion}"
                 conector = None
 
             if servidor and conector:
-                tipoConector = testc.limpiarStringTipoServidor(conector.nombre_conector)
+                tipoConector = testc.limpiarStringTipoServidor(
+                    conector.nombre_conector)
 
                 if tipoConector == "mssql" or tipoConector == "sqlserver":
                     response = getTables.getMssqlTables(
