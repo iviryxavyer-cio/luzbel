@@ -11,6 +11,8 @@
 import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
 
+import { StepOne } from '../../pages/sqoop/monitor/StepOne';
+
 
 const state = {
     idConexion: 0,
@@ -27,10 +29,7 @@ export function WizzardTtl(props) {
 
     return (
         <>
-            <h1>{datos.nombre}</h1>
-            <Button variant="outlined" 
-                color="primary"
-                onClick={updateState}>test</Button>
+            <StepOne onChange={updateState} data={datos} />
         </>
     )
 }
