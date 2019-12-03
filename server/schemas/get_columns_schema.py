@@ -153,16 +153,13 @@ class GetColumnsQuery(graphene.ObjectType):
                 elif conector_type == 'postgres' or conector_type == 'postgresql':
                     response["error"] = constants.ERROR_POSTGRESQL_NOT_IMPLEMENTED
                     api_logger.error(response["error"])
-                elif conector_type == 'mariadb' or conector_type == "mysql" or
-                conector_type == "maria" or conector_type == "percona" or
-                conector_type == "perconaserver":
+                elif conector_type == "mariadb" or conector_type == "mysql" or conector_type == "maria" or conector_type == "percona" or conector_type == "perconaserver":
                     response["error"] = constants.ERROR_MYSQL_NOT_IMPLEMENTED
                     api_logger.error(response["error"])
                 elif conector_type == 'mongo' or conector_type == 'mongodb':
                     response["error"] = constants.ERROR_MONGO_NOT_IMPLEMENTED
                     api_logger.error(response["error"])
-                elif conector_type == 'cassandra' or conector_type == 'casandra' or
-                conector_type == 'apachecasandra':
+                elif conector_type == 'cassandra' or conector_type == 'casandra' or conector_type == 'apachecasandra':
                     response["error"] = constants.ERROR_CASSANDRA_NOT_IMPLEMENTED
                     api_logger.error(response["error"])
                 else:

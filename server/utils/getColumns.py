@@ -39,7 +39,7 @@ def get_columns(host: str = "localhost", user: str = "admin", password: str = "a
     }
 
     try:
-        connection = pymssql.connect(
+        conection = pymssql.connect(
             server=host, user=user, password=password, port=port, database=db)
     except pymssql.Error as pymssql_error:
         error_message = ""
@@ -58,14 +58,14 @@ def get_columns(host: str = "localhost", user: str = "admin", password: str = "a
             api_logger.error(error_message)
         response["error"] = error_message + str(pymssql_error.args[0][1])
 
-    if connection:
-        cursor = connection.cursor()
+    if conection:
+        cursor = conection.cursor()
 
         try:
             cursor.execute(
                 f'''SELECT column_name
-                    FROM INFORMATION_SCHEMA.columns
-                        WHERE table_name = {table}
+                    FROM {db}.INFORMATION_SCHEMA.COLUMNS
+                        WHERE table_name = '{table}'
                 '''
             )
             response["status"] = True
