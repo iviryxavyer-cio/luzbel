@@ -175,3 +175,6 @@ class GetColumnsQuery(graphene.ObjectType):
                 id_conection)
 
         return response
+
+
+schema_columns = graphene.Schema(query=GetColumnsQuery)

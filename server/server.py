@@ -8,6 +8,7 @@ from schemas.validacion_conexiones_schema import SchemaValidacionConexion
 from schemas.conexiones_schema import SchemaConexiones
 from schemas.tablasdb_schema import SchemaTablaDB
 from schemas.parametros_pysqoop_schema import schema_parametros_pysqoop
+from schemas.get_columns_schema import schema_columns
 from utils.middleware import login_required
 
 
@@ -51,7 +52,6 @@ def create_app(config_name):
                      )
                      )
 
-
     app.add_url_rule('/validacion',
                      view_func=GraphQLView.as_view(
                          'validacion',
@@ -75,6 +75,9 @@ def create_app(config_name):
                          graphiql=True
                      )
                      )
+    app.add_url_rule('/columnas',
+                     view_func=GraphQLView.as_view('columnas',
+                                                   schema=schema_columns, graphiql=True))
 
     return app
 
