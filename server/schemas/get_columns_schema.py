@@ -1,7 +1,7 @@
 """
 author: Luis Manuel Torres Treviño
 date: 02/12/2019
-description: Este archivo contiene la definición del schema para obtener 
+description: Este archivo contiene la definición del schema para obtener
     las columnas de una tabla
 version: 1.0.0
 
@@ -16,6 +16,7 @@ from models.servidores import Servidores
 from models.conexiones import Conexiones
 from models.conector import Conector
 from utils.api_logger import api_logger
+import utils.test_conexion as testc
 
 
 class GetColumnsSchema(graphene.ObjectType):
@@ -29,8 +30,8 @@ class GetColumnsSchema(graphene.ObjectType):
 
 class GetColumnsQuery(graphene.ObjectType):
     """GetColumnsQuery
-    Esta clase contiene la definición de los metodos query 
-        para que el cliente obtenga información de la api, asi como sus resolves 
+    Esta clase contiene la definición de los metodos query
+        para que el cliente obtenga información de la api, asi como sus resolves
     """
     get_columns = graphene.Field(GetColumnsSchema,
                                  host=graphene.String(required=True),
@@ -51,11 +52,11 @@ class GetColumnsQuery(graphene.ObjectType):
     def resolve_get_columns(self, info, host, user,
                             password, port, database_name, table_name):
         """resolve_get_columns
-        Este metodo se encarga de resolver una petición que manda el cliente 
+        Este metodo se encarga de resolver una petición que manda el cliente
             para obtener las columnas de la tabla que solicitan
 
         Args:
-            self (GetColumnsQuery): instancia del objete con el cual se esta 
+            self (GetColumnsQuery): instancia del objete con el cual se esta
                 llamando este metodo.
             info (Object): informacion de la request.
             host (String): direccion ip del servidor de la base de datos.
@@ -86,14 +87,14 @@ class GetColumnsQuery(graphene.ObjectType):
     @staticmethod
     def resolve_get_columns_by_id_conection(self, info, id_conection, table_name):
         """get_columns_by_id_conection
-        Este metodo se encarga de resolver una petición que manda el 
+        Este metodo se encarga de resolver una petición que manda el
             cliente cuando solo se le envia el id de una conexion.
 
         Args:
-            self (GetColumnsQuery): instancia del objeto con el cual se esta 
+            self (GetColumnsQuery): instancia del objeto con el cual se esta
                 llamando este metodo.
             info (Object): informacion de la request.
-            id_conection (Int): id de la conexion previamente registrada 
+            id_conection (Int): id de la conexion previamente registrada
                 en la base de datos.
             table_name (String): nombre de la tabla de la base de datos.
 
@@ -136,5 +137,41 @@ class GetColumnsQuery(graphene.ObjectType):
                 api_logger.error(response["error"])
                 conector = None
 
-        if server and conector:
-            pass
+            if server and conector:
+                conector_type = testc.limpiarStringTipoServidor(
+                    conector.nombre_conector)
+
+                if conector_type == "mssql" or conector_type == "sqlserver":
+                    response = getColumns.get_columns(
+                        host=server.direcccion,
+                        user=conection.usuario,
+                        password=conection.contrasena,
+                        port=conection.puerto,
+                        db=conection.database,
+                        table=table_name
+                    )
+                elif conector_type == 'postgres' or conector_type == 'postgresql':
+                    response["error"] = constants.ERROR_POSTGRESQL_NOT_IMPLEMENTED
+                    api_logger.error(response["error"])
+                elif conector_type == 'mariadb' or conector_type == "mysql" or
+                conector_type == "maria" or conector_type == "percona" or
+                conector_type == "perconaserver":
+                    response["error"] = constants.ERROR_MYSQL_NOT_IMPLEMENTED
+                    api_logger.error(response["error"])
+                elif conector_type == 'mongo' or conector_type == 'mongodb':
+                    response["error"] = constants.ERROR_MONGO_NOT_IMPLEMENTED
+                    api_logger.error(response["error"])
+                elif conector_type == 'cassandra' or conector_type == 'casandra' or
+                conector_type == 'apachecasandra':
+                    response["error"] = constants.ERROR_CASSANDRA_NOT_IMPLEMENTED
+                    api_logger.error(response["error"])
+                else:
+                    response["error"] = constants.ERROR_CONECTOR_TYPE_NOT_IMPLEMENTED
+                    api_logger.error(response["error"])
+            else:
+                pass
+        else:
+            response["error"] = constants.ERROR_CONECTIONS_DEFAULT.format(
+                id_conection)
+
+        return response
