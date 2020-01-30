@@ -3,6 +3,8 @@ services:
   api:
     container_name: 'api'
     build: './server'
+    env_file:
+      - './server/develop.env'
     volumes:
       - './server:/app'
     restart: 'always'
@@ -33,7 +35,7 @@ services:
     restart: 'always'
     image: 'postgres:latest'
     ports:
-      - '5431:5432'
+      - '5432:5432'
     volumes:
       - 'db-data:/var/lib/postgresql/data'
 volumes:

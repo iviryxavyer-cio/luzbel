@@ -1,78 +1,57 @@
-import React, { Component } from 'react'
-//importamos los datatable para su utilizaciones
-//import DataTable from 'react-data-table-component';
-
-// with es6
+import React from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-// with es5
-/*var ReactBsTable = require('react-bootstrap-table');
-var BootstrapTable = ReactBsTable.BootstrapTable;
-var TableHeaderColumn = ReactBsTable.TableHeaderColumn;
+import { connect } from 'react-redux';
+// dispatchs
+import { conexionesActions } from "../actions/conexiones.actions";
 
-// with es5
-require('node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css');*/
-// with es6
-import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
+import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
-class DataTableConexiones extends Component {
-
+class DataTableConexiones extends React.Component {
   constructor (props) {
-    super(props)
-    this.state = { 
-      db: '',
-      servidor: '',
-      usuario: '',
-      contrasenia: '',
-      conector: '',
-      puerto: ''
-    }
-    //this.handleBDChanged = this.handleBDChanged.bind(this);
+    super(props);
+    this.state = {
+    };
+    //dispatch
+    this.props.dispatch(conexionesActions.getAllConexiones());
   }
-
-/*  handleBDChanged (event) {
-    this.setState({db: event.target.value})
-  }*/
 
   render(){
- //Variable que contiene los campos de prueba       
-  const data = [{db: 'db_intranet', servidor: '10.1.1.18', usuario: 'tca', contrasenia: 'ITerp01@02', conector: 'SQL', puerto: '27010'},
-                {db: 'TCADBDWH', servidor: '10.1.1.67', usuario: 'tca', contrasenia: 'ITerp01@02', conector: 'SQL', puerto: '27010'}];
+    const { connections } = this.props;
 
-  const selectRowProp = {
-        mode: 'radio',
-        clickToSelect: true, 
-        bgColor: '#91c4f7',
-        hideSelectColumn: true
-  };
+    const selectRowProp = {
+      mode: 'radio',
+      clickToSelect: true,
+      //bgColor: '#91c4f7',
+      className:"bg-info",
+      hideSelectColumn: true,
+      onSelect: this.props.handleRowSelection
+    };
 
-  const options = {
-
-      onRowClick: function(row) {
-
-          document.getElementById('Eliminar').removeAttribute("disabled");
-
-      }
-
-  }
- // const handleIndeterninate = isIndeterminate => (isIndeterminate ? <FontIcon>indeterminate_check_box</FontIcon> : <FontIcon>check_box_outline_blank</FontIcon>)
     return(
       <div>        
-        <BootstrapTable 
-              
-              data = { data } 
-              selectRow = { selectRowProp }
-              options = { options }
-              pagination>
-              <TableHeaderColumn dataField='db' isKey={ true }>Base de Datos</TableHeaderColumn>
-              <TableHeaderColumn dataField='servidor'>Servidor</TableHeaderColumn>
-              <TableHeaderColumn dataField='usuario'>Usuario</TableHeaderColumn>
-              <TableHeaderColumn dataField='contrasenia'>Contraseña</TableHeaderColumn>
-              <TableHeaderColumn dataField='conector'>Conector</TableHeaderColumn>
-              <TableHeaderColumn dataField='puerto'>Puerto</TableHeaderColumn>
-            </BootstrapTable>
+        <BootstrapTable               
+          data = { connections.allConexiones } 
+          selectRow = { selectRowProp }
+          //options = { options }
+          pagination
+        >
+          <TableHeaderColumn dataField='idConexion' isKey={ true }># Conexion</TableHeaderColumn>
+          <TableHeaderColumn dataField='idServidor'>Servidor</TableHeaderColumn>
+          <TableHeaderColumn dataField='idConector'>Conector</TableHeaderColumn>
+          <TableHeaderColumn dataField='bd'>BD</TableHeaderColumn>
+          <TableHeaderColumn dataField='usuario'>Usuario</TableHeaderColumn>
+          <TableHeaderColumn dataField='puerto'>Puerto</TableHeaderColumn>
+        </BootstrapTable>
       </div>
     );
   }
 }
 
-export default DataTableConexiones;
+// vincular store
+function mapPropsState(state){
+  return {
+    connections: state.connections
+  }
+}
+
+export default connect(mapPropsState)(DataTableConexiones);

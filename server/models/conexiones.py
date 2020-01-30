@@ -11,11 +11,12 @@ class Conexiones(Model):
         database = psql_db
 
     id_conexion = AutoField()
-    id_servidor = ForeignKeyField(Servidores, backref='id_servidor')
-    id_conector = ForeignKeyField(Conector, backref='id_conector')
+    id_servidor = IntegerField()
+    id_conector = IntegerField()
     puerto = CharField(max_length=10)
     usuario = CharField(max_length=20)
     contrasena = CharField(max_length=150)
+    bd = CharField(max_length=200)
     fecha_creacion = DateTimeField(default=datetime.utcnow)
     fecha_modificacion = DateTimeField(default=datetime.utcnow)
 

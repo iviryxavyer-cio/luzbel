@@ -2,6 +2,8 @@ from models.conexiones import Conexiones
 import graphene
 
 # usado para definir los datos que se recuperan de un objeto(modelo peewee) tpo Servidores por GQL
+
+
 class ConexionesSchema(graphene.ObjectType):
     id_conexion = graphene.Int()
     id_servidor = graphene.Int()
@@ -9,6 +11,8 @@ class ConexionesSchema(graphene.ObjectType):
     puerto = graphene.String()
     usuario = graphene.String()
     contrasena = graphene.String()
+    bd = graphene.String()
+
 
 
 # usado para recibir un objeto tipo servidor como parametro en graphql
@@ -18,11 +22,13 @@ class ConexionesInput(graphene.InputObjectType):
     puerto = graphene.String(required=True)
     usuario = graphene.String(required=True)
     contrasena = graphene.String(required=True)
+    bd = graphene.String(required=True)
 
 
 class ConexionesQuery(graphene.ObjectType):
     conexiones = graphene.List(ConexionesSchema)
-    conexion = graphene.Field(ConexionesSchema, id_conexion=graphene.Int(required=True))
+    conexion = graphene.Field(
+        ConexionesSchema, id_conexion=graphene.Int(required=True))
 
     @staticmethod
     def resolve_conexiones(self, info):
@@ -43,19 +49,20 @@ class ConexionesCreateMutation(graphene.Mutation):
         puerto = graphene.String(required=True)
         usuario = graphene.String(required=True)
         contrasena = graphene.String(required=True)
+        bd = graphene.String(required=True)
 
     conexion = graphene.Field(ConexionesSchema)
 
     @staticmethod
-    def mutate(self, info, id_servidor, id_conector, puerto, usuario, contrasena):
-        modelo = Conexiones(id_servidor=id_servidor, id_conector=id_conector, puerto=puerto, usuario=usuario, contrasena=contrasena)
+    def mutate(self, info, id_servidor, id_conector, puerto, usuario, contrasena, bd):
+        modelo = Conexiones(id_servidor=id_servidor, id_conector=id_conector, puerto=puerto, usuario=usuario, contrasena=contrasena, bd=bd)
         modelo.save()
         return ConexionesCreateMutation(conexion=modelo)
 
 
 class ConexionesDeleteMutation(graphene.Mutation):
     class Arguments:
-        id_conexion=graphene.Int(required=True)
+        id_conexion = graphene.Int(required=True)
 
     conexion = graphene.Field(ConexionesSchema)
 
@@ -84,6 +91,7 @@ class ConexionesUpdateMutation(graphene.Mutation):
         modelo.puerto = conexion_data.puerto
         modelo.usuario = conexion_data.usuario
         modelo.contrasena = conexion_data.contrasena
+        modelo.bd = conexion_data.bd
         modelo.save()
         return ConexionesUpdateMutation(conexion=modelo)
 
@@ -94,4 +102,5 @@ class ConexionesMutations(graphene.ObjectType):
     updateConexion = ConexionesUpdateMutation.Field()
 
 
-SchemaConexiones = graphene.Schema(query=ConexionesQuery, mutation=ConexionesMutations)
+SchemaConexiones = graphene.Schema(
+    query=ConexionesQuery, mutation=ConexionesMutations)

@@ -1,0 +1,192 @@
+/*Alinear a la izquierda*/
+.pos-left{
+  float: left;
+}
+/*background blanco*/
+.fondo-blanco{
+	background-color: #fff;
+}
+/**/
+.text-center{
+	text-align: center;
+}
+.fondo-azul{
+	background-color: #09d3ac;
+}
+.login-components{
+	align-items: column;
+	padding-top: 20%;
+	padding-bottom: 19%;
+}
+.input-border{
+	box-shadow: none;
+	border: 1px solid #565656;
+	border-radius: 15px;
+	margin: 0.5%;
+	width: 100%;
+	padding: 1%;
+	padding-left: 4%;
+	padding-right: 4%;
+}
+.buttons{
+	background-color: #fff !important;
+	/*width: ;*/
+}
+.boutton-crud{
+	border: 1px solid #565656 !important;
+	box-shadow: none;
+	/*padding: 2% 5% 2% 5%;*/
+	margin: 0.5%;
+	/*width:80%;*/
+	color: #565656 !important;
+	/*margin-left: 10%;*/
+	/*margin-right: 10%;*/
+}
+/*Seccion de los botones del CRUD*/
+.controller-crud {
+	text-align: center;
+	border: 1px solid #565656;
+	margin: 5%;
+	padding: 5%;
+	margin-top: 0%;
+}
+
+/*encabezado data table*/
+.rdt_TableHead{
+	background-color: #40ce26 !important;
+}
+/*DataTable*/
+.bTnnmE{
+	border: 1px solid #565656;
+}
+/*Titulo del datatable*/
+.gXlqCi{
+	display: none !important;
+}
+/*Contenedor*/
+.Container{
+	width: 100%;
+	margin: 5%;
+}
+.hLrWNh{
+	color: #fff !important;
+}
+.Aceptar:hover{
+	background-color: #00c100  !important;
+	border-color: #00c100 !important;
+	color: #fff !important;
+}
+.Editar:hover{
+	background-color: #f7b900 !important;
+	border-color: #f7b900 !important;
+	color: #fff !important;
+}
+.Eliminar:hover{
+	background-color: #fe3232 !important;
+	border-color: #fe3232 !important;
+	color: #fff !important;
+}
+.Agregar:hover{
+	background-color: #007bff !important;
+	border-color: #007bff !important;
+	color: #fff !important;
+}
+.modal-header{
+	color: #fff;
+	background-color: dodgerblue;
+	border-bottom: 2px solid #565656 !important;
+}
+.modal-footer{
+	margin-left: auto;
+	margin-right: auto;
+	border-top: none !important;
+}
+.buttonModal{
+	color: #565656 !important;
+	border: 1px solid #565656 !important;
+}
+.marginXS10{
+	margin-left: 10%;
+	margin-right: 10%;
+}
+.modalInput{
+	border-radius: 4px !important;
+	border: 1px solid #565656 !important;
+	width: 80% !important;
+	padding-left: 2% !important;
+}
+.close > span:hover{
+	border: 1px solid red;
+    border-radius: 15px;
+    padding-left: 21%;
+    padding-right: 23%;
+    background-color: red;
+    color: #fff;
+}
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, 
+.col-7, .col-8, .col-9, .col-10, .col-11, .col-12{
+	float: left;
+	margin-bottom: 1%;
+}
+.col-sm-6, .col-sm-5 {
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+.container{
+	display: block;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+}
+
+.TextCenter{
+	text-align: center;
+}
+.bottonWizard{
+	border: 1px solid #565656 !important;
+    box-shadow: none;
+    padding: 2% 5% 2% 5%;
+    margin: 2%;
+    color: #565656 !important;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.WizardInput{
+	border-radius: 4px !important;
+	border: 1px solid #565656 !important;
+	width: 100% !important;
+	padding-left: 2% !important;
+}
+.react-bs-container-header.table-header-wrapper {
+    background-color: dodgerblue;
+    font-size: 14px;
+}
+.Ingresar:hover{
+	border-color: dodgerblue;
+	background-color: dodgerblue !important;
+	color: #fff;
+}
+h2{
+	text-decoration: underline;	
+	text-decoration-color: dodgerblue;
+}
+h4{
+	text-decoration: underline;
+	text-decoration-color: #565656;
+	text-align: center;
+}
+.Login-form{
+	margin-top: 40%;
+}
+.TituloPagina{
+	margin-top: 5%;
+}
+.FondoGrisClaro{
+	background: #f2f2f2;
+}
+/*CARDS*/
+.TituloCard{
+	font-size: 14;
+}
+.bodyCard{
+	margin-bottom: 12;
+}

@@ -1,0 +1,38 @@
+/** 
+* @author Luis Manuel Torres Treviño
+* @date 23/11/2019
+* @description Este archivo contiene los estilos que se utilizan en el sideBar
+*/
+
+$color-menuItemIcon: #97c05c;
+$secondary-menuItemIcon: #fff;
+$drawerWidth: 240px;
+$appMenuWidth: 20%;
+$colorText: #fff;
+$backgroundColor: #595959;
+
+.appMenu {
+	width: $drawerWidth;
+	float: left;
+	background: $backgroundColor;
+}
+
+.navList {
+	width: $drawerWidth;
+}
+
+.menuItem {
+	width: $drawerWidth;
+}
+
+.textColor {
+	color: $colorText;
+}
+
+.colorIcon {
+	color: $color-menuItemIcon;
+}
+
+.secondaryIcon { 
+	color: $secondary-menuItemIcon;
+}
