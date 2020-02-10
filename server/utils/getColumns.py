@@ -72,7 +72,7 @@ def get_columns(host: str = "localhost", user: str = "admin", password: str = "a
         except pymssql.Error as sql_error:
             error_message = sql_error.args[1]
             api_logger.error(error_message)
-            
+           
             response["error"] = f"{error_message}"
 
         if response["status"]:
