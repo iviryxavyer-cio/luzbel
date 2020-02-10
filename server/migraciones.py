@@ -38,7 +38,7 @@ def crear_tipo_status(db):
 def alterar_campo_status(db, tabla):
     try:
         db.connect()
-        api_logger.info('Se alterará el campo de status de la tabla {}'.format(tabla))
+        api_logger.info('Se alterara el campo de status de la tabla {}'.format(tabla))
         db.execute_sql(
             'ALTER TABLE {} ALTER COLUMN status TYPE status using status::status'
             .format(tabla))
