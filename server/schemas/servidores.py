@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+@author Marco Gallegos 
+@date 2020-02-11
+@description
+definiciones necesarias para querys y mutations para nuestro schema
+"""
 from models.servidores import Servidores
 import graphene
 
@@ -15,21 +22,6 @@ class ServidoresInput(graphene.InputObjectType):
     direccion = graphene.String(required=True)
     alias_servidor = graphene.String(required=True)
     status = graphene.String(required=True)
-
-
-class ServidoresQuery(graphene.ObjectType):
-    servidores = graphene.List(ServidoresSchema)
-    servidor = graphene.Field(ServidoresSchema, id_servidor=graphene.Int(required=True))
-
-    @staticmethod
-    def resolve_servidores(self, info):
-        servdidores = Servidores.select().where(Servidores.status != "E")
-        return servdidores
-
-    @staticmethod
-    def resolve_servidor(self, info, id_servidor):
-        servidor = Servidores.select().where(Servidores.id_servidor == id_servidor).get()
-        return servidor
 
 
 # definimos mutacion para  crear, editar y eliminar
@@ -77,12 +69,3 @@ class ServidoresUpdateMutation(graphene.Mutation):
         servidor.status = servidor_data.status
         servidor.save()
         return ServidoresUpdateMutation(servidor=servidor)
-
-
-class ServidoresMutations(graphene.ObjectType):
-    createServidor = ServidoresCreateMutation.Field()
-    deleteServidor = ServidoresDeleteMutation.Field()
-    updateServidor = ServidoresUpdateMutation.Field()
-
-
-SchemaServidores = graphene.Schema(query=ServidoresQuery, mutation=ServidoresMutations)

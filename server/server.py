@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_graphql import GraphQLView
-from schemas.servidores_schema import SchemaServidores
 from schemas.conector_schema import SchemaConectores
 from schemas.validacion_conexiones_schema import SchemaValidacionConexion
 from schemas.conexiones_schema import SchemaConexiones
@@ -27,15 +26,6 @@ def create_app(config_name):
         schema=UniversalSchema,
         graphiql=True
     ))
-
-    # ruta para servidores GQL
-    app.add_url_rule('/servidor',
-        view_func=GraphQLView.as_view(
-            'servidor',
-            schema=SchemaServidores,
-            graphiql=True
-        )
-    )
 
     # ruta para conexiones GQL
     app.add_url_rule('/conexion',

@@ -8,13 +8,20 @@ de cada recurso y unirlo en un schema para exportarlo y exponerlo en una ruta
 """
 
 import graphene
-import schemas.usuario_schema as usuariosch
+import schemas.usuario as usuariosch
+import schemas.servidores as servidoressch
+
 from models.usuario import Usuario
+from models.servidores import Servidores
 
 class Query(graphene.ObjectType):
     usuario = graphene.Field(usuariosch.UsuariosSchema, id=graphene.Int())
     usuarioByUser = graphene.Field(usuariosch.UsuariosSchema, usuario=graphene.String())
     usuarios = graphene.List(usuariosch.UsuariosSchema)
+    
+    servidores = graphene.List(servidoressch.ServidoresSchema)
+    servidor = graphene.Field(servidoressch.ServidoresSchema, id_servidor=graphene.Int(required=True))
+    
     
     # inicio usuarios
     def resolve_usuario(self, info, **kwargs):
@@ -46,6 +53,15 @@ class Query(graphene.ObjectType):
         else:
             return {}
     # fin usuarios
+    # inicio servidores
+    def resolve_servidores(self, info):
+        servdidores = Servidores.select().where(Servidores.status != "E")
+        return servdidores
+
+    def resolve_servidor(self, info, id_servidor):
+        servidor = Servidores.select().where(Servidores.id_servidor == id_servidor).get()
+        return servidor
+    # fin servidores
 
 
 class Mutation(graphene.ObjectType):
@@ -55,6 +71,11 @@ class Mutation(graphene.ObjectType):
     login_usuario = usuariosch.LoginUsuario.Field()
     eliminar_usuario = usuariosch.UsuarioDeleteMutation.Field()
     # fin servicios
+    # inicio servidores
+    createServidor = servidoressch.ServidoresCreateMutation.Field()
+    deleteServidor = servidoressch.ServidoresDeleteMutation.Field()
+    updateServidor = servidoressch.ServidoresUpdateMutation.Field()
+    # fin servidores
 
 
 UniversalSchema = graphene.Schema(query=Query, mutation=Mutation)
