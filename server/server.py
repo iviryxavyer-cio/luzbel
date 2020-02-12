@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_graphql import GraphQLView
-from schemas.conector_schema import SchemaConectores
+
 from schemas.validacion_conexiones_schema import SchemaValidacionConexion
 from schemas.conexiones_schema import SchemaConexiones
 from schemas.tablasdb_schema import SchemaTablaDB
@@ -32,14 +32,6 @@ def create_app(config_name):
         view_func=GraphQLView.as_view(
             'conexion',
             schema=SchemaConexiones,
-            graphiql=True
-        )
-    )
-
-    app.add_url_rule('/conector',
-        view_func=GraphQLView.as_view(
-            'conector',
-            schema=SchemaConectores,
             graphiql=True
         )
     )

@@ -10,9 +10,11 @@ de cada recurso y unirlo en un schema para exportarlo y exponerlo en una ruta
 import graphene
 import schemas.usuario as usuariosch
 import schemas.servidores as servidoressch
+import schemas.conector as conectorsch
 
 from models.usuario import Usuario
 from models.servidores import Servidores
+from models.conector import Conector
 
 class Query(graphene.ObjectType):
     usuario = graphene.Field(usuariosch.UsuariosSchema, id=graphene.Int())
@@ -21,6 +23,9 @@ class Query(graphene.ObjectType):
     
     servidores = graphene.List(servidoressch.ServidoresSchema)
     servidor = graphene.Field(servidoressch.ServidoresSchema, id_servidor=graphene.Int(required=True))
+    
+    conectores = graphene.List(conectorsch.ConectoresSchema)
+    conector = graphene.Field(conectorsch.ConectoresSchema, id_conector=graphene.Int(required=True))
     
     
     # inicio usuarios
@@ -62,6 +67,15 @@ class Query(graphene.ObjectType):
         servidor = Servidores.select().where(Servidores.id_servidor == id_servidor).get()
         return servidor
     # fin servidores
+    # inicio conectores
+    def resolve_conectores(self, info):
+        conectores = Conector.select().where(Conector.status == 'A')
+        return conectores
+
+    def resolve_conector(self, info, id_conector):
+        conector = Conector.select().where(Conector.id_conector == id_conector).get()
+        return conector
+    # fin conectores
 
 
 class Mutation(graphene.ObjectType):
@@ -76,6 +90,11 @@ class Mutation(graphene.ObjectType):
     deleteServidor = servidoressch.ServidoresDeleteMutation.Field()
     updateServidor = servidoressch.ServidoresUpdateMutation.Field()
     # fin servidores
+    # inicio conectores
+    crearConector = conectorsch.ConectorCreateMutation.Field()
+    borrarConector = conectorsch.ConectoresDeleteMutation.Field()
+    actualizarConector = conectorsch.ConectoresUpdateMutation.Field()
+    # fin conectores
 
 
 UniversalSchema = graphene.Schema(query=Query, mutation=Mutation)

@@ -18,21 +18,6 @@ class ConectoresInput(graphene.InputObjectType):
     url_conector = graphene.String()
 
 
-class ConectoresQuery(graphene.ObjectType):
-    conectores = graphene.List(ConectoresSchema)
-    conector = graphene.Field(ConectoresSchema, id_conector=graphene.Int(required=True))
-
-    @staticmethod
-    def resolve_conectores(self, info):
-        conectores = Conector.select().where(Conector.status == 'A')
-        return conectores
-
-    @staticmethod
-    def resolve_conector(self, info, id_conector):
-        conector = Conector.select().where(Conector.id_conector == id_conector).get()
-        return conector
-
-
 class ConectorCreateMutation(graphene.Mutation):
     class Arguments:
         nombre_conector = graphene.String()
@@ -82,5 +67,3 @@ class ConectoresMutations(graphene.ObjectType):
     borrarConector = ConectoresDeleteMutation.Field()
     actualizarConector = ConectoresUpdateMutation.Field()
 
-
-SchemaConectores = graphene.Schema(query=ConectoresQuery, mutation=ConectoresMutations)
