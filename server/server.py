@@ -3,7 +3,6 @@ from flask_cors import CORS
 from flask_graphql import GraphQLView
 
 from schemas.validacion_conexiones_schema import SchemaValidacionConexion
-from schemas.tablasdb_schema import SchemaTablaDB
 from schemas.parametros_pysqoop_schema import schema_parametros_pysqoop
 from schemas.get_columns_schema import schema_columns
 from utils.middleware import login_required
@@ -32,14 +31,6 @@ def create_app(config_name):
            schema=SchemaValidacionConexion,
            graphiql=True
        )
-    )
-
-    app.add_url_rule('/tabla',
-        view_func=GraphQLView.as_view(
-            'tabla',
-            schema=SchemaTablaDB,
-            graphiql=True
-        )
     )
 
     app.add_url_rule('/parametros_pysqoop',

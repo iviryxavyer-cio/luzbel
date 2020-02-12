@@ -4,7 +4,7 @@ import utils.test_conexion as testc
 from models.servidores import Servidores
 from models.conector import Conector
 from models.conexiones import Conexiones
-from tabulate import tabulate
+#from tabulate import tabulate
 
 
 class TablaDBSchema(graphene.ObjectType):
@@ -16,7 +16,8 @@ class TablaDBSchema(graphene.ObjectType):
     data = graphene.List(graphene.String)
 
 
-class TablaDBQuery(graphene.ObjectType):
+#class TablaDBQuery(graphene.ObjectType):
+class TablaDBQuery():
     tablas = graphene.Field(
         TablaDBSchema,
         id_conexion=graphene.Int(required=True),
@@ -82,4 +83,4 @@ class TablaDBQuery(graphene.ObjectType):
         return response
 
 
-SchemaTablaDB = graphene.Schema(query=TablaDBQuery)
+#SchemaTablaDB = graphene.Schema(query=TablaDBQuery)

@@ -12,13 +12,17 @@ import schemas.usuario as usuariosch
 import schemas.servidores as servidoressch
 import schemas.conector as conectorsch
 import schemas.conexiones as conexionessch
+import schemas.tablasdb as tablasch
 
 from models.usuario import Usuario
 from models.servidores import Servidores
 from models.conector import Conector
 from models.conexiones import Conexiones
 
-class Query(graphene.ObjectType):
+class Query(
+        graphene.ObjectType, tablasch.TablaDBQuery
+        ):
+    """Clase que abstracta para proveer querys a el schema global"""
     usuario = graphene.Field(usuariosch.UsuariosSchema, id=graphene.Int())
     usuarioByUser = graphene.Field(usuariosch.UsuariosSchema, usuario=graphene.String())
     usuarios = graphene.List(usuariosch.UsuariosSchema)
@@ -31,6 +35,13 @@ class Query(graphene.ObjectType):
     
     conexiones = graphene.List(conexionessch.ConexionesSchema)
     conexion = graphene.Field(conexionessch.ConexionesSchema, id_conexion=graphene.Int(required=True))
+    
+    # para obtener tablas de una conexion y una db
+    #tablas = graphene.Field(
+    #    tablasch.TablaDBSchema,
+    #    id_conexion=graphene.Int(required=True),
+    #    database=graphene.String(required=True)
+    #)
     
     
     # inicio usuarios
@@ -75,9 +86,6 @@ class Query(graphene.ObjectType):
     # inicio conexiones
     def resolve_conexiones(self, info):
         result = Conexiones.select()
-        print("conexiones")
-        for row in result:
-            print(row)
         return result
 
     def resolve_conexion(self, info, id_conexion):
