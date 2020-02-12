@@ -12,7 +12,7 @@ import graphene
 from graphql import GraphQLError
 
 from models.parametros_pysqoop import ParametrosPysqoop
-from .conexiones_schema import ConexionesSchema
+from schemas.conexiones import ConexionesSchema
 
 from utils.api_logger import api_logger
 import constants

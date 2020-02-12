@@ -11,10 +11,12 @@ import graphene
 import schemas.usuario as usuariosch
 import schemas.servidores as servidoressch
 import schemas.conector as conectorsch
+import schemas.conexiones as conexionessch
 
 from models.usuario import Usuario
 from models.servidores import Servidores
 from models.conector import Conector
+from models.conexiones import Conexiones
 
 class Query(graphene.ObjectType):
     usuario = graphene.Field(usuariosch.UsuariosSchema, id=graphene.Int())
@@ -26,6 +28,9 @@ class Query(graphene.ObjectType):
     
     conectores = graphene.List(conectorsch.ConectoresSchema)
     conector = graphene.Field(conectorsch.ConectoresSchema, id_conector=graphene.Int(required=True))
+    
+    conexiones = graphene.List(conexionessch.ConexionesSchema)
+    conexion = graphene.Field(conexionessch.ConexionesSchema, id_conexion=graphene.Int(required=True))
     
     
     # inicio usuarios
@@ -67,6 +72,18 @@ class Query(graphene.ObjectType):
         conector = Conector.select().where(Conector.id_conector == id_conector).get()
         return conector
     # fin conectores
+    # inicio conexiones
+    def resolve_conexiones(self, info):
+        result = Conexiones.select()
+        print("conexiones")
+        for row in result:
+            print(row)
+        return result
+
+    def resolve_conexion(self, info, id_conexion):
+        result = Conexiones.select().where(Conexiones.id_servidor == id_conexion).get()
+        return result
+    # fin conexiones
 
 
 class Mutation(graphene.ObjectType):
@@ -86,6 +103,11 @@ class Mutation(graphene.ObjectType):
     borrarConector = conectorsch.ConectoresDeleteMutation.Field()
     actualizarConector = conectorsch.ConectoresUpdateMutation.Field()
     # fin conectores
+    # inicio conexiones
+    createConexion = conexionessch.ConexionesCreateMutation.Field()
+    deleteConexion = conexionessch.ConexionesDeleteMutation.Field()
+    updateConexion = conexionessch.ConexionesUpdateMutation.Field()
+    # fin conexiones
 
 
 UniversalSchema = graphene.Schema(query=Query, mutation=Mutation)

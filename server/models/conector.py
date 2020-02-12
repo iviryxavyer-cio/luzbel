@@ -1,7 +1,7 @@
 from utils.conexion import psql_db
 from peewee import *
 from datetime import datetime
-from .usuario import Usuario
+from models.usuario import Usuario
 
 class Conector(Model):
     class Meta:
