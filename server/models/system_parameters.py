@@ -19,7 +19,7 @@ class SystemParameters(Model):
         name = 'paramateros_sistema'
 
     id_parametro_sistema = AutoField()
-    flume_delay = CharField(max_length=30, null=False, default='', va)
+    flume_delay = CharField(max_length=30, null=False, default='')
     color_primario = CharField(max_length=10, null=False, default='0F4C81')
     color_secundario = CharField(max_length=10, null=False, default='FFFFFF')
     fecha_creacion = DateTimeField(default=datetime.utcnow)
