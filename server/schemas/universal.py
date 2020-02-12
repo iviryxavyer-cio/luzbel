@@ -29,15 +29,6 @@ class Query(graphene.ObjectType):
     
     
     # inicio usuarios
-    def resolve_usuario(self, info, **kwargs):
-        id = kwargs.get('id')
-        if id is not None:
-            query = Usuario.select().where(Usuario.id_usuario == id).get()
-        else:
-            query = Usuario.select().get()
-
-        return query
-
     def resolve_usuarios(self, info):
         users = Usuario.select().where((Usuario.status == 'A') | (Usuario.status == 'I'))
         return users

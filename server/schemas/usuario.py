@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+@author Marco Gallegos 
+@date 2020-02-11
+@description
+definiciones necesarias para querys y mutations de nuestro schema relacionado con usuario
+"""
 import graphene
 from models.usuario import Usuario
 from utils.authentication import login

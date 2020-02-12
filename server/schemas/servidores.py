@@ -3,7 +3,7 @@
 @author Marco Gallegos 
 @date 2020-02-11
 @description
-definiciones necesarias para querys y mutations para nuestro schema
+definiciones necesarias para querys y mutations de nuestro schema servidor
 """
 from models.servidores import Servidores
 import graphene

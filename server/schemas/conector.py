@@ -1,5 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+@author Marco Gallegos 
+@date 2020-02-11
+@description
+definiciones necesarias para querys y mutations de nuestro schema conector
+"""
 import graphene
-
 from models.conector import Conector
 
 
@@ -60,10 +66,4 @@ class ConectoresUpdateMutation(graphene.Mutation):
         conector.url_conector = conector_data.url_conector
         conector.save()
         return ConectoresUpdateMutation(conector=conector)
-
-
-class ConectoresMutations(graphene.ObjectType):
-    crearConector = ConectorCreateMutation.Field()
-    borrarConector = ConectoresDeleteMutation.Field()
-    actualizarConector = ConectoresUpdateMutation.Field()
 
