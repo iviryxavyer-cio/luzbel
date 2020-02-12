@@ -5,6 +5,8 @@
 @description
 este archivo tiene como finalidad reunir las definiciones de querys, mutations 
 de cada recurso y unirlo en un schema para exportarlo y exponerlo en una ruta
+@historial
+
 """
 
 import graphene
@@ -14,6 +16,7 @@ import schemas.conector as conectorsch
 import schemas.conexiones as conexionessch
 import schemas.tablasdb as tablasch
 import schemas.validacion_conexiones as validacionsch
+import schemas.get_columns as getcolumnssch
 
 from models.usuario import Usuario
 from models.servidores import Servidores
@@ -21,7 +24,8 @@ from models.conector import Conector
 from models.conexiones import Conexiones
 
 class Query(
-        graphene.ObjectType, tablasch.TablaDBQuery, validacionsch.ValidacionConexionQuery
+        graphene.ObjectType, tablasch.TablaDBQuery, validacionsch.ValidacionConexionQuery,
+        getcolumnssch.GetColumnsQuery
         
         ):
     """Clase que abstracta para proveer querys a el schema global"""

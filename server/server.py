@@ -3,7 +3,6 @@ from flask_cors import CORS
 from flask_graphql import GraphQLView
 
 from schemas.parametros_pysqoop_schema import schema_parametros_pysqoop
-from schemas.get_columns_schema import schema_columns
 from utils.middleware import login_required
 
 # schema global
@@ -28,14 +27,6 @@ def create_app(config_name):
         view_func=GraphQLView.as_view(
             'parametros_pysqoop',
             schema=schema_parametros_pysqoop,
-            graphiql=True
-        )
-    )
-    
-    app.add_url_rule('/columnas',
-         view_func=GraphQLView.as_view(
-            'columnas',
-            schema=schema_columns,
             graphiql=True
         )
     )
