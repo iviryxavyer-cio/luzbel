@@ -13,6 +13,7 @@ import schemas.servidores as servidoressch
 import schemas.conector as conectorsch
 import schemas.conexiones as conexionessch
 import schemas.tablasdb as tablasch
+import schemas.validacion_conexiones as validacionsch
 
 from models.usuario import Usuario
 from models.servidores import Servidores
@@ -20,7 +21,8 @@ from models.conector import Conector
 from models.conexiones import Conexiones
 
 class Query(
-        graphene.ObjectType, tablasch.TablaDBQuery
+        graphene.ObjectType, tablasch.TablaDBQuery, validacionsch.ValidacionConexionQuery
+        
         ):
     """Clase que abstracta para proveer querys a el schema global"""
     usuario = graphene.Field(usuariosch.UsuariosSchema, id=graphene.Int())

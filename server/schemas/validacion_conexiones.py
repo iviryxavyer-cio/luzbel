@@ -2,12 +2,12 @@ import graphene
 import utils.test_conexion as testc
 from models.servidores import Servidores
 from models.conector import Conector
-from tabulate import tabulate
+#from tabulate import tabulate
 
 
 class ValidacionConexionSchema(graphene.ObjectType):
     """
-    usado para definir los datos que se recuperan de un objeto(modelo peewee) tpo Servidores por GQL
+    usado para definir los datos que se recuperan de un objeto(modelo peewee) tipo Servidores por GQL
     """
     status = graphene.Boolean()
     error = graphene.String()
@@ -25,7 +25,7 @@ class ValidacionConexionInput(graphene.InputObjectType):
     puerto = graphene.Int(required=True)
 
 
-class ValidacionConexionQuery(graphene.ObjectType):
+class ValidacionConexionQuery():
     validacion = graphene.Field(
         ValidacionConexionSchema,
         id_servidor=graphene.Int(required=True),
@@ -76,4 +76,4 @@ class ValidacionConexionQuery(graphene.ObjectType):
         return response
 
 
-SchemaValidacionConexion = graphene.Schema(query=ValidacionConexionQuery)
+#SchemaValidacionConexion = graphene.Schema(query=ValidacionConexionQuery)
