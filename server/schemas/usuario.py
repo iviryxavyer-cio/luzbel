@@ -109,3 +109,43 @@ class UsuarioDeleteMutation(graphene.Mutation):
         usuario.status = 'E'
         usuario.save()
         return UsuarioDeleteMutation(usuario=usuario)
+
+class UsuarioQuery():
+    # node = graphene.relay.node.Field()
+    hello = graphene.String(name=graphene.String(default_value='World'))
+    usuario = graphene.Field(UsuariosSchema, id=graphene.Int())
+    usuarioByUser = graphene.Field(UsuariosSchema, usuario=graphene.String())
+    usuarios = graphene.List(UsuariosSchema)
+
+    def resolve_hello(self, info, name):
+        print(name)
+        return 'hello {}'.format(name)
+
+    def resolve_usuario(self, info, **kwargs):
+        id = kwargs.get('id')
+        if id is not None:
+            query = Usuario.select().where(Usuario.id_usuario == id).get()
+        else:
+            query = Usuario.select().get()
+
+        return query
+
+    def resolve_usuarios(self, info):
+        users = Usuario.select().where((Usuario.status == 'A') | (Usuario.status == 'I'))
+        return users
+
+    def resolve_usuarioByUser(self, info, **kwargs):
+        usuario = kwargs.get('usuario')
+        if usuario is not None:
+            query = Usuario.select().where(Usuario.usuario == usuario).get()
+        else:
+            query = Usuario.select().get()
+
+        return query
+
+
+class UsuarioMutation():
+    crear_usuario = CrearUsuarios.Field()
+    modificar_usuario = ModificarUsuario.Field()
+    login_usuario = LoginUsuario.Field()
+    eliminar_usuario = UsuarioDeleteMutation.Field()

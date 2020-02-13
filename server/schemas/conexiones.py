@@ -78,5 +78,20 @@ class ConexionesUpdateMutation(graphene.Mutation):
         modelo.save()
         return ConexionesUpdateMutation(conexion=modelo)
 
-#SchemaConexiones = graphene.Schema(
-#    query=ConexionesQuery, mutation=ConexionesMutations)
+class ConexionesQuery():
+    conexiones = graphene.List(ConexionesSchema)
+    conexion = graphene.Field(
+        ConexionesSchema, id_conexion=graphene.Int(required=True))
+
+    def resolve_conexiones(self, info):
+        result = Conexiones.select()
+        return result
+
+    def resolve_conexion(self, info, id_conexion):
+        result = Conexiones.select().where(Conexiones.id_servidor == id_conexion).get()
+        return result
+
+class ConexionesMutation():
+    createConexion = ConexionesCreateMutation.Field()
+    deleteConexion = ConexionesDeleteMutation.Field()
+    updateConexion = ConexionesUpdateMutation.Field()

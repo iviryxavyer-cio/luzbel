@@ -67,3 +67,20 @@ class ConectoresUpdateMutation(graphene.Mutation):
         conector.save()
         return ConectoresUpdateMutation(conector=conector)
 
+
+class ConectoresQuery():
+    conectores = graphene.List(ConectoresSchema)
+    conector = graphene.Field(ConectoresSchema, id_conector=graphene.Int(required=True))
+
+    def resolve_conectores(self, info):
+        conectores = Conector.select().where(Conector.status == 'A')
+        return conectores
+
+    def resolve_conector(self, info, id_conector):
+        conector = Conector.select().where(Conector.id_conector == id_conector).get()
+        return conector
+
+class ConectoresMutation():
+    crearConector = ConectorCreateMutation.Field()
+    borrarConector = ConectoresDeleteMutation.Field()
+    actualizarConector = ConectoresUpdateMutation.Field()
