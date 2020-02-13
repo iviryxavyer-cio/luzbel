@@ -7,6 +7,7 @@ version: 1.0.0
 
 historial
 v.1.0.0 - Creacion de schema, querys y subscripciones
+v.1.0.0 - marco gallegos - se modifican clases de query y mutationn para aplicar herencia multiple a query y mutation universal
 """
 import graphene
 from graphql import GraphQLError
@@ -46,7 +47,7 @@ class ParametrosPysqoopInput(graphene.InputObjectType):
     id_conexion = graphene.Int(required=True)
 
 
-class ParametrosPysqoopQuery(graphene.ObjectType):
+class ParametrosPysqoopQuery():
     """
     ParametrosPysqoopQuery
     Esta clase contiene todas las querys para obtener los datos de la tabla de
@@ -152,7 +153,7 @@ class ParametrosPysqoopUpdateMutation(graphene.Mutation):
         return ParametrosPysqoopUpdateMutation(parm_pysqoop=parm, ok=True)
 
 
-class ParametrosPysqoopMutation(graphene.ObjectType):
+class ParametrosPysqoopMutation():
     """
     ParametrosPysqoopMutation
     Clase que contiene todas las mutaciones para el schema de parametros_pysqoop
@@ -162,5 +163,5 @@ class ParametrosPysqoopMutation(graphene.ObjectType):
     modificar_parametro_pysqoop = ParametrosPysqoopUpdateMutation.Field()
 
 
-schema_parametros_pysqoop = graphene.Schema(
-    query=ParametrosPysqoopQuery, mutation=ParametrosPysqoopMutation)
+#schema_parametros_pysqoop = graphene.Schema(
+#    query=ParametrosPysqoopQuery, mutation=ParametrosPysqoopMutation)

@@ -17,6 +17,7 @@ import schemas.conexiones as conexionessch
 import schemas.tablasdb as tablasch
 import schemas.validacion_conexiones as validacionsch
 import schemas.get_columns as getcolumnssch
+import schemas.parametros_pysqoop as parametrospysqoopsch
 
 from models.usuario import Usuario
 from models.servidores import Servidores
@@ -25,7 +26,7 @@ from models.conexiones import Conexiones
 
 class Query(
         graphene.ObjectType, tablasch.TablaDBQuery, validacionsch.ValidacionConexionQuery,
-        getcolumnssch.GetColumnsQuery
+        getcolumnssch.GetColumnsQuery, parametrospysqoopsch.ParametrosPysqoopQuery
         
         ):
     """Clase que abstracta para proveer querys a el schema global"""
@@ -100,7 +101,11 @@ class Query(
     # fin conexiones
 
 
-class Mutation(graphene.ObjectType):
+class Mutation(
+        graphene.ObjectType, parametrospysqoopsch.ParametrosPysqoopMutation
+        ):
+    """Mutation globales que debe implementar las mutaciones de cada recurso 
+    que se tenga"""
     # inicio usuarios
     crear_usuario = usuariosch.CrearUsuarios.Field()
     modificar_usuario = usuariosch.ModificarUsuario.Field()

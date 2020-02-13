@@ -2,7 +2,6 @@ from flask import Flask
 from flask_cors import CORS
 from flask_graphql import GraphQLView
 
-from schemas.parametros_pysqoop_schema import schema_parametros_pysqoop
 from utils.middleware import login_required
 
 # schema global
@@ -16,17 +15,10 @@ def create_app(config_name):
 
     # insert_data()
     
-    # Routes (aqui se importaran las rutas de la api)
+    # Routes (aqui se genera el endpoint general)
     app.add_url_rule('/graphql', view_func=GraphQLView.as_view(
-        'graphql',
-        schema=UniversalSchema,
-        graphiql=True
-    ))
-
-    app.add_url_rule('/parametros_pysqoop',
-        view_func=GraphQLView.as_view(
-            'parametros_pysqoop',
-            schema=schema_parametros_pysqoop,
+            'graphql',
+            schema=UniversalSchema,
             graphiql=True
         )
     )
@@ -40,8 +32,12 @@ cors = CORS(app)
 
 @app.route('/api/')
 @login_required
-def index():
+def api():
     return 'CAIN'
+
+@app.route('/')
+def index():
+    return 'Api Luzbel 3:D'
 
 
 if __name__ == '__main__':
