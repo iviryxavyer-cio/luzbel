@@ -22,6 +22,8 @@ export function StepOne(props){
     const dispatch = useDispatch()
     const inputLabel = React.useRef(null);
     const [labelWidth, setLabelWidth] = React.useState(0);
+    // para evitar el warning puesto que si eliminas la variable arroja error
+    console.log(labelWidth);
 
     React.useEffect(() => {
         setLabelWidth(inputLabel.current.offsetWidth);
