@@ -31,7 +31,7 @@ class Query(
 class Mutation(
         graphene.ObjectType, parametrospysqoopsch.ParametrosPysqoopMutation,
         servidoressch.ServidoresMutations, conectorsch.ConectoresMutation,
-        conexionessch.ConexionesMutation
+        conexionessch.ConexionesMutation, usuariosch.UsuarioMutation
         ):
     """Mutation globales que debe implementar las mutaciones de cada recurso 
     que se tenga"""
