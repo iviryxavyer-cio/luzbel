@@ -7,6 +7,7 @@ version: 1.0.0
 
 historial
 v.1.0.0 - Creacion de la query para consulta de las columnas
+v.1.0.0 - marco gallegos - la clase GetColumnsQuery se hace abstracta para llevarala al schema global
 """
 import graphene
 
@@ -28,7 +29,7 @@ class GetColumnsSchema(graphene.ObjectType):
     data = graphene.List(graphene.String)
 
 
-class GetColumnsQuery(graphene.ObjectType):
+class GetColumnsQuery():
     """GetColumnsQuery
     Esta clase contiene la definición de los metodos query
         para que el cliente obtenga información de la api, asi como sus resolves
@@ -174,4 +175,4 @@ class GetColumnsQuery(graphene.ObjectType):
         return response
 
 
-schema_columns = graphene.Schema(query=GetColumnsQuery)
+# schema_columns = graphene.Schema(query=GetColumnsQuery)

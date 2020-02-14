@@ -7,6 +7,7 @@
 //importacion de la librerias necesarias
 import { request } from 'graphql-request';
 import { ServidoresConstants } from '../constants/servidores.constans';
+import { config } from '../config';
 
 //Se exporta un objeto con las funciones de los servicios.
 export const ServidoresService = {
@@ -20,8 +21,7 @@ export const ServidoresService = {
  * Funcion que se encarga de obtener una lista de los servidores registrados en el servidor
  */
 function obtenerServidores(){
-    return request(ServidoresConstants.URL_GRAPHQL_SERVIDORES,
-        ServidoresConstants.GET_ALL_SERVERS_REQUEST_QUERY)
+    return request(config.api.url(), ServidoresConstants.GET_ALL_SERVERS_REQUEST_QUERY)
 }
 
 /**
@@ -38,7 +38,7 @@ function crearServidor(datos){
         status: 'A'
     }
     const variables = JSON.stringify(data)
-    return request(ServidoresConstants.URL_GRAPHQL_SERVIDORES,
+    return request(config.api.url(),
         ServidoresConstants.CREATE_NEW_SERVER_QUERY,
         variables)
 }
@@ -52,7 +52,7 @@ function modificarServidor(datos){
             status: datos.status
         }
     }
-    return request(ServidoresConstants.URL_GRAPHQL_SERVIDORES,
+    return request(config.api.url(),
         ServidoresConstants.QUERY_MODIFICAR_SERVIDOR, variable);
 }
 
@@ -60,6 +60,6 @@ function eliminarServidor(idServidor){
     const variables = {
         idServidor: idServidor
     }
-    return request(ServidoresConstants.URL_GRAPHQL_SERVIDORES,
+    return request(config.api.url(),
         ServidoresConstants.QUERY_ELIMINAR_SERVIDOR, variables);
 }
