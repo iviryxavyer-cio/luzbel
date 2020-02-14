@@ -127,4 +127,5 @@ dmypy.json
 .vscode/
 .idea/
 server/logs/
+server/logs/None
 
