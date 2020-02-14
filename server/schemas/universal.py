@@ -18,21 +18,33 @@ import schemas.tablasdb as tablasch
 import schemas.validacion_conexiones as validacionsch
 import schemas.get_columns as getcolumnssch
 import schemas.parametros_pysqoop as parametrospysqoopsch
+import schemas.system_parameters as system_parameters
+
 
 class Query(
-        graphene.ObjectType, tablasch.TablaDBQuery, validacionsch.ValidacionConexionQuery,
-        getcolumnssch.GetColumnsQuery, parametrospysqoopsch.ParametrosPysqoopQuery,
-        usuariosch.UsuarioQuery, servidoressch.ServidoresQuery,
-        conectorsch.ConectoresQuery, conexionessch.ConexionesQuery
-        ):
+    graphene.ObjectType,
+    tablasch.TablaDBQuery,
+    validacionsch.ValidacionConexionQuery,
+    getcolumnssch.GetColumnsQuery,
+    parametrospysqoopsch.ParametrosPysqoopQuery,
+    usuariosch.UsuarioQuery,
+    servidoressch.ServidoresQuery,
+    conectorsch.ConectoresQuery,
+    conexionessch.ConexionesQuery,
+    system_parameters.SystemParametersQuery,
+):
     """Clase que abstracta para proveer querys a el schema global"""
 
 
 class Mutation(
-        graphene.ObjectType, parametrospysqoopsch.ParametrosPysqoopMutation,
-        servidoressch.ServidoresMutations, conectorsch.ConectoresMutation,
-        conexionessch.ConexionesMutation, usuariosch.UsuarioMutation
-        ):
+    graphene.ObjectType,
+    parametrospysqoopsch.ParametrosPysqoopMutation,
+    servidoressch.ServidoresMutations,
+    conectorsch.ConectoresMutation,
+    conexionessch.ConexionesMutation,
+    usuariosch.UsuarioMutation,
+    system_parameters.SystemParametersMutation
+):
     """Mutation globales que debe implementar las mutaciones de cada recurso 
     que se tenga"""
 

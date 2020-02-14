@@ -35,14 +35,16 @@ class ServidoresCreateMutation(graphene.Mutation):
 
     @staticmethod
     def mutate(self, info, direccion, alias_servidor, status):
-        servidor = Servidores(direccion = direccion, alias_servidor=alias_servidor, status=status)
+        servidor = Servidores(
+            direccion=direccion, alias_servidor=alias_servidor, status=status
+        )
         servidor.save()
-        return ServidoresCreateMutation(servidor = servidor)
+        return ServidoresCreateMutation(servidor=servidor)
 
 
 class ServidoresDeleteMutation(graphene.Mutation):
     class Arguments:
-        id_servidor=graphene.Int()
+        id_servidor = graphene.Int()
 
     servidor = graphene.Field(ServidoresSchema)
 
@@ -70,7 +72,8 @@ class ServidoresUpdateMutation(graphene.Mutation):
         servidor.save()
         return ServidoresUpdateMutation(servidor=servidor)
 
-class ServidoresQuery():
+
+class ServidoresQuery:
     servidores = graphene.List(ServidoresSchema)
     servidor = graphene.Field(ServidoresSchema, id_servidor=graphene.Int(required=True))
 
@@ -84,7 +87,8 @@ class ServidoresQuery():
         servidor = Servidores.select().where(Servidores.id_servidor == id_servidor).get()
         return servidor
 
-class ServidoresMutations():
+
+class ServidoresMutations:
     createServidor = ServidoresCreateMutation.Field()
     deleteServidor = ServidoresDeleteMutation.Field()
     updateServidor = ServidoresUpdateMutation.Field()
