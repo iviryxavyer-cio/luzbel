@@ -11,6 +11,7 @@
  */
 import { request } from 'graphql-request';
 import { DriversConstants } from '../constants/drivers.constants';
+import { config } from '../config';
 
 /**
  * Se exporta un objeto constante llamado 'DriverService' que contiene los metodos del servicio.
@@ -28,7 +29,7 @@ export const DriverService = {
  *  obtener la lista de conectores.
  */
 function obtenerDrivers(){
-    return request(DriversConstants.URL_CONECTORES_GRAPHQL, 
+    return request(config.api.url() , 
         DriversConstants.QUERY_OBTENER_CONECTORES);
 }
 
@@ -43,7 +44,7 @@ function registrarDrivers(datos){
         urlConector: datos.urlConector
     };
     variables = JSON.stringify(variables);
-    return request(DriversConstants.URL_CONECTORES_GRAPHQL,
+    return request(config.api.url() ,
         DriversConstants.QUERY_CREAR_CONECTORES, variables);
 }
 
@@ -62,7 +63,7 @@ function modificarDrivers(datos){
         }
     }
     variables = JSON.stringify(variables)
-    return request(DriversConstants.URL_CONECTORES_GRAPHQL,
+    return request(config.api.url() ,
         DriversConstants.QUERY_MODIFICAR_CONECTORES, variables)
 }
 
@@ -76,6 +77,6 @@ function eliminarDrivers(idConector){
         idConector: idConector
     }
     variables = JSON.stringify(variables)
-    return request(DriversConstants.URL_CONECTORES_GRAPHQL,
+    return request(config.api.url() ,
         DriversConstants.QUERY_ELIMINAR_CONECTORES, variables);
 }
