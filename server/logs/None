@@ -1,9 +1,0 @@
-[12/Feb/2020 13:05:09] INFO[api_logger:17] Tabla Usuario creada
-[12/Feb/2020 13:05:09] INFO[api_logger:41] Se alterara el campo de status de la tabla usuarios
-[12/Feb/2020 13:05:09] INFO[api_logger:17] Tabla Servidores creada
-[12/Feb/2020 13:05:09] INFO[api_logger:41] Se alterara el campo de status de la tabla Servidores
-[12/Feb/2020 13:05:09] INFO[api_logger:17] Tabla Conector creada
-[12/Feb/2020 13:05:09] INFO[api_logger:41] Se alterara el campo de status de la tabla conectores
-[12/Feb/2020 13:05:09] INFO[api_logger:17] Tabla Conexiones creada
-[12/Feb/2020 13:05:10] INFO[api_logger:17] Tabla ParametrosPysqoop creada
-[12/Feb/2020 13:05:10] INFO[api_logger:41] Se alterara el campo de status de la tabla parametros_pysqoop

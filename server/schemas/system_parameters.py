@@ -7,6 +7,7 @@
 import graphene
 from models.system_parameters import SystemParameters
 
+
 class SystemPametersSchema(graphene.ObjectType):
     """
     SystemPametersSchema
@@ -31,11 +32,12 @@ class SystemParametersInputSchema(graphene.InputObjectType):
     color_secundario = graphene.String(required=True)
 
 
-class SystemParametersQuery(graphene.ObjectType):
+class SystemParametersQuery:
     """
     SystemParametersQuery
     Clase que contiene las querys para obtener los parametros del sistema.
     """
+
     parametros = graphene.Field(SystemPametersSchema)
 
     @staticmethod
@@ -48,28 +50,37 @@ class SystemParametersQuery(graphene.ObjectType):
         return system_params
 
 
-class SystemParametersMutation(graphene.Mutation):
+class SystemParametersUpdateMutation(graphene.Mutation):
     """
-    SystemParametersMutation
+    SystemParametersUpdateMutation
     Clase que contiene la logica para modificar los parametros del sistema
     """
+
     class Arguments:
         id_parametros_sistema = graphene.Int(required=True)
         system_params = SystemParametersInputSchema(required=True)
 
     is_updated = graphene.Boolean()
     data = graphene.Field(SystemPametersSchema)
-    
+
     @staticmethod
     def mutate(self, info, id_parametros_sistema, system_params):
         parms = SystemParameters.select().where(
-            id_parametro_sistema == id_parametros_sistema)
+            SystemParameters.id_parametro_sistema == id_parametros_sistema
+        )
         parms.flume_delay = system_params.flume_delay
         parms.color_primario = system_params.color_primario
         parms.color_secundario = system_params.color_secundario
-        try: 
+        try:
             parms.modificar_parametros_sistema()
             return SystemParametersMutation(data=parms, ok=True)
         except Exception:
             return SystemParametersMutation(data=None, ok=False)
 
+
+class SystemParametersMutation:
+    """
+    SystemParametersMutation
+    Clase que contiene los metodos de las mutaciones del modelo system parameters
+    """
+    update_system_parameters = SystemParametersUpdateMutation.Field()
