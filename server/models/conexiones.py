@@ -1,24 +1,22 @@
 from datetime import datetime
-from peewee import *
+import peewee as pwe
 from utils.conexion import psql_db
-from .usuario import Usuario
-from .servidores import Servidores
-from .conector import Conector
 
 
-class Conexiones(Model):
+class Conexiones(pwe.Model):
     class Meta:
         database = psql_db
+        table_name="conexiones"
 
-    id_conexion = AutoField()
-    id_servidor = IntegerField()
-    id_conector = IntegerField()
-    puerto = CharField(max_length=10)
-    usuario = CharField(max_length=20)
-    contrasena = CharField(max_length=150)
-    bd = CharField(max_length=200)
-    fecha_creacion = DateTimeField(default=datetime.utcnow)
-    fecha_modificacion = DateTimeField(default=datetime.utcnow)
+    id_conexion = pwe.AutoField()
+    id_servidor = pwe.IntegerField()
+    id_conector = pwe.IntegerField()
+    puerto = pwe.CharField(max_length=10)
+    usuario = pwe.CharField(max_length=20)
+    contrasena = pwe.CharField(max_length=150)
+    bd = pwe.CharField(max_length=200)
+    fecha_creacion = pwe.DateTimeField(default=datetime.utcnow)
+    fecha_modificacion = pwe.DateTimeField(default=datetime.utcnow)
 
 
 if __name__ == "__main__":

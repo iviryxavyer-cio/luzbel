@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+@author Marco Gallegos 
+@date 2020-02-11
+@description
+definiciones necesarias para querys y mutations de nuestro schema relacionado con usuario
+"""
 import graphene
 from models.usuario import Usuario
 from utils.authentication import login
@@ -103,9 +110,7 @@ class UsuarioDeleteMutation(graphene.Mutation):
         usuario.save()
         return UsuarioDeleteMutation(usuario=usuario)
 
-
-
-class Query(graphene.ObjectType):
+class UsuarioQuery():
     # node = graphene.relay.node.Field()
     hello = graphene.String(name=graphene.String(default_value='World'))
     usuario = graphene.Field(UsuariosSchema, id=graphene.Int())
@@ -138,26 +143,9 @@ class Query(graphene.ObjectType):
 
         return query
 
-    #def resolve_usuario(self, info, **kwargs):
-    #    id = kwargs.get('id')
-    #    print(id)
-    #    query = Usuario.select().get()
-    #    return query
 
-    def resolve_usuario(self, info, id):
-        print(id)
-        query = Usuario.select().where(Usuario.id_usuario == id).get()
-        if query:
-            return query
-        else:
-            return {}
-
-
-class Mutation(graphene.ObjectType):
+class UsuarioMutation():
     crear_usuario = CrearUsuarios.Field()
     modificar_usuario = ModificarUsuario.Field()
     login_usuario = LoginUsuario.Field()
     eliminar_usuario = UsuarioDeleteMutation.Field()
-
-
-schema = graphene.Schema(query=Query, mutation=Mutation)

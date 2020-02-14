@@ -1,5 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+@author Marco Gallegos 
+@date 2020-02-11
+@description
+definiciones necesarias para querys y mutations de nuestro schema conector
+"""
 import graphene
-
 from models.conector import Conector
 
 
@@ -16,21 +22,6 @@ class ConectoresSchema(graphene.ObjectType):
 class ConectoresInput(graphene.InputObjectType):
     nombre_conector = graphene.String()
     url_conector = graphene.String()
-
-
-class ConectoresQuery(graphene.ObjectType):
-    conectores = graphene.List(ConectoresSchema)
-    conector = graphene.Field(ConectoresSchema, id_conector=graphene.Int(required=True))
-
-    @staticmethod
-    def resolve_conectores(self, info):
-        conectores = Conector.select().where(Conector.status == 'A')
-        return conectores
-
-    @staticmethod
-    def resolve_conector(self, info, id_conector):
-        conector = Conector.select().where(Conector.id_conector == id_conector).get()
-        return conector
 
 
 class ConectorCreateMutation(graphene.Mutation):
@@ -77,10 +68,19 @@ class ConectoresUpdateMutation(graphene.Mutation):
         return ConectoresUpdateMutation(conector=conector)
 
 
-class ConectoresMutations(graphene.ObjectType):
+class ConectoresQuery():
+    conectores = graphene.List(ConectoresSchema)
+    conector = graphene.Field(ConectoresSchema, id_conector=graphene.Int(required=True))
+
+    def resolve_conectores(self, info):
+        conectores = Conector.select().where(Conector.status == 'A')
+        return conectores
+
+    def resolve_conector(self, info, id_conector):
+        conector = Conector.select().where(Conector.id_conector == id_conector).get()
+        return conector
+
+class ConectoresMutation():
     crearConector = ConectorCreateMutation.Field()
     borrarConector = ConectoresDeleteMutation.Field()
     actualizarConector = ConectoresUpdateMutation.Field()
-
-
-SchemaConectores = graphene.Schema(query=ConectoresQuery, mutation=ConectoresMutations)
