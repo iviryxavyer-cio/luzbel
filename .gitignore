@@ -126,4 +126,5 @@ dmypy.json
 /.env/lib64
 .vscode/
 .idea/
-app/logs
+server/logs/
+
