@@ -3,6 +3,7 @@
  * @date 11/11/2019
  * @description Este archivo contiene el formulario de creacion 
  * y modificación de usuarios.
+ * @cambios se corrigieron nombres y se agregaron acentos
  */
 import React, { Component } from 'react';
 import { Field, reduxForm, getFormSyncErrors } from 'redux-form';
@@ -67,7 +68,7 @@ class FormularioAgregarEditar extends Component {
 
                 <Form.Group as={Row}>
                     <Form.Label column sm={3}>
-                        Apellido:
+                        Apellidos:
                     </Form.Label>
                     <Col sm={9}>
                         <Field
@@ -97,7 +98,7 @@ class FormularioAgregarEditar extends Component {
 
                 <Form.Group as={Row}>
                     <Form.Label column sm={3}>
-                        Telefono:
+                        Teléfono:
                     </Form.Label>
                     <Col sm={9}>
                         <Field

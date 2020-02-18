@@ -5,7 +5,7 @@ import { Col } from 'react-bootstrap';
 //import { showModal, hideModal } from '../actions/modal.actions';
 //import { connect } from 'react-redux';
 
-
+/*
 class FuncModalAgregar extends Component{
   render(){
     //const { Servidores } = this.props
@@ -46,5 +46,5 @@ class FuncModalAgregar extends Component{
     );
   }
 }
-
+*/
 export default FuncModalAgregar;

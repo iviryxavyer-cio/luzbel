@@ -2,9 +2,11 @@
  * @author Luis Manuel Torres Treviño
  * @date 11/11/2019
  * @description Este archivo contiene el componente de campo contraseña
+ * @cambio Se agrego estilo al boton mostrar
  */
 import React  from 'react';
 import { Form } from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 
 class CampoContrasena extends React.Component {
     constructor(props) {
@@ -47,13 +49,15 @@ class CampoContrasena extends React.Component {
         let claseBoton= [
             'btn_contrasenaMostrar',
             this.state.botonVisible ? 'btn_mostrar' : 'btn_Ocultar',
+           
         ];
         claseBoton = claseBoton.join(' ');
 
         return (
             <Form.Group>
                 <Form.Control {...input} {...rest}  className="campo" onChange={ e => {this.handleChangePassword(e); input.onChange() }} value={rest.value} placeholder={label} type={this.state.tipoCampo} />
-                <span className={claseBoton} onMouseDown={this.mostrarContrasena} onMouseUp={this.ocultarContrasena}>{this.state.tipoCampo === 'input' ? 'Ocultar' : 'Mostrar'}</span>
+                <Button><span className={claseBoton} onMouseDown={this.mostrarContrasena} onMouseUp={this.ocultarContrasena}>{this.state.tipoCampo === 'input' ? 'Ocultar' : 'Mostrar'}</span></Button>
+                
                     {
                         meta.touched && meta.error &&
                         <span className="error text-danger">{meta.error}</span>

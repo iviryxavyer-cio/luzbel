@@ -1,3 +1,10 @@
+/**
+ * @author Luis Manuel Torres Treviño
+ * @date 11/11/2019
+ * @description Este archivo contiene la logica para la creacion de la datatable
+ * @cambio se corrigieron titulos de tabla y ortografia
+ */
+
 import React, { Component } from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
@@ -50,11 +57,11 @@ class DataTableUsuarios extends Component {
                     selectRow = { selectRowProp }
                     options = { options }
                     pagination>
-                        <TableHeaderColumn dataField='usuario' isKey={ true }>Usuarios</TableHeaderColumn>
-                        <TableHeaderColumn dataField='nombreUsuario'>Nombres</TableHeaderColumn>
+                        <TableHeaderColumn dataField='usuario' isKey={ true }>Usuario</TableHeaderColumn>
+                        <TableHeaderColumn dataField='nombreUsuario'>Nombre</TableHeaderColumn>
                         <TableHeaderColumn dataField='apellidoUsuario'>Apellidos</TableHeaderColumn>
                         <TableHeaderColumn dataField='correoUsuario'>Correo</TableHeaderColumn>
-                        <TableHeaderColumn dataField='telefonoUsuario'>Telefono</TableHeaderColumn>
+                        <TableHeaderColumn dataField='telefonoUsuario'>Teléfono</TableHeaderColumn>
                 </BootstrapTable>
             </div>
         );

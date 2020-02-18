@@ -7,7 +7,7 @@ function BotonCancelar(){
             className="buttons boutton-crud Eliminar"
            // onClick= { Close() }
         >
-            Cancelar
+            Can
         </Button>
     )
 }
