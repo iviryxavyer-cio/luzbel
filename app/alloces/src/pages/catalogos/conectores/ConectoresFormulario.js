@@ -111,7 +111,7 @@ class ConectoresFormulario extends React.Component {
                 }*/}
 
                 <Modal.Footer>
-                    <Button variant="secundary" onClick={cerrarModal}>
+                    <Button variant="secondary" onClick={cerrarModal}>
                         Cancelar
                     </Button>
                     {/*{

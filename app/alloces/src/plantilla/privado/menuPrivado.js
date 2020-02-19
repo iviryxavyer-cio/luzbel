@@ -6,6 +6,7 @@
  * 
  * Historial
  * v.1.0.0 Se crea el menu de catalogos con usuarios, servidores, conectores y conexiones.
+ * se agrega la seccion ambari aunque con un link que no lleva a ningun lado, JLM 18/02/2020
  */
 
 import React from 'react';
@@ -45,5 +46,32 @@ export const menuPrivado = [
                 link: '/MonitorProcesos'
             },
         ]
+    },
+    {
+        name: 'Ambari',
+        icon: <IconLibraryBooks className="colorIcon" />,
+        openIcon: <IconExpandLess className="secondaryIcon" />,
+        closeIcon: <IconExpandMore className="secondaryIcon" />,
+        collapse: true,
+        collapseItems: [
+            {
+                name: 'Ambari',
+                link: '/Ambari-Link'//cuando se hizo esta opcion del menu aun no se tenia definido donde va estar ambari 18 de febrero del 2020
+            },
+        ]
+    },
+    {
+        name: 'MapReduce2',
+        icon: <IconLibraryBooks className="colorIcon" />,
+        openIcon: <IconExpandLess className="secondaryIcon" />,
+        closeIcon: <IconExpandMore className="secondaryIcon" />,
+        collapse: true,
+        collapseItems: [
+            {
+                name: 'Administrador MapReduce',
+                link: '/linkMap'//no existe seccion a esta fecha 19 de febrero del 2020
+            },
+        ]
     }
+
 ]
