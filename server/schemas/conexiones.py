@@ -14,7 +14,6 @@ class ConexionesSchema(graphene.ObjectType):
     bd = graphene.String()
 
 
-
 # usado para recibir un objeto tipo servidor como parametro en graphql
 class ConexionesInput(graphene.InputObjectType):
     id_servidor = graphene.Int(required=True)
@@ -23,22 +22,6 @@ class ConexionesInput(graphene.InputObjectType):
     usuario = graphene.String(required=True)
     contrasena = graphene.String(required=True)
     bd = graphene.String(required=True)
-
-
-class ConexionesQuery(graphene.ObjectType):
-    conexiones = graphene.List(ConexionesSchema)
-    conexion = graphene.Field(
-        ConexionesSchema, id_conexion=graphene.Int(required=True))
-
-    @staticmethod
-    def resolve_conexiones(self, info):
-        result = Conexiones.select()
-        return result
-
-    @staticmethod
-    def resolve_conexion(self, info, id_conexion):
-        result = Conexiones.select().where(Conexiones.id_servidor == id_conexion).get()
-        return result
 
 
 # definimos mutacion para  crear, editar y eliminar
@@ -95,12 +78,20 @@ class ConexionesUpdateMutation(graphene.Mutation):
         modelo.save()
         return ConexionesUpdateMutation(conexion=modelo)
 
+class ConexionesQuery():
+    conexiones = graphene.List(ConexionesSchema)
+    conexion = graphene.Field(
+        ConexionesSchema, id_conexion=graphene.Int(required=True))
 
-class ConexionesMutations(graphene.ObjectType):
+    def resolve_conexiones(self, info):
+        result = Conexiones.select()
+        return result
+
+    def resolve_conexion(self, info, id_conexion):
+        result = Conexiones.select().where(Conexiones.id_servidor == id_conexion).get()
+        return result
+
+class ConexionesMutation():
     createConexion = ConexionesCreateMutation.Field()
     deleteConexion = ConexionesDeleteMutation.Field()
     updateConexion = ConexionesUpdateMutation.Field()
-
-
-SchemaConexiones = graphene.Schema(
-    query=ConexionesQuery, mutation=ConexionesMutations)

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, ButtonToolbar} from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import CardComponent from '../../../componentes/comun/CardComponent';
 

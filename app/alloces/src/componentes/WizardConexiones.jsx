@@ -133,7 +133,7 @@ class ModalWizard extends React.Component {
         contrasena: this.state.contrasena,
         puerto: this.state.puerto,
       };
-      window.graphqlRequest(window.config.api.url("validacion"), QueryValidaciones.validacion(requestData))
+      window.graphqlRequest(window.config.api.url(), QueryValidaciones.validacion(requestData))
       .then(response=>{
         switch (response.validacion.status) {
           case true:

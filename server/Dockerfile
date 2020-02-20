@@ -3,5 +3,5 @@ LABEL MAINTAINER="CIOSA"
 WORKDIR /app
 COPY . .
 RUN python3.7 -m pip install -r requirements.txt
-EXPOSE 3000
+EXPOSE 3030
 CMD [ "python3.7","server.py" ]
